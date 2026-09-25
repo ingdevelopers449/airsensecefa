@@ -8,35 +8,39 @@
     $desarrolladores = $desarrolladores ?? [
         [
             'iniciales' => 'AD',
-            'nombre' => 'Aprendiz ADSO 1',
+            'nombre' => 'Luis Felipe Lozada Bastidas',
             'rol' => 'Líder de Desarrollo IoT',
-            'programa' => 'ADSO - Ficha 2670142',
+            'programa' => 'ADSO - Ficha 3312595',
             'especialidad' => 'Desarrollo Backend en Laravel y firmware ESP32 para sensores ambientales.',
-            'github' => 'https://github.com/',
+            'github' => 'https://github.com/ingdevelopers449',
+            'foto' => 'images/equipo/foto-adso-1.png',
         ],
         [
             'iniciales' => 'FE',
-            'nombre' => 'Aprendiz ADSO 2',
+            'nombre' => 'Isabella Sifuentes Perdomo',
             'rol' => 'Desarrollador Frontend & UI',
-            'programa' => 'ADSO - Ficha 2670142',
+            'programa' => 'ADSO - Ficha 3312595',
             'especialidad' => 'Diseño de interfaces web responsivas, componentes Bootstrap y experiencia de usuario.',
             'github' => 'https://github.com/',
+            'foto' => 'images/equipo/foto-adso-2.png',
         ],
         [
             'iniciales' => 'IA',
-            'nombre' => 'Aprendiz ADSO 3',
+            'nombre' => 'Michael Gustavo Castaño Pareja',
             'rol' => 'Analítica de Datos & IA',
-            'programa' => 'ADSO - Ficha 2670142',
+            'programa' => 'ADSO - Ficha 3312595',
             'especialidad' => 'Modelado de algoritmos predictivos de CO₂ y correlación climática.',
             'github' => 'https://github.com/',
+            'foto' => 'images/equipo/foto-adso-3.png',
         ],
         [
             'iniciales' => 'ST',
-            'nombre' => 'Aprendiz ADSO 4',
+            'nombre' => 'Lizbeth Dayana Daza Rogelis',
             'rol' => 'Soporte Telemetría & Redes',
-            'programa' => 'ADSO - Ficha 2670142',
+            'programa' => 'ADSO - Ficha 3312595',
             'especialidad' => 'Protocolos MQTT, seguridad de red y sincronización offline en aulas.',
             'github' => 'https://github.com/',
+            'foto' => 'images/equipo/foto-adso-4.png',
         ],
     ];
 @endphp
@@ -52,6 +56,11 @@
     
     <!-- Bootstrap Icons Oficial -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!-- Fuentes de Google: Inter (La mejor para dashboards y tecnología) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Estilos Institucionales SENA -->
     @vite(['resources/css/styles.css'])
@@ -85,13 +94,7 @@
                         <a class="nav-link" href="#hero">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#solucion">La Solución</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="#funcionalidades">Funcionalidades</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#roles">Roles</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#equipo">Equipo Desarrollador</a>
@@ -131,34 +134,62 @@
         <!-- =========================================================================
              1. HERO SECTION (100vh Pantalla Completa + Bootstrap 5 + Fondo cefa.jpg)
              ========================================================================= -->
-        <section id="hero" class="hero-section hero-fullscreen section-scroll">
-            <div class="container d-flex flex-column justify-content-between flex-grow-1 pt-3 pb-3">
-                
-                <!-- Fila Superior: Contenido Principal y Diagrama -->
-                <div class="row align-items-start align-items-lg-center g-4 mt-0 mt-lg-1 mb-auto">
-                    
-                    <!-- Columna Izquierda: Información Principal -->
-                    <div class="col-lg-7 pt-lg-1">
+        <section id="hero" class="hero-section hero-fullscreen section-scroll" style="position: relative; overflow: hidden;">
+
+            <!-- Imagen independiente: Centrada verticalmente en el lado derecho -->
+            <!-- ↔ right:  4%=muy derecha | 12%=centro-derecha | 25%=más al centro -->
+            <!-- ↕ top:   40%=más arriba  | 50%=centrada       | 60%=más abajo    -->
+            <div class="d-none d-lg-block" style="position: absolute; right: 8%; top: 50%; transform: translateY(-45%); width: 60%; max-width: 600px; z-index: 1;">
+                <img src="images/diagrama_sensores.png"
+                     alt="Diagrama de Monitoreo: CO2, Temperatura y Humedad"
+                     class="img-fluid w-100"
+                     style="filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.55));">
+            </div>
+
+            <div class="container d-flex flex-column justify-content-between flex-grow-1 pt-3 pb-3" style="position: relative; z-index: 2;">
+
+                <!-- Fila Superior: Solo contenido izquierdo (imagen ya es independiente) -->
+                <div class="row mt-0 mt-lg-1 mb-auto">
+
+                    <!-- Columna Izquierda: Información Principal (Agrandamos a col-lg-10 para dar espacio al texto gigante) -->
+                    <div class="col-lg-10 pt-lg-1" style="position: relative; z-index: 3;">
 
                         <!-- Título Principal Institucional -->
-                        <h1 class="display-2 fw-bold text-white mb-3">
+                        <!-- Pantallas grandes: 6rem (ahora cabe en 2 renglones porque la columna es más ancha) -->
+                        <h1 class="fw-bold text-white mb-5 d-none d-md-block" style="font-size: 6rem; line-height: 1.1; text-shadow: 0 4px 12px rgba(0,0,0,0.4);">
+                            Monitoreo inteligente <br>
+                            <span class="text-sena">de calidad del aire</span>
+                        </h1>
+                        <!-- Pantallas pequeñas (móviles) -->
+                        <h1 class="fw-bold text-white mb-4 d-block d-md-none" style="font-size: 3rem; line-height: 1.15;">
                             Monitoreo inteligente <br>
                             <span class="text-sena">de calidad del aire</span>
                         </h1>
 
                         <!-- Subtítulo Aclaratorio -->
-                        <p class="lead text-light opacity-90 mb-4" style="font-size: 1.15rem; max-width: 620px;">
+                        <p class="lead text-light opacity-90 mb-4 mt-10 pt-3" style="font-size: 1.25rem; max-width: 650px; line-height: 1.6;">
                             Detectamos y predecimos en tiempo real la acumulación de <strong>CO₂</strong>, <strong>temperatura</strong> y <strong>humedad</strong> en las aulas y hangares del CEFA La Angostura para prevenir la fatiga y avisar con semáforos cuándo abrir las ventanas.
                         </p>
-                    </div>
 
-                    <!-- Columna Derecha: Diagrama Centrado con Ajuste Manual -->
-                    <div class="col-lg-5 d-flex align-items-center justify-content-center text-center">
-                        <div class="w-100" style="max-width: 480px;">
-                            <img src="{{ asset('images/diagrama-sensores.svg') }}" 
-                                 alt="Diagrama de Monitoreo: CO2, Temperatura y Humedad" 
-                                 class="img-fluid mx-auto d-block"
-                                 style="filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.45));">
+                        <!-- Píldoras (Badges) de Variables Medidas -->
+                        <div class="d-flex flex-wrap gap-3 mt-4 mb-4">
+                            <span class="badge bg-white text-dark rounded-pill px-3 py-2 shadow-sm" style="font-size: 0.95rem;">
+                                <i class="bi bi-wind text-info me-1"></i> Dióxido de carbono (CO₂)
+                            </span>
+                            <span class="badge bg-white text-dark rounded-pill px-3 py-2 shadow-sm" style="font-size: 0.95rem;">
+                                <i class="bi bi-thermometer-half text-danger me-1"></i> Temperatura
+                            </span>
+                            <span class="badge bg-white text-dark rounded-pill px-3 py-2 shadow-sm" style="font-size: 0.95rem;">
+                                <i class="bi bi-droplet-fill text-primary me-1"></i> Humedad
+                            </span>
+                        </div>
+
+                        <!-- Imagen visible solo en móvil (reemplaza la absoluta) -->
+                        <div class="d-block d-lg-none mb-8 text-center">
+                            <img src="images/diagrama_sensores.png"
+                                 alt="Diagrama de Monitoreo: CO2, Temperatura y Humedad"
+                                 class="img-fluid mx-auto"
+                                 style="max-width: 320px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.45));">
                         </div>
                     </div>
 
@@ -166,40 +197,52 @@
 
                 <!-- Fila Inferior Integrada: Tarjeta en 3 Pasos + Ticker + Scroll Down -->
                 <div class="mt-4 pt-2">
-                    
-                    <!-- TARJETA EN 3 PASOS (Explicación Horizontal Inmediata) -->
-                    <div class="card bg-white text-dark shadow-sm border-0 rounded-3 p-3 p-md-4 mb-3">
-                        <div class="row g-3 text-center text-md-start align-items-center">
-                            
-                            <div class="col-md-4 d-flex align-items-center gap-3">
-                                <span class="badge bg-sena rounded-circle p-2 fs-6 fw-bold" style="width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center;">1</span>
-                                <div>
-                                    <h6 class="fw-bold text-dark mb-0">Sensores IoT en aulas</h6>
-                                    <small class="text-muted">Lecturas cada 60s en hangares y ambientes.</small>
+                    <!-- TARJETAS EN 3 PASOS - Alineación horizontal -->
+                    <div class="row g-3">
+
+                        <!-- TARJETA 1 -->
+                        <div class="col-md-4">
+                            <div class="card bg-white text-dark shadow-sm border-0 rounded-3 p-3 p-md-4 h-100">
+                                <div class="d-flex align-items-center gap-3">
+                                    <span class="badge bg-sena rounded-circle p-2 fs-5 fw-bold flex-shrink-0" style="width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center;">1</span>
+                                    <div>
+                                        <h5 class="fw-bold text-dark mb-1" style="font-size: 1.15rem;">Sensores IoT en aulas</h5>
+                                        <div class="text-muted" style="font-size: 0.95rem; line-height: 1.4;">Lecturas cada 60s en hangares y ambientes.</div>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="col-md-4 d-flex align-items-center gap-3 border-start-md ps-md-3">
-                                <span class="badge bg-sena rounded-circle p-2 fs-6 fw-bold" style="width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center;">2</span>
-                                <div>
-                                    <h6 class="fw-bold text-dark mb-0">Inteligencia Artificial</h6>
-                                    <small class="text-muted">Anticipa picos de saturación 15 minutos antes.</small>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 d-flex align-items-center gap-3 border-start-md ps-md-3">
-                                <span class="badge bg-sena rounded-circle p-2 fs-6 fw-bold" style="width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center;">3</span>
-                                <div>
-                                    <h6 class="fw-bold text-dark mb-0">Semáforo & Alertas SST</h6>
-                                    <small class="text-muted">Avisa el momento exacto para abrir ventanas.</small>
-                                </div>
-                            </div>
-
                         </div>
+
+                        <!-- TARJETA 2 -->
+                        <div class="col-md-4">
+                            <div class="card bg-white text-dark shadow-sm border-0 rounded-3 p-3 p-md-4 h-100">
+                                <div class="d-flex align-items-center gap-3">
+                                    <span class="badge bg-sena rounded-circle p-2 fs-5 fw-bold flex-shrink-0" style="width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center;">2</span>
+                                    <div>
+                                        <h5 class="fw-bold text-dark mb-1" style="font-size: 1.15rem;">Inteligencia Artificial</h5>
+                                        <div class="text-muted" style="font-size: 0.95rem; line-height: 1.4;">Anticipa picos de saturación 15 minutos antes.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TARJETA 3 -->
+                        <div class="col-md-4">
+                            <div class="card bg-white text-dark shadow-sm border-0 rounded-3 p-3 p-md-4 h-100">
+                                <div class="d-flex align-items-center gap-3">
+                                    <span class="badge bg-sena rounded-circle p-2 fs-5 fw-bold flex-shrink-0" style="width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center;">3</span>
+                                    <div>
+                                        <h5 class="fw-bold text-dark mb-1" style="font-size: 1.15rem;">Semáforo & Alertas SST</h5>
+                                        <div class="text-muted" style="font-size: 0.95rem; line-height: 1.4;">Avisa el momento exacto para abrir ventanas.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                     <!-- Ticker de Telemetría Inferior e Indicador de Scroll -->
-                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 text-white-50 small">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 text-white-50 small mt-3">
                         <div>
                             <i class="bi bi-activity text-sena me-1"></i> Promedio institucional CEFA:
                             <span class="text-white fw-bold ms-1">{{ $telemetria['co2']['valor'] ?? 540 }} {{ $telemetria['co2']['unidad'] ?? 'ppm' }}</span> <span class="text-sena">({{ $telemetria['co2']['estado'] ?? 'Óptimo' }})</span> &bull;
@@ -207,7 +250,7 @@
                             <span class="text-white fw-bold ms-1">{{ $telemetria['humedad']['valor'] ?? 58 }} {{ $telemetria['humedad']['unidad'] ?? '%' }}</span>
                         </div>
                         <div>
-                            <a href="#solucion" class="text-white-50 text-decoration-none d-inline-flex align-items-center gap-1 hover-white bounce-scroll">
+                            <a href="#funcionalidades" class="text-white-50 text-decoration-none d-inline-flex align-items-center gap-1 hover-white bounce-scroll">
                                 <span>Desliza para explorar</span>
                                 <i class="bi bi-chevron-down"></i>
                             </a>
@@ -220,74 +263,12 @@
         </section>
 
         <!-- =========================================================================
-             2. SECCIÓN "LA SOLUCIÓN"
+             2. SECCIÓN "FUNCIONALIDADES PRINCIPALES"
              ========================================================================= -->
-        <section id="solucion" class="py-5 bg-light section-scroll border-bottom">
-            <div class="container py-4">
+        <section id="funcionalidades" class="bg-white section-scroll border-bottom d-flex align-items-center py-3" style="min-height: calc(100vh - 74px);">
+            <div class="container w-100">
                 
-                <div class="text-center mx-auto mb-5" style="max-width: 768px;">
-                    <span class="text-uppercase fw-bold text-sena small tracking-wider d-block mb-1">
-                        Nuestra Solución
-                    </span>
-                    <h2 class="display-6 fw-bold text-sena-dark mb-2">
-                        Tecnología que cuida nuestra salud
-                    </h2>
-                    <p class="text-secondary small">Un ecosistema de hardware IoT, Inteligencia Artificial y panel web institucional.</p>
-                </div>
-
-                <div class="row g-4">
-                    
-                    <div class="col-md-4">
-                        <div class="card card-sena h-100 border-0 shadow-sm p-4 bg-white">
-                            <span class="badge bg-primary rounded-pill mb-3" style="width: fit-content;">Paso 01</span>
-                            <h5 class="fw-bold text-dark mb-2">Mide</h5>
-                            <p class="text-secondary small leading-relaxed mb-3">
-                                Sensores de alta precisión capturan los niveles de aire, temperatura y humedad cada minuto de forma autónoma.
-                            </p>
-                            <small class="text-muted border-top pt-2 d-block">
-                                <strong>Hardware:</strong> ESP32 &bull; Sensores MH-Z19B &bull; DHT22
-                            </small>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card card-sena h-100 border-0 shadow-sm p-4 bg-white">
-                            <span class="badge bg-sena rounded-pill mb-3" style="width: fit-content;">Paso 02</span>
-                            <h5 class="fw-bold text-dark mb-2">Analiza</h5>
-                            <p class="text-secondary small leading-relaxed mb-3">
-                                Nuestra plataforma procesa los datos y aplica Inteligencia Artificial para predecir cuándo el aire será dañino.
-                            </p>
-                            <small class="text-muted border-top pt-2 d-block">
-                                <strong>Software:</strong> Backend Laravel &bull; Modelos IA
-                            </small>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card card-sena h-100 border-0 shadow-sm p-4 bg-white">
-                            <span class="badge bg-danger rounded-pill mb-3" style="width: fit-content;">Paso 03</span>
-                            <h5 class="fw-bold text-dark mb-2">Alerta</h5>
-                            <p class="text-secondary small leading-relaxed mb-3">
-                                Un sistema visual tipo semáforo y correos automáticos avisan al instante para tomar medidas como abrir ventanas.
-                            </p>
-                            <small class="text-muted border-top pt-2 d-block">
-                                <strong>Prevención:</strong> Notificaciones SST &bull; Semáforo en vivo
-                            </small>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </section>
-
-        <!-- =========================================================================
-             3. SECCIÓN "FUNCIONALIDADES PRINCIPALES"
-             ========================================================================= -->
-        <section id="funcionalidades" class="py-5 bg-white section-scroll border-bottom">
-            <div class="container py-4">
-                
-                <div class="text-center mx-auto mb-5" style="max-width: 768px;">
+                <div class="text-center mx-auto mb-4 mt-2" style="max-width: 768px;">
                     <span class="text-uppercase fw-bold text-sena small tracking-wider d-block mb-1">
                         Funcionalidades Principales
                     </span>
@@ -297,148 +278,114 @@
                     <p class="text-secondary small">Herramientas diseñadas para instructores, aprendices y seguridad ocupacional.</p>
                 </div>
 
-                <div class="row g-4">
+                <div class="row g-3">
                     
                     <!-- Card 1 -->
                     <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 card-sena border shadow-sm p-4 bg-light">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary rounded-3 p-3 mb-3 fs-3" style="width: 52px; height: 52px;">
-                                <i class="bi bi-map"></i>
+                        <div class="card h-100 border-0 shadow-sm p-3 bg-white d-flex flex-column" style="border-radius: 1rem; border: 1px solid rgba(0,0,0,0.05) !important;">
+                            <!-- Icono estilo 3D SENA -->
+                            <div class="d-inline-flex align-items-center justify-content-center rounded-3 mb-2" style="width: 44px; height: 44px; background-color: #dcfce7;">
+                                <span style="font-size: 24px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));">🗺️</span>
                             </div>
-                            <h5 class="fw-bold text-dark mb-2">Mapa interactivo</h5>
-                            <p class="card-text text-secondary small leading-relaxed">
+                            <h5 class="fw-bold mb-2 fs-6" style="color: #00324b; line-height: 1.4;">Mapa interactivo</h5>
+                            <p class="card-text text-secondary mb-3" style="font-size: 0.85rem; line-height: 1.35;">
                                 Visualiza el estado de cada ambiente de formación sobre un plano digital del CEFA con semáforo en tiempo real.
                             </p>
+                            <div class="mt-auto text-end">
+                                <a href="#funcionalidades" class="btn btn-sena rounded-circle d-inline-flex align-items-center justify-content-center p-0 hover-lift" style="width: 28px; height: 28px;">
+                                    <i class="bi bi-arrow-right text-white"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Card 2 -->
                     <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 card-sena border shadow-sm p-4 bg-light">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-danger bg-opacity-10 text-danger rounded-3 p-3 mb-3 fs-3" style="width: 52px; height: 52px;">
-                                <i class="bi bi-bell"></i>
+                        <div class="card h-100 border-0 shadow-sm p-3 bg-white d-flex flex-column" style="border-radius: 1rem; border: 1px solid rgba(0,0,0,0.05) !important;">
+                            <div class="d-inline-flex align-items-center justify-content-center rounded-3 mb-2" style="width: 44px; height: 44px; background-color: #dcfce7;">
+                                <span style="font-size: 24px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));">🚨</span>
                             </div>
-                            <h5 class="fw-bold text-dark mb-2">Alertas duales</h5>
-                            <p class="card-text text-secondary small leading-relaxed">
+                            <h5 class="fw-bold mb-2 fs-6" style="color: #00324b; line-height: 1.4;">Alertas duales</h5>
+                            <p class="card-text text-secondary mb-3" style="font-size: 0.85rem; line-height: 1.35;">
                                 Notificaciones visuales en el panel y correo institucional automático cuando el CO₂ supera el umbral crítico.
                             </p>
+                            <div class="mt-auto text-end">
+                                <a href="#funcionalidades" class="btn btn-sena rounded-circle d-inline-flex align-items-center justify-content-center p-0 hover-lift" style="width: 28px; height: 28px;">
+                                    <i class="bi bi-arrow-right text-white"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Card 3 -->
                     <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 card-sena border shadow-sm p-4 bg-light">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-success bg-opacity-10 text-success rounded-3 p-3 mb-3 fs-3" style="width: 52px; height: 52px;">
-                                <i class="bi bi-cpu"></i>
+                        <div class="card h-100 border-0 shadow-sm p-3 bg-white d-flex flex-column" style="border-radius: 1rem; border: 1px solid rgba(0,0,0,0.05) !important;">
+                            <div class="d-inline-flex align-items-center justify-content-center rounded-3 mb-2" style="width: 44px; height: 44px; background-color: #dcfce7;">
+                                <span style="font-size: 24px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));">🧠</span>
                             </div>
-                            <h5 class="fw-bold text-dark mb-2">Predicción con IA</h5>
-                            <p class="card-text text-secondary small leading-relaxed">
+                            <h5 class="fw-bold mb-2 fs-6" style="color: #00324b; line-height: 1.4;">Predicción con IA</h5>
+                            <p class="card-text text-secondary mb-3" style="font-size: 0.85rem; line-height: 1.35;">
                                 El módulo predictivo anticipa hasta 15 minutos antes cuándo el aire se deteriorará, sugiriendo acciones preventivas.
                             </p>
+                            <div class="mt-auto text-end">
+                                <a href="#funcionalidades" class="btn btn-sena rounded-circle d-inline-flex align-items-center justify-content-center p-0 hover-lift" style="width: 28px; height: 28px;">
+                                    <i class="bi bi-arrow-right text-white"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Card 4 -->
                     <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 card-sena border shadow-sm p-4 bg-light">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-info bg-opacity-10 text-info rounded-3 p-3 mb-3 fs-3" style="width: 52px; height: 52px;">
-                                <i class="bi bi-file-earmark-bar-graph"></i>
+                        <div class="card h-100 border-0 shadow-sm p-3 bg-white d-flex flex-column" style="border-radius: 1rem; border: 1px solid rgba(0,0,0,0.05) !important;">
+                            <div class="d-inline-flex align-items-center justify-content-center rounded-3 mb-2" style="width: 44px; height: 44px; background-color: #dcfce7;">
+                                <span style="font-size: 24px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));">📊</span>
                             </div>
-                            <h5 class="fw-bold text-dark mb-2">Histórico exportable</h5>
-                            <p class="card-text text-secondary small leading-relaxed">
+                            <h5 class="fw-bold mb-2 fs-6" style="color: #00324b; line-height: 1.4;">Histórico exportable</h5>
+                            <p class="card-text text-secondary mb-3" style="font-size: 0.85rem; line-height: 1.35;">
                                 Consulta registros de hasta un año académico y exporta reportes protegidos en Excel o PDF para auditorías.
                             </p>
+                            <div class="mt-auto text-end">
+                                <a href="#funcionalidades" class="btn btn-sena rounded-circle d-inline-flex align-items-center justify-content-center p-0 hover-lift" style="width: 28px; height: 28px;">
+                                    <i class="bi bi-arrow-right text-white"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Card 5 -->
                     <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 card-sena border shadow-sm p-4 bg-light">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-warning bg-opacity-10 text-warning rounded-3 p-3 mb-3 fs-3" style="width: 52px; height: 52px;">
-                                <i class="bi bi-hdd-network"></i>
+                        <div class="card h-100 border-0 shadow-sm p-3 bg-white d-flex flex-column" style="border-radius: 1rem; border: 1px solid rgba(0,0,0,0.05) !important;">
+                            <div class="d-inline-flex align-items-center justify-content-center rounded-3 mb-2" style="width: 44px; height: 44px; background-color: #dcfce7;">
+                                <span style="font-size: 24px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));">📡</span>
                             </div>
-                            <h5 class="fw-bold text-dark mb-2">Sensores IoT ESP32</h5>
-                            <p class="card-text text-secondary small leading-relaxed">
+                            <h5 class="fw-bold mb-2 fs-6" style="color: #00324b; line-height: 1.4;">Sensores IoT ESP32</h5>
+                            <p class="card-text text-secondary mb-3" style="font-size: 0.85rem; line-height: 1.35;">
                                 Nodos autónomos con modo offline que almacenan lecturas durante pérdidas de señal Wi-Fi y sincronizan al reconectarse.
                             </p>
+                            <div class="mt-auto text-end">
+                                <a href="#funcionalidades" class="btn btn-sena rounded-circle d-inline-flex align-items-center justify-content-center p-0 hover-lift" style="width: 28px; height: 28px;">
+                                    <i class="bi bi-arrow-right text-white"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Card 6 -->
                     <div class="col-md-6 col-lg-4">
-                        <div class="card h-100 card-sena border shadow-sm p-4 bg-light">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-sena-subtle text-sena rounded-3 p-3 mb-3 fs-3" style="width: 52px; height: 52px;">
-                                <i class="bi bi-shield-check"></i>
+                        <div class="card h-100 border-0 shadow-sm p-3 bg-white d-flex flex-column" style="border-radius: 1rem; border: 1px solid rgba(0,0,0,0.05) !important;">
+                            <div class="d-inline-flex align-items-center justify-content-center rounded-3 mb-2" style="width: 44px; height: 44px; background-color: #dcfce7;">
+                                <span style="font-size: 24px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));">🔐</span>
                             </div>
-                            <h5 class="fw-bold text-dark mb-2">Seguridad y RBAC</h5>
-                            <p class="card-text text-secondary small leading-relaxed">
+                            <h5 class="fw-bold mb-2 fs-6" style="color: #00324b; line-height: 1.4;">Seguridad y RBAC</h5>
+                            <p class="card-text text-secondary mb-3" style="font-size: 0.85rem; line-height: 1.35;">
                                 Control de acceso por rol, log de auditoría completo y cierre de sesión automático por inactividad según el perfil.
                             </p>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-        </section>
-
-        <!-- =========================================================================
-             4. SECCIÓN "ROLES DE USUARIO"
-             ========================================================================= -->
-        <section id="roles" class="py-5 bg-light section-scroll border-bottom">
-            <div class="container py-4">
-                
-                <div class="text-center mx-auto mb-5" style="max-width: 768px;">
-                    <span class="text-uppercase fw-bold text-sena small tracking-wider d-block mb-1">
-                        Roles de Usuario
-                    </span>
-                    <h2 class="display-6 fw-bold text-sena-dark mb-2">
-                        Diseñado para cada integrante de la comunidad
-                    </h2>
-                    <p class="text-secondary small">Perfiles personalizados para una gestión eficiente y oportuna.</p>
-                </div>
-
-                <div class="row g-4">
-                    
-                    <div class="col-md-4">
-                        <div class="card card-sena h-100 p-4 border bg-white shadow-sm">
-                            <div class="fs-2 text-primary mb-2"><i class="bi bi-gear-wide-connected"></i></div>
-                            <h5 class="fw-bold text-dark mb-2">Administradores</h5>
-                            <p class="text-secondary small leading-relaxed mb-3">
-                                Control total del sistema, gestión de usuarios, definición de límites de alerta y visualización del mapa completo del CEFA.
-                            </p>
-                            <ul class="list-unstyled small text-muted border-top pt-2 mb-0">
-                                <li><i class="bi bi-check2 text-sena me-1"></i> Control de acceso y roles</li>
-                                <li><i class="bi bi-check2 text-sena me-1"></i> Configuración de nodos IoT</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card card-sena h-100 p-4 border bg-white shadow-sm">
-                            <div class="fs-2 text-sena mb-2"><i class="bi bi-shield-check"></i></div>
-                            <h5 class="fw-bold text-dark mb-2">Funcionarios SST</h5>
-                            <p class="text-secondary small leading-relaxed mb-3">
-                                Herramienta preventiva y reactiva. Reciben alertas críticas y pueden observar el estado general para actuar rápido.
-                            </p>
-                            <ul class="list-unstyled small text-muted border-top pt-2 mb-0">
-                                <li><i class="bi bi-check2 text-sena me-1"></i> Alertas críticas al correo</li>
-                                <li><i class="bi bi-check2 text-sena me-1"></i> Reportes exportables para auditoría</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card card-sena h-100 p-4 border bg-white shadow-sm">
-                            <div class="fs-2 text-info mb-2"><i class="bi bi-person-workspace"></i></div>
-                            <h5 class="fw-bold text-dark mb-2">Instructores</h5>
-                            <p class="text-secondary small leading-relaxed mb-3">
-                                Un panel sencillo para ver el estado de su salón, registrar el número de aprendices (aforo) y saber cuándo ventilar.
-                            </p>
-                            <ul class="list-unstyled small text-muted border-top pt-2 mb-0">
-                                <li><i class="bi bi-check2 text-sena me-1"></i> Semáforo visual en el aula</li>
-                                <li><i class="bi bi-check2 text-sena me-1"></i> Registro fácil de aforo</li>
-                            </ul>
+                            <div class="mt-auto text-end">
+                                <a href="#funcionalidades" class="btn btn-sena rounded-circle d-inline-flex align-items-center justify-content-center p-0 hover-lift" style="width: 28px; height: 28px;">
+                                    <i class="bi bi-arrow-right text-white"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
@@ -450,20 +397,20 @@
         <!-- =========================================================================
              5. SECCIÓN "EQUIPO DESARROLLADOR" (ADSO SENA La Angostura)
              ========================================================================= -->
-        <section id="equipo" class="py-5 bg-white section-scroll border-bottom">
-            <div class="container py-4">
+        <section id="equipo" class="bg-white section-scroll d-flex align-items-center py-2" style="min-height: calc(100vh - 74px - 78px);">
+            <div class="container w-100">
                 
-                <div class="text-center mx-auto mb-5" style="max-width: 768px;">
+                <div class="text-center mx-auto mb-3" style="max-width: 768px;">
                     <span class="text-uppercase fw-bold text-sena small tracking-wider d-block mb-1">
                         Equipo Desarrollador
                     </span>
-                    <h2 class="display-6 fw-bold text-sena-dark mb-2">
+                    <h2 class="h3 fw-bold text-sena-dark mb-1">
                         Creado por Aprendices del SENA
                     </h2>
-                    <p class="text-secondary small">Centro de Formación Agroindustrial La Angostura &bull; Regional Huila</p>
+                    <p class="text-secondary small mb-0">Centro de Formación Agroindustrial La Angostura &bull; Regional Huila</p>
                 </div>
 
-                <div class="row g-4">
+                <div class="row g-4 justify-content-center">
                     @foreach ($desarrolladores as $dev)
                         @php
                             $devObj = (object) $dev;
@@ -471,26 +418,34 @@
                         <div class="col-sm-6 col-lg-3">
                             <div class="card card-sena h-100 border shadow-sm p-4 bg-white text-center d-flex flex-column justify-content-between">
                                 <div>
-                                    <!-- Avatar Institucional con Iniciales -->
-                                    <div class="rounded-circle bg-sena-dark text-white d-inline-flex align-items-center justify-content-center mx-auto mb-3 shadow-sm" style="width: 64px; height: 64px; font-size: 1.25rem; font-weight: bold;">
-                                        {{ $devObj->iniciales ?? 'AD' }}
+                                    <!-- Avatar Institucional con Iniciales o Foto (Aumentado a 140px) -->
+                                    <div class="rounded-circle overflow-hidden bg-sena-dark text-white d-inline-flex align-items-center justify-content-center mx-auto mb-3 shadow position-relative" style="width: 140px; height: 140px; font-size: 2.5rem; font-weight: bold;">
+                                        @if(isset($devObj->foto) && $devObj->foto)
+                                            <!-- Si no se encuentra la imagen en public/, se mostrarán las iniciales automáticamente gracias a onerror -->
+                                            <img src="{{ asset($devObj->foto) }}" alt="{{ $devObj->nombre }}" class="w-100 h-100" style="object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                            <div class="w-100 h-100 bg-sena-dark text-white align-items-center justify-content-center position-absolute top-0 start-0" style="display: none; font-size: 2.5rem; font-weight: bold;">
+                                                {{ $devObj->iniciales ?? 'AD' }}
+                                            </div>
+                                        @else
+                                            {{ $devObj->iniciales ?? 'AD' }}
+                                        @endif
                                     </div>
 
                                     <!-- Nombre del Aprendiz -->
-                                    <h6 class="fw-bold text-dark mb-1">{{ $devObj->nombre ?? 'Aprendiz' }}</h6>
+                                    <h5 class="fw-bold text-dark mb-1" style="font-size: 1.05rem;">{{ $devObj->nombre ?? 'Aprendiz' }}</h5>
 
                                     <!-- Rol en el Proyecto -->
                                     <span class="text-sena fw-semibold small d-block mb-2">{{ $devObj->rol ?? 'Desarrollador' }}</span>
 
                                     <!-- Badge del Programa Académico -->
-                                    <div class="mb-3">
-                                        <span class="badge bg-light text-dark border px-2 py-1" style="font-size: 0.65rem;">
+                                    <div class="mb-2">
+                                        <span class="badge bg-light text-dark border px-2 py-1" style="font-size: 0.7rem;">
                                             {{ $devObj->programa ?? 'ADSO' }}
                                         </span>
                                     </div>
 
                                     <!-- Especialidad -->
-                                    <p class="text-secondary small leading-relaxed mb-3" style="font-size: 0.8rem;">
+                                    <p class="text-secondary small leading-relaxed mb-3" style="font-size: 0.825rem;">
                                         {{ $devObj->especialidad ?? '' }}
                                     </p>
                                 </div>
@@ -505,72 +460,30 @@
                         </div>
                     @endforeach
                 </div>
-
             </div>
         </section>
     </main>
 
     <!-- =========================================================================
-         PIE DE PÁGINA INSTITUCIONAL SENA LA ANGOSTURA
+         PIE DE PÁGINA (MINI FOOTER INSTITUCIONAL)
          ========================================================================= -->
-    <footer class="bg-sena-dark text-white py-5 mt-auto">
-        <div class="container">
-            <div class="row g-4 mb-4">
-                
-                <!-- Columna 1: Datos del Proyecto -->
-                <div class="col-lg-5">
-                    <div class="d-flex align-items-center gap-2 mb-3">
-                        <span class="fs-4 fw-bold text-white">AirSense CEFA</span>
-                        <span class="badge bg-sena">SENA</span>
-                    </div>
-                    <p class="text-white-50 small pe-lg-4 leading-relaxed">
-                        Sistema integral de monitoreo ambiental inteligente. Mide y predice en tiempo real la acumulación de dióxido de carbono (CO₂), temperatura y humedad para garantizar ambientes pedagógicos seguros y saludables.
-                    </p>
-                    <div class="small text-white-50 d-flex align-items-center gap-2">
-                        <i class="bi bi-geo-alt-fill text-sena"></i>
-                        <span>Centro de Formación Agroindustrial La Angostura &bull; SENA Regional Huila</span>
-                    </div>
-                </div> 
-
-                <!-- Columna 2: Enlaces Rápidos -->
-                <div class="col-6 col-lg-3">
-                    <h6 class="text-uppercase fw-bold text-white small tracking-wider mb-3">Navegación</h6>
-                    <ul class="list-unstyled small">
-                        <li class="mb-2"><a href="#hero" class="text-white-50 text-decoration-none">Inicio</a></li>
-                        <li class="mb-2"><a href="#solucion" class="text-white-50 text-decoration-none">La Solución</a></li>
-                        <li class="mb-2"><a href="#funcionalidades" class="text-white-50 text-decoration-none">Funcionalidades</a></li>
-                        <li class="mb-2"><a href="#roles" class="text-white-50 text-decoration-none">Roles de Usuario</a></li>
-                        <li class="mb-2"><a href="#equipo" class="text-white-50 text-decoration-none">Equipo Desarrollador</a></li>
-                    </ul>
-                </div>
-
-                <!-- Columna 3: Información Formativa -->
-                <div class="col-6 col-lg-4">
-                    <h6 class="text-uppercase fw-bold text-white small tracking-wider mb-3">Programa Académico</h6>
-                    <p class="small text-sena fw-bold mb-1">
-                        TGO. Análisis y Desarrollo de Software (ADSO)
-                    </p>
-                    <p class="small text-white-50 mb-3">
-                        Proyecto formativo institucional orientado a la salud ocupacional, prevención de riesgos ambientales y telemetría IoT.
-                    </p>
-                    @if (Route::has('login'))
-                        @auth
-                            <a href="{{ url('/dashboard') }}" class="btn btn-outline-light btn-sm">
-                                <i class="bi bi-speedometer2 me-1"></i> Panel de Control
-                            </a>
-                        @else
-                            <a href="{{ route('login') }}" class="btn btn-outline-light btn-sm">
-                                <i class="bi bi-shield-lock me-1"></i> Panel Administrativo
-                            </a>
-                        @endauth
-                    @endif
-                </div>
-
+    <footer class="bg-sena-dark text-white py-3 mt-auto shadow-sm" style="position: relative; z-index: 10;">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+            <!-- Logos Izquierda -->
+            <div class="d-flex align-items-center gap-3">
+                <img src="{{ asset('images/logo.png') }}" alt="Logo" style="height: 36px; width: auto;">
+                <img src="{{ asset('images/airsense-texto-blanco.svg') }}" alt="AirSense CEFA" style="height: 20px; width: auto; transform: translateY(2px);">
             </div>
-
-            <!-- Separador y Copyright -->
-            <div class="border-top border-secondary border-opacity-25 pt-4 d-flex flex-column flex-md-row justify-content-between align-items-center small text-white-50">
-                <p class="mb-2 mb-md-0">&copy; {{ date('Y') }} AirSense CEFA &bull; Servicio Nacional de Aprendizaje (SENA)</p>
+            
+            <!-- Derechos y Contacto -->
+            <div class="text-center text-white-50 small fw-medium" style="font-size: 0.8rem; line-height: 1.4;">
+                &copy; {{ date('Y') }} <span class="text-white fw-bold">AirSense CEFA</span>. Todos los derechos reservados.<br>
+                Centro de Formación Agroindustrial La Angostura &bull; SENA Regional Huila
+            </div>
+            
+            <!-- Logo SENA Derecha -->
+            <div>
+                <img src="{{ asset('images/log-sena.svg') }}" alt="SENA" style="height: 42px; width: auto;">
             </div>
         </div>
     </footer>

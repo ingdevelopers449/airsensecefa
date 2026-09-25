@@ -1,58 +1,40 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# AirSense CEFA 🌿
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![Logo AirSense](ruta/al/logo.png)
 
-## About Laravel
+AirSense CEFA es un sistema de monitoreo de calidad del aire basado en Internet de las Cosas (IoT) desarrollado para el Centro de Formación Agroindustrial La Angostura - Regional Huila. 🏫
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📝 Descripción
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Este proyecto tiene como objetivo monitorear y analizar en tiempo real las variables ambientales (CO2, temperatura, humedad) en los diferentes ambientes de formación del CEFA, utilizando una red de sensores IoT. La plataforma web permite visualizar los datos, generar alertas, predecir situaciones de riesgo y sugerir acciones preventivas para garantizar la salud y el bienestar de la comunidad educativa. 🌡️💨
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🚀 Funcionalidades principales
 
-## Learning Laravel
+- 📈 Monitoreo en tiempo real de CO2, temperatura y humedad
+- 🚦 Visualización del estado ambiental mediante un sistema de semáforo
+- 🔔 Alertas visuales y por correo cuando se superan umbrales críticos
+- 🧠 Módulo de Inteligencia Artificial para análisis predictivo
+- 📊 Reportes y gráficas históricas de las variables monitoreadas
+- 🔒 Gestión de usuarios y roles con autenticación segura
+- 🌐 Acceso remoto desde cualquier dispositivo con internet
+- 📱 Diseño responsive para visualización en smartphones y tablets
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🛠️ Arquitectura y tecnologías utilizadas
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Sensores:** Nodos ESP32 con sensores MH-Z19B (CO2), DHT22 (temperatura y humedad)
+- **Conectividad:** Wi-Fi (IEEE 802.11 b/g/n)
+- **Protocolos:** MQTT para comunicación entre nodos y servidor
+- **Backend:** Node.js con Express.js y MongoDB
+- **Frontend:** React.js con Redux y Material-UI
+- **Análisis de datos:** Python con NumPy, Pandas y Scikit-Learn
+- **Despliegue:** Contenedores Docker en AWS EC2
+- **Integración y entrega continua (CI/CD):** Jenkins y GitHub Actions
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## 📁 Estructura del repositorio
 
-## Agentic Development
+- `./frontend` - Código fuente del frontend en React.js
+- `./backend` - Código fuente del backend en Node.js
+- `./data_analysis` - Scripts de análisis de datos y módulo de IA en Python
+- `./hardware` - Esquemáticos y firmware de los nodos ESP32
+- `./docs` - Documentación del proyecto
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
-```
-
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

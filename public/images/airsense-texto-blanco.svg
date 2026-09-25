@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 6 285 32" width="100%" height="100%">
+  <defs>
+    <!-- Gradiente Verde para "Air" -->
+    <linearGradient id="airGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#78cb27" />
+      <stop offset="100%" stop-color="#39A900" />
+    </linearGradient>
+  </defs>
+
+  <!-- Variante para fondo oscuro: Air (Verde) y Sense CEFA (Blanco) -->
+  <g font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">
+    <text x="0" y="35" font-size="40" letter-spacing="-0.5">
+      <tspan fill="url(#airGrad)" font-weight="800">Air</tspan><tspan fill="#FFFFFF" font-weight="800">Sense</tspan><tspan dx="6" fill="#FFFFFF" font-weight="900" letter-spacing="0.5">CEFA</tspan>
+    </text>
+  </g>
+</svg>
