@@ -1,3 +1,3 @@
-<div>
-    <!-- It always seems impossible until it is done. - Nelson Mandela -->
-</div>
+@extends('layouts.sidebaradmincefa')
+@section('content')
+@endsection
