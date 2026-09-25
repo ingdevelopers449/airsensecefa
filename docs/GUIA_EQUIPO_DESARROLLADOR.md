@@ -57,9 +57,15 @@ git commit -m "feat(ui): diseñar componentes de tarjetas de sensores"
 ```
 
 ### 4️⃣ Subir tu rama a GitHub
+Sube únicamente los cambios a la rama específica sobre la que estás trabajando:
 ```bash
-git push origin feature/tu-funcionalidad
+# Ejemplo si estás en la rama feature/login-usuario:
+git push origin feature/login-usuario
+
+# O si es la primera vez que subes esa rama a GitHub:
+git push -u origin feature/login-usuario
 ```
+> **Recuerda:** Reemplaza `feature/login-usuario` por el nombre exacto de la rama en la que estás trabajando (`git branch`).
 
 ### 5️⃣ Solicitar aprobación (Pull Request)
 1. Ve a GitHub: [https://github.com/ingdevelopers449/airsensecefa](https://github.com/ingdevelopers449/airsensecefa)
