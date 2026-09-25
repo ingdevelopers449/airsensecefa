@@ -1,9 +1,23 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UsuarioController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
+    if (Auth::check()) {
+        $role = Auth::user()->role_id;
+
+        if ($role == 1) {
+            return view('admin.dashboard');
+        } elseif ($role == 2) {
+            return view('ehscefa.dashboard');
+        } elseif ($role == 3) {
+            return view('instructor.dashboard');
+        }
+    }
+
     return view('welcome');
 });
 
