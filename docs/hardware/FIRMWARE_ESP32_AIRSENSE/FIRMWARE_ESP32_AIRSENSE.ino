@@ -6,11 +6,11 @@
 // =========================================================================
 // ⚙️ 1. CONFIGURACIÓN DE RED Y DISPOSITIVO (EDITA ESTOS VALORES)
 // =========================================================================
-const char* WIFI_SSID     = "NOMBRE_DE_TU_WIFI";       // Escribe el SSID de tu Wi-Fi
-const char* WIFI_PASSWORD = "CLAVE_DE_TU_WIFI";        // Escribe la clave del Wi-Fi
+const char* WIFI_SSID     = "FAMILIA LOZADA";       // Escribe el SSID de tu Wi-Fi
+const char* WIFI_PASSWORD = "1077845912@";        // Escribe la clave del Wi-Fi
 
 // Reemplaza 192.168.X.X por la dirección IP local de tu computador donde corre Laragon
-const char* API_URL = "http://192.168.1.15:8000/api/v1/nodes/telemetry";
+const char* API_URL = "http://192.168.0.116:8000/api/v1/nodes/telemetry";
 
 // Credenciales de Seguridad del Nodo registradas en la Base de Datos
 const char* DEVICE_UID   = "ESP32_XX5R69";
