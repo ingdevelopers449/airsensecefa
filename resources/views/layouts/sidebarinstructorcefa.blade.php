@@ -56,136 +56,49 @@
                     
                     <!-- Dashboard -->
                     <div>
-                        <a href="{{ route('instructor.dashboard') }}" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all duration-200 text-decoration-none {{ request()->routeIs('admin.dashboard', 'dashboard') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
-                            <i class="fas fa-chart-pie text-sm w-4 text-center text-[#39A900]"></i>
-                            <span class="text-sm">Dashboard Principal</span>
+                        <a href="{{ route('instructor.dashboard') }}" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 text-decoration-none {{ request()->routeIs('instructor.dashboard') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                            <i class="fas fa-desktop text-base w-4 text-center text-[#39A900]"></i>
+                            <span>Mi Ambiente de Formación</span>
                         </a>
                     </div>
 
-                    <!-- CATÁLOGOS -->
-                    <div x-data="{ open: {{ request()->routeIs('usuarios.*', 'gusuarios.*') ? 'true' : 'false' }} }" class="space-y-1">
-                        <p class="px-3 text-[10.5px] font-extrabold text-slate-400 uppercase tracking-wider mb-1.5">Gestión y Catálogos</p>
-
-                        <button @click="open = !open" type="button" class="w-full flex items-center justify-between px-3.5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 {{ request()->routeIs('usuarios.*', 'gusuarios.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }} focus:outline-none">
-                            <div class="flex items-center gap-2.5">
-                                <i class="fas fa-users-cog w-4 text-center text-[#39A900]"></i>
-                                <span>Gestión de Usuarios</span>
-                            </div>
-                            <i class="fas fa-chevron-down text-[10px] transition-transform duration-200" :class="{ 'rotate-180': open }"></i>
-                        </button>
-                        <div x-show="open" x-collapse x-cloak class="pl-6 pr-2 py-1 space-y-1 border-l-2 border-[#003B5C] ml-4 mt-1">
-                            <a href="" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-[13px] font-medium text-decoration-none transition-all duration-150 {{ request()->routeIs('usuarios.create') ? 'bg-[#39A900] text-white font-bold shadow-sm' : 'text-slate-300 hover:text-white hover:bg-white/10' }}">
-                                <i class="fas fa-user-plus text-[11px] text-[#39A900]"></i>
-                                <span>Registrar Usuario</span>
-                            </a>
-                            <a href="" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-[13px] font-medium text-decoration-none transition-all duration-150 {{ request()->routeIs('gusuarios.listausuario') ? 'bg-[#39A900] text-white font-bold shadow-sm' : 'text-slate-300 hover:text-white hover:bg-white/10' }}">
-                                <i class="fas fa-list text-[11px] text-[#39A900]"></i>
-                                <span>Listado de Usuarios</span>
-                            </a>
-                        </div>
-
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('proveedores.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
-                            <i class="fas fa-building w-4 text-center text-[#39A900]"></i>
-                            <span>Proveedores</span>
-                        </a>
-
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('categorias.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
-                            <i class="fas fa-tags w-4 text-center text-[#39A900]"></i>
-                            <span>Categorías</span>
-                        </a>
-
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('productos.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
-                            <i class="fas fa-boxes w-4 text-center text-[#39A900]"></i>
-                            <span>Productos e Insumos</span>
-                        </a>
-                    </div>
-
-                    <!-- INVENTARIO -->
+                    <!-- MI AULA & AFORO -->
                     <div class="space-y-1">
-                        <p class="px-3 text-[10.5px] font-extrabold text-slate-400 uppercase tracking-wider mb-1.5">Control de Inventario</p>
+                        <p class="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">Control de Aula & Aforo</p>
 
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('inventario.stock') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
-                            <i class="fas fa-warehouse w-4 text-center text-[#39A900]"></i>
-                            <span>Consultar Stock</span>
+                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('instructor.estadía.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                            <i class="fas fa-check-circle w-4 text-center text-[#39A900]"></i>
+                            <span>Estadía y Aforo Diario</span>
                         </a>
 
-                        <a href="" class="flex items-center justify-between px-3.5 py-2 rounded-xl text-xs font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('inventario.stock-minimo') ? 'bg-amber-400/20 text-amber-400 font-bold border-l-4 border-amber-400' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
-                            <span class="flex items-center gap-2.5">
-                                <i class="fas fa-exclamation-triangle text-amber-400 w-4 text-center"></i>
-                                <span>Stock Mínimo</span>
-                            </span>
-                        </a>
-
-                        <a href="" class="flex items-center justify-between px-3.5 py-2 rounded-xl text-xs font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('inventario.agotados') ? 'bg-rose-400/20 text-rose-400 font-bold border-l-4 border-rose-400' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
-                            <span class="flex items-center gap-2.5">
-                                <i class="fas fa-times-circle text-rose-400 w-4 text-center"></i>
-                                <span>Agotados</span>
-                            </span>
-                        </a>
-
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('inventario.ajustes') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
-                            <i class="fas fa-tools w-4 text-center text-[#39A900]"></i>
-                            <span>Ajustes de Stock</span>
-                        </a>
-
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('inventario.movimientos') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('instructor.cambio-ambiente.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-exchange-alt w-4 text-center text-[#39A900]"></i>
-                            <span>Movimientos Auditados</span>
+                            <span>Cambiar de Ambiente</span>
                         </a>
                     </div>
 
-                    <!-- COMPRAS Y VENTAS -->
+                    <!-- PROTOCOLOS & RECOMENDACIONES -->
                     <div class="space-y-1">
-                        <p class="px-3 text-[10.5px] font-extrabold text-slate-400 uppercase tracking-wider mb-1.5">Operaciones Comercial</p>
+                        <p class="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">Protocolos de Seguridad</p>
 
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-200 hover:text-white hover:bg-white/10 text-decoration-none">
-                            <i class="fas fa-cart-plus text-[#39A900] w-4 text-center"></i>
-                            <span>Nueva Compra Entrada</span>
+                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('instructor.manual.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                            <i class="fas fa-notes-medical w-4 text-center text-[#39A900]"></i>
+                            <span>Manual de Contingencia</span>
                         </a>
 
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('compras.index') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
-                            <i class="fas fa-file-invoice-dollar w-4 text-center text-[#39A900]"></i>
-                            <span>Historial Compras</span>
-                        </a>
-
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-amber-300 hover:text-amber-200 hover:bg-white/10 text-decoration-none">
-                            <i class="fas fa-cash-register w-4 text-center"></i>
-                            <span>Nueva Venta (POS)</span>
-                        </a>
-
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ventas.index') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
-                            <i class="fas fa-shopping-basket w-4 text-center text-[#39A900]"></i>
-                            <span>Historial Ventas</span>
+                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('instructor.alertas-preventivas.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                            <i class="fas fa-exclamation-circle w-4 text-center text-[#39A900]"></i>
+                            <span>Alertas Preventivas</span>
                         </a>
                     </div>
 
-                    <!-- REPORTES & POST-VENTA -->
+                    <!-- ANALÍTICA PREDICTIVA DE AULA -->
                     <div class="space-y-1">
-                        <p class="px-3 text-[10.5px] font-extrabold text-slate-400 uppercase tracking-wider mb-1.5">Reportes & Post-Venta</p>
+                        <p class="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">Pronóstico Ambiental</p>
 
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('reportes.ventas') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('instructor.predictivo.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-chart-line w-4 text-center text-[#39A900]"></i>
-                            <span>Reporte de Ventas</span>
-                        </a>
-
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('reportes.ganancias') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
-                            <i class="fas fa-calculator w-4 text-center text-[#39A900]"></i>
-                            <span>Resumen Ganancias</span>
-                        </a>
-
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('devoluciones.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
-                            <i class="fas fa-undo w-4 text-center text-[#39A900]"></i>
-                            <span>Devoluciones</span>
-                        </a>
-
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('garantias.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
-                            <i class="fas fa-shield-alt w-4 text-center text-[#39A900]"></i>
-                            <span>Garantías</span>
-                        </a>
-
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('configuracion.bitacora') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
-                            <i class="fas fa-history w-4 text-center text-[#39A900]"></i>
-                            <span>Bitácora & Backup</span>
+                            <span>Tendencia de Aire (IA)</span>
                         </a>
                     </div>
                 </div>
