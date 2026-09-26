@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class InitialDataSeeder extends Seeder
 {
@@ -101,5 +102,33 @@ class InitialDataSeeder extends Seeder
         foreach ($settings as $s) {
             DB::table('system_settings')->updateOrInsert(['setting_key' => $s['setting_key']], $s);
         }
+
+        // 7. Ambientes y Nodos Iniciales (Ejemplo de prueba)
+        DB::table('environments')->updateOrInsert(
+            ['code' => 'AULA_101'],
+            [
+                'name' => 'Aula de Formación 101 - CEFA',
+                'description' => 'Ambiente de formación principal',
+                'is_active' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
+
+        $envId = DB::table('environments')->where('code', 'AULA_101')->value('id');
+
+        DB::table('nodes')->updateOrInsert(
+            ['device_uid' => 'ESP32_XX5R69'],
+            [
+                'environment_id' => $envId,
+                'name' => 'Nodo ESP32 La Angostura',
+                'device_token_hash' => Hash::make('secret_token_abc123'),
+                'token_version' => 1,
+                'is_active' => true,
+                'connectivity_status' => 'online',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
     }
 }
