@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="es" class="h-full bg-light">
+<html lang="es" class="h-full bg-slate-50">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="{{ asset('images/logo.png')}}" type="image/x-icon">
-    <title>AirSense CEFA - Panel de Administración</title>
+    <title>AirSense CEFA - Panel de EHS</title>
 
     <!-- Bootstrap 5.3.3 CSS Oficial & Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -37,13 +37,13 @@
             <div>
                 <!-- Brand Header -->
                 <div class="h-16 px-4 flex items-center justify-between bg-[#001522] border-b border-[#003B5C]/70">
-                    <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2.5 text-decoration-none">
+                    <a href="{{ route('ehscefa.dashboard') }}" class="flex items-center gap-2.5 text-decoration-none">
                         <!-- Isotipo AirSense -->
                         <img src="{{ asset('images/logo.png') }}" alt="Logo AirSense" class="h-8 w-auto object-contain">
                         <div class="flex flex-col">
                             <!-- Logo de Texto Blanco -->
                             <img src="{{ asset('images/airsense-texto-blanco.svg') }}" alt="AirSense CEFA" class="h-3.5 w-auto object-contain">
-                            <span class="text-[8.5px] text-[#39A900] font-bold tracking-wider uppercase mt-0.5">PANEL ADMINISTRADOR</span>
+                            <span class="text-[8.5px] text-[#39A900] font-bold tracking-wider uppercase mt-0.5">PANEL EHS</span>
                         </div>
                     </a>
                     <button @click="sidebarOpen = !sidebarOpen" class="lg:hidden text-slate-300 hover:text-white focus:outline-none p-1.5 rounded-lg hover:bg-white/10">
@@ -56,7 +56,7 @@
                     
                     <!-- Dashboard -->
                     <div>
-                        <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all duration-200 text-decoration-none {{ request()->routeIs('admin.dashboard', 'dashboard') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="{{ route('ehscefa.dashboard') }}" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all duration-200 text-decoration-none {{ request()->routeIs('admin.dashboard', 'dashboard') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-chart-pie text-sm w-4 text-center text-[#39A900]"></i>
                             <span class="text-sm">Dashboard Principal</span>
                         </a>
@@ -283,3 +283,4 @@
     @yield('js')
 </body>
 </html>
+
