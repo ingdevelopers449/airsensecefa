@@ -41,22 +41,54 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    // 1. Verificar si el usuario ha iniciado sesión
     if (Auth::check()) {
         $role = Auth::user()->role_id;
 
-        // Redirección condicional según el rol asignado
         if ($role == 1) {
-            return view('admin.dashboard');
+            return redirect()->route('admin.dashboard');
         } elseif ($role == 2) {
-            return view('ehscefa.dashboard');
+            return redirect()->route('ehscefa.dashboard');
         } elseif ($role == 3) {
-            return view('instructor.dashboard');
+            return redirect()->route('instructor.dashboard');
         }
     }
 
-    // 2. Si es un visitante sin sesión, cargar la Landing Page pública
     return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    $role = Auth::user()->role_id ?? null;
+
+    if ($role == 1) {
+        return redirect()->route('admin.dashboard');
+    } elseif ($role == 2) {
+        return redirect()->route('ehscefa.dashboard');
+    } elseif ($role == 3) {
+        return redirect()->route('instructor.dashboard');
+    }
+
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+// 1. Administrador (role_id: 1)
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
+});
+
+// 2. SST / EHS CEFA (role_id: 2)
+Route::middleware(['auth'])->prefix('ehscefa')->name('ehscefa.')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('ehscefa.dashboard');
+    })->name('dashboard');
+});
+
+// 3. Instructor (role_id: 3)
+Route::middleware(['auth'])->prefix('instructor')->name('instructor.')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('instructor.dashboard');
+    })->name('dashboard');
 });
 ```
 
