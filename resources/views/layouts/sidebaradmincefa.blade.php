@@ -241,7 +241,7 @@
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-rose-600 hover:bg-rose-50 transition-colors font-medium border-0 bg-transparent">
-                                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesiónn
                                 </button>
                             </form>
                         </div>
