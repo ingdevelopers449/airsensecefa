@@ -1,3 +1,3 @@
-<div>
-    <!-- Life is available only in the present moment. - Thich Nhat Hanh -->
-</div>
+@extends('layouts.sidebarehscefa')
+@section('content')
+@endsection
