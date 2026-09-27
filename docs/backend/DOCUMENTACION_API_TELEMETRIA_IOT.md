@@ -1,166 +1,273 @@
-# 📡 Manual y Explicación Paso a Paso: API REST de Telemetría IoT — AirSense CEFA
+# 📡 Guía Definitiva y Documentación Técnica: API REST de Telemetría IoT — AirSense CEFA
 
-Bienvenido a la documentación técnica de la **API REST de Telemetría IoT** de AirSense CEFA.
+Bienvenido a la documentación técnica detallada de la **API REST de Telemetría IoT** de AirSense CEFA.
 
-Este documento está escrito de forma **súper clara, visual y sencilla**, pensado para que cualquier desarrollador (incluso si estás empezando desde cero en el mundo de las APIs) entienda al 100% **cómo se construyó, cómo funciona y cómo defenderla en una presentación o sustentación del proyecto**.
-
----
-
-## 💡 1. ¿Qué es esta API y para qué la necesitamos?
-
-### El Problema:
-El microcontrolador **ESP32** instalado en un aula de clase lee el CO₂ (sensor MH-Z16) y la temperatura/humedad (sensor DHT11). Sin embargo, el ESP32 no puede conectarse directamente a la base de datos MySQL por razones de seguridad y rendimiento.
-
-### La Solución (La API REST):
-La **API REST** es como una **"Ventanilla de Recepción Digital"** que pusimos en nuestro servidor Laravel. 
-1. El ESP32 se conecta al Wi-Fi del CEFA.
-2. Cada minuto envía un paquete de datos en formato **JSON** a nuestra ventanilla (API).
-3. Nuestra API recibe el paquete, verifica la identidad del ESP32, guarda los datos en MySQL y le responde al ESP32: *"¡Recibido con éxito!"*.
+Este documento está diseñado de forma **didáctica, profunda y estructurada paso a paso**, pensado para que cualquier desarrollador (incluso si está comenzando desde cero en desarrollo web y Laravel) entienda a la perfección **cómo funciona la API, cómo se conecta con MySQL, cómo se guardan las mediciones y cómo defender el proyecto en una sustentación técnica (SENA o clientes)**.
 
 ---
 
-## 🗺️ 2. El Viaje del Dato: Flujo Paso a Paso (Diagrama)
+## 💡 1. Conceptos Básicos: ¿Qué es esta API y cómo funciona?
 
-```mermaid
-sequenceDiagram
-    autonumber
-    participant ESP32 as 📟 ESP32 (Hardware)
-    participant Router as 🌐 Wi-Fi CEFA
-    participant Route as 🚦 Router API (routes/api.php)
-    participant Middleware as 🛡️ Middleware (ValidateIoTDevice)
-    participant Controller as ⚙️ Controller (IoTTelemetryController)
-    participant DB as 🗄️ Base de Datos MySQL
+### 🔴 El Reto Técnico:
+El microcontrolador **ESP32** (instalado en un ambiente o aula de clase) toma lecturas físicas de calidad del aire:
+* **CO₂ (Dióxido de Carbono)** con el sensor MH-Z16 / NDIR en PPM.
+* **Temperatura y Humedad** con el sensor DHT11 en °C y %.
 
-    ESP32->>Router: Envía HTTP POST (JSON + Headers UID/Token)
-    Router->>Route: Petición llega a /api/v1/nodes/telemetry
-    Route->>Middleware: ¿El UID y Token son válidos?
-    alt Token o UID Inválido / Dispositivo Inactivo
-        Middleware-->>ESP32: 🛑 Responde 401 Unauthorized (Acceso Denegado)
-    else Autenticación Exitosa
-        Middleware->>Controller: Pasa el Nodo verificado al Controlador
-        Controller->>DB: Inicia Transacción (DB::transaction)
-        Controller->>DB: 1. Guarda cabecera en `sensor_readings`
-        Controller->>DB: 2. Guarda mediciones en `sensor_measurements` (CO2, Temp, Hum)
-        Controller->>DB: 3. Actualiza estado del nodo a 'online' en `nodes`
-        DB-->>Controller: Transacción Confirmada
-        Controller-->>ESP32: ✅ Responde 201 Created ("Lectura registrada correctamente")
-    end
-```
+Los microcontroladores no se conectan directamente a una base de datos MySQL por razones de seguridad, red y arquitectura.
 
----
-
-## 📂 3. Archivos Creados y su Función Explicada
-
-Construimos **7 archivos principales** organizados en la arquitectura MVC de Laravel:
+### 🟢 La Solución (La API REST de Laravel):
+Una **API REST** es un punto de entrada HTTP en nuestro servidor web que recibe peticiones en formato estructurado (JSON), valida que vengan de una fuente confiable y realiza la persistencia de datos en la base de datos.
 
 ```text
-c:\laragon\www\airsense-cefa\
-├── app/
-│   ├── Http/
-│   │   ├── Controllers/Api/v1/
-│   │   │   └── IoTTelemetryController.php   <-- ⚙️ El Cerebro que procesa y guarda
-│   │   └── Middleware/
-│   │       └── ValidateIoTDevice.php        <-- 🛡️ El Guardián que valida la clave
-│   └── Models/
-│       ├── Node.php                         <-- 📦 Modelo para la tabla `nodes`
-│       ├── Environment.php                  <-- 📦 Modelo para la tabla `environments`
-│       ├── SensorReading.php                <-- 📦 Modelo para la tabla `sensor_readings`
-│       └── SensorMeasurement.php            <-- 📦 Modelo para la tabla `sensor_measurements`
-├── bootstrap/
-│   └── app.php                              <-- 🔌 Registra la ruta de la API
-└── routes/
-    └── api.php                              <-- 🚦 Define las URLs públicas de la API
+[ Sensor DHT11 + MH-Z16 ] ──> [ ESP32 (Wi-Fi) ] ──(HTTP POST JSON)──> [ API Laravel ] ──(Eloquent ORM)──> [ MySQL DB ]
 ```
 
 ---
 
-## 🔍 4. Explicación Detallada Código por Código
+## 🗄️ 2. Arquitectura de Base de Datos y Tablas Involucradas
 
-### 1️⃣ El Router (`routes/api.php`):
-Es la puerta de entrada. Le dice a Laravel qué URL debe responder:
+Para que los datos queden bien organizados y escalables, la base de datos relacional MySQL utiliza **4 tablas principales**:
+
+```mermaid
+erDiagram
+    ENVIRONMENTS ||--o{ NODES : "alberga"
+    ENVIRONMENTS ||--o{ SENSOR_READINGS : "registra en"
+    NODES ||--o{ SENSOR_READINGS : "transmite"
+    SENSOR_READINGS ||--|{ SENSOR_MEASUREMENTS : "contiene"
+
+    ENVIRONMENTS {
+        bigint id PK
+        string code "Código del aula (ej: AMB-101)"
+        string name "Nombre (ej: Aula 101 Sistemática)"
+        enum current_semaphore_state "green, yellow, red, no_data"
+        boolean is_active
+    }
+
+    NODES {
+        bigint id PK
+        bigint environment_id FK "Aula asignada (Nullable)"
+        string device_uid "Identificador único (ej: ESP32_XX5R69)"
+        string device_token_hash "Hash Bcrypt de la clave secreta"
+        enum connectivity_status "online, offline, unknown"
+        datetime last_seen_at "Última transmisión recibida"
+        boolean is_active
+    }
+
+    SENSOR_READINGS {
+        bigint id PK
+        bigint node_id FK "ESP32 que envió la lectura"
+        bigint environment_id FK "Aula donde se midió"
+        datetime measured_at "Fecha/hora de la toma en el sensor"
+        datetime received_at "Fecha/hora de llegada al servidor"
+        json raw_payload "Payload JSON original completo"
+    }
+
+    SENSOR_MEASUREMENTS {
+        bigint id PK
+        bigint reading_id FK "Relación con la cabecera sensor_readings"
+        enum variable_type "co2, temperature, humidity"
+        decimal value "Valor numérico (ej: 645.5000)"
+        string unit "Unidad (ppm, °C, %)"
+    }
+```
+
+### 📋 Detalle de cada Tabla:
+
+| Tabla | Función | Campos Clave |
+| :--- | :--- | :--- |
+| **`environments`** | Representa los ambientes físicos (aulas, laboratorios) del CEFA. | `id`, `code`, `name`, `current_semaphore_state` |
+| **`nodes`** | Almacena los dispositivos físicos ESP32 registrados en el sistema. | `id`, `environment_id`, `device_uid`, `device_token_hash`, `connectivity_status` |
+| **`sensor_readings`** | **Tabla Cabecera**: Registra el evento de transmisión (quién envió, cuándo y en qué aula). | `id`, `node_id`, `environment_id`, `measured_at`, `raw_payload` |
+| **`sensor_measurements`** | **Tabla Detalle**: Almacena de forma normalizada cada variable individual. | `id`, `reading_id`, `variable_type`, `value`, `unit` |
+
+> 🧠 **¿Por qué separar en Cabecera (`sensor_readings`) y Detalle (`sensor_measurements`)?**  
+> Si mañana agregamos un sensor de **Partículas en suspensión (PM2.5)** o **Ruido (dB)**, **NO** necesitamos modificar la estructura de la base de datos. Simplemente agregamos una nueva fila en `sensor_measurements` con `variable_type = 'pm25'`.
+
+---
+
+## 🔌 3. ¿Cómo se conecta Laravel a la Base de Datos MySQL?
+
+Laravel utiliza el archivo de configuración `.env` ubicado en la raíz del proyecto para conectarse a MySQL:
+
+```ini
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=airsense_cefa
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### El Rol de Eloquent ORM:
+En lugar de escribir consultas SQL puras a mano (como `INSERT INTO sensor_readings...`), Laravel usa **Eloquent ORM** (Object-Relational Mapping). Eloquent convierte las tablas de MySQL en **Clases/Modelos de PHP**:
+
+* La tabla `nodes` ──> Modelo PHP `App\Models\Node`
+* La tabla `environments` ──> Modelo PHP `App\Models\Environment`
+* La tabla `sensor_readings` ──> Modelo PHP `App\Models\SensorReading`
+* La tabla `sensor_measurements` ──> Modelo PHP `App\Models\SensorMeasurement`
+
+---
+
+## 🛠️ 4. Flujo Paso a Paso: Desde que el ESP32 envía hasta que se guarda en MySQL
+
+### 🛣️ Paso 1: Ruta y Petición HTTP (`routes/api.php`)
+El ESP32 realiza una petición `HTTP POST` a la dirección URL:
+`http://192.168.0.116:8000/api/v1/nodes/telemetry`
 
 ```php
 Route::prefix('v1/nodes')->group(function () {
     Route::middleware([ValidateIoTDevice::class])->group(function () {
         Route::post('telemetry', [IoTTelemetryController::class, 'store']);
-        Route::post('ping', [IoTTelemetryController::class, 'ping']);
     });
 });
 ```
-- **URL generada**: `http://tu-servidor/api/v1/nodes/telemetry`
-- **Método**: `POST` (porque el ESP32 está *enviando/creando* información).
-- **Middleware**: Antes de llamar al controlador, obliga a ejecutar `ValidateIoTDevice`.
 
 ---
 
-### 2️⃣ El Guardián de Seguridad (`app/Http/Middleware/ValidateIoTDevice.php`):
-Evita que hackers o personas extrañas envíen datos falsos a la base de datos.
+### 🛡️ Paso 2: Autenticación del Hardware en el Middleware (`ValidateIoTDevice.php`)
+Antes de llegar al controlador o tocar la base de datos, la petición pasa por el **Middleware Guardián**.
 
-**¿Cómo funciona la seguridad?**
-1. El ESP32 envía 2 encabezados HTTP:
-   - `X-Device-UID`: El número de cédula del ESP32 (ej: `ESP32_XX5R69`).
-   - `X-Device-Token`: La clave secreta (ej: `secret_token_abc123`).
-2. El Middleware busca el nodo en la tabla `nodes` por su `device_uid`.
-3. Compara el token usando **`Hash::check($token, $nodo->device_token_hash)`**.
-   > 🔐 **¿Por qué Hash?**: En la base de datos NUNCA guardamos la clave en texto plano. Guardamos un *hash* encriptado. `Hash::check()` verifica si la clave que mandó el ESP32 coincide con el hash guardado sin descifrarlo.
+1. El middleware extrae dos cabeceras (Headers) de la petición HTTP:
+   * `X-Device-UID`: El identificador único del hardware (ej: `ESP32_XX5R69`).
+   * `X-Device-Token`: La clave secreta del hardware (ej: `secret_token_abc123`).
 
----
+2. **Consulta a la tabla `nodes`**:
+   Eloquent busca si existe ese nodo en MySQL:
+   ```php
+   $node = Node::where('device_uid', $deviceUid)->first();
+   ```
+   *(Consulta SQL generada por debajo: `SELECT * FROM nodes WHERE device_uid = 'ESP32_XX5R69' LIMIT 1;`)*
 
-### 3️⃣ El Controlador de Ingesta (`app/Http/Controllers/Api/v1/IoTTelemetryController.php`):
-Es el encargado de procesar la información y guardarla de forma segura.
-
-**Pasos clave del método `store()`**:
-
-1. **Validación del JSON recibido**:
-   Verifica que el JSON contenga el arreglo `measurements` y que las variables sean válidas (`co2`, `temperature`, `humidity`).
-
-2. **Transacción de Base de Datos (`DB::transaction`)**:
-   > 💡 **¿Qué es una transacción?**: Es un principio de "Todo o Nada". Si por alguna razón se guarda el CO₂ pero falla al guardar la temperatura, la transacción cancela todo (*rollback*) para que la base de datos nunca quede corrupta o con datos incompletos.
-
-3. **Insección en `sensor_readings` (Cabecera)**:
-   Crea un registro general indicando el `node_id`, el `environment_id` (aula), la fecha de medición y guarda el JSON completo en `raw_payload` para auditoría.
-
-4. **Inserción en `sensor_measurements` (Detalle)**:
-   Itera sobre cada variable recibida e inserta una fila por cada medición:
-   - Fila 1: `variable_type = co2`, `value = 645.5`, `unit = ppm`
-   - Fila 2: `variable_type = temperature`, `value = 25.2`, `unit = °C`
-   - Fila 3: `variable_type = humidity`, `value = 60.0`, `unit = %`
-
-5. **Actualización de Estado del Hardware**:
-   Actualiza el nodo en la tabla `nodes`:
-   - `connectivity_status = 'online'`
-   - `last_seen_at = now()`
-
-6. **Respuesta HTTP 201 Created**:
-   Le responde al ESP32 en milisegundos un código HTTP `201` confirmando el éxito.
+3. **Verificación de la Clave Encriptada (`Hash::check`)**:
+   En la base de datos la clave **NUNCA** se guarda en texto plano, sino como un hash Bcrypt. El Middleware comprueba la clave enviada contra el hash guardado:
+   ```php
+   if (! Hash::check($deviceToken, $node->device_token_hash)) {
+       return response()->json(['message' => 'Credenciales del dispositivo inválidas'], 401);
+   }
+   ```
+4. Si la clave es correcta y el dispositivo está activo (`is_active = true`), la petición continúa hacia el controlador.
 
 ---
 
-## 🧪 5. Ejemplo de Petición y Respuesta HTTP Real
+### ⚙️ Paso 3: Inserción Transaccional en el Controlador (`IoTTelemetryController.php`)
 
-### Petición Enviada por el ESP32 (HTTP POST):
-* **URL**: `http://127.0.0.1:8000/api/v1/nodes/telemetry`
-* **Headers**:
-  ```text
-  Content-Type: application/json
-  Accept: application/json
-  X-Device-UID: ESP32_XX5R69
-  X-Device-Token: secret_token_abc123
-  ```
-* **Body (JSON)**:
+El método `store()` ejecuta el guardado en la base de datos utilizando **Transacciones de Base de Datos (`DB::transaction`)**:
+
+```php
+DB::transaction(function () use ($node, $validated, &$reading) {
+    // 1. Obtener o asignar el ambiente (aula)
+    $environmentId = $node->environment_id;
+    if (! $environmentId) {
+        $fallbackEnv = Environment::firstOrCreate(
+            ['code' => 'UNASSIGNED'],
+            ['name' => 'Sin Asignar', 'is_active' => true]
+        );
+        $environmentId = $fallbackEnv->id;
+    }
+
+    // 2. Insertar Registro Cabecera en `sensor_readings`
+    $reading = SensorReading::create([
+        'node_id' => $node->id,
+        'environment_id' => $environmentId,
+        'measured_at' => $validated['measured_at'] ?? now(),
+        'received_at' => now(),
+        'source' => 'online',
+        'is_valid' => true,
+        'raw_payload' => $validated,
+    ]);
+
+    // 3. Bucle para Insertar las Mediciones en `sensor_measurements`
+    foreach ($validated['measurements'] as $measurement) {
+        SensorMeasurement::create([
+            'reading_id' => $reading->id,
+            'variable_type' => strtolower($measurement['variable_type']),
+            'value' => $measurement['value'],
+            'unit' => $measurement['unit'],
+            'is_valid' => true,
+        ]);
+    }
+
+    // 4. Actualizar Estado de Conectividad en la tabla `nodes`
+    $node->update([
+        'connectivity_status' => 'online',
+        'last_seen_at' => now(),
+    ]);
+});
+```
+
+#### 🔍 ¿Qué consultas SQL se ejecutan exactamente en MySQL durante este proceso?
+Al ejecutarse el código anterior, Laravel ejecuta automáticamente en la base de datos:
+
+```sql
+-- 1. Inicia la transacción segura (Principio ACID)
+START TRANSACTION;
+
+-- 2. Inserta la cabecera de la lectura
+INSERT INTO `sensor_readings` (`node_id`, `environment_id`, `measured_at`, `received_at`, `source`, `is_valid`, `raw_payload`, `created_at`) 
+VALUES (1, 1, '2026-09-27 17:00:00', '2026-09-27 17:00:01', 'online', 1, '{"measurements":[...]}', '2026-09-27 17:00:01');
+
+-- 3. Inserta el CO2
+INSERT INTO `sensor_measurements` (`reading_id`, `variable_type`, `value`, `unit`, `is_valid`, `created_at`) 
+VALUES (1, 'co2', 431.0000, 'ppm', 1, '2026-09-27 17:00:01');
+
+-- 4. Inserta la Temperatura
+INSERT INTO `sensor_measurements` (`reading_id`, `variable_type`, `value`, `unit`, `is_valid`, `created_at`) 
+VALUES (1, 'temperature', 34.4000, '°C', 1, '2026-09-27 17:00:01');
+
+-- 5. Inserta la Humedad
+INSERT INTO `sensor_measurements` (`reading_id`, `variable_type`, `value`, `unit`, `is_valid`, `created_at`) 
+VALUES (1, 'humidity', 56.0000, '%', 1, '2026-09-27 17:00:01');
+
+-- 6. Actualiza el estado del nodo a 'online'
+UPDATE `nodes` 
+SET `connectivity_status` = 'online', `last_seen_at` = '2026-09-27 17:00:01' 
+WHERE `id` = 1;
+
+-- 7. Confirma y guarda permanentemente la transacción
+COMMIT;
+```
+
+> 🛡️ **¿Qué pasa si falla la energía a mitad del proceso?**  
+> Si falla la inserción de la humedad o se interrumpe la conexión a MySQL, la transacción ejecuta un `ROLLBACK` automático. Ningún dato incompleto queda guardado en la base de datos.
+
+---
+
+## 🧪 5. Estructura Exacta del Paquete JSON Enviado y Recibido
+
+### 📤 Petición enviada por el ESP32 (HTTP POST):
+* **URL**: `http://192.168.0.116:8000/api/v1/nodes/telemetry`
+* **Headers Obligatorios**:
+  * `Content-Type: application/json`
+  * `Accept: application/json`
+  * `X-Device-UID: ESP32_XX5R69`
+  * `X-Device-Token: secret_token_abc123`
+
+* **Cuerpo de la Petición (JSON Body)**:
   ```json
   {
     "device_uid": "ESP32_XX5R69",
-    "measured_at": "2026-09-26 12:00:00",
+    "measured_at": "2026-09-27 17:00:00",
     "measurements": [
-      { "variable_type": "co2", "value": 645.5, "unit": "ppm" },
-      { "variable_type": "temperature", "value": 25.2, "unit": "°C" },
-      { "variable_type": "humidity", "value": 60.0, "unit": "%" }
+      {
+        "variable_type": "co2",
+        "value": 431.0,
+        "unit": "ppm"
+      },
+      {
+        "variable_type": "temperature",
+        "value": 34.4,
+        "unit": "°C"
+      },
+      {
+        "variable_type": "humidity",
+        "value": 56.0,
+        "unit": "%"
+      }
     ]
   }
   ```
 
-### Respuesta Exitosa enviada por Laravel (`HTTP 201 Created`):
+### 📥 Respuesta HTTP devuelta por Laravel (`HTTP 201 Created`):
 ```json
 {
   "status": "success",
@@ -168,33 +275,44 @@ Es el encargado de procesar la información y guardarla de forma segura.
   "reading_id": 1,
   "node_id": 1,
   "device_uid": "ESP32_XX5R69",
-  "received_at": "2026-09-26 17:37:46"
+  "received_at": "2026-09-27 17:00:01"
 }
 ```
 
 ---
 
-## ❓ 6. Banco de Preguntas y Respuestas para Sustentaciones (SENA / Evaluadores)
+## 🔑 6. Datos Iniciales de Prueba y Credenciales (`Seeder`)
 
-Si un jurado o instructor te pregunta sobre la API, responde con estas palabras clave:
+Para probar la API en ambiente de desarrollo, la base de datos cuenta con un seeder inicial (`database/seeders/InitialDataSeeder.php`).
 
-### ❓ Pregunta 1: *"¿Por qué eligieron una arquitectura relacional de dos tablas (`sensor_readings` y `sensor_measurements`) en lugar de poner todo en una sola tabla?"*
-> 🗣️ **Respuesta**: *"Por principios de **normalización de bases de datos** y **escalabilidad**. La tabla `sensor_readings` actúa como la cabecera del evento de transmisión (quién, dónde y cuándo), mientras que `sensor_measurements` almacena en filas independientes cada variable (`co2`, `temperature`, `humidity`). Si el día de mañana agregamos un sensor de ruido o material particulado, no tenemos que alterar la estructura de la base de datos; simplemente enviamos una nueva variable en el arreglo."*
+Al ejecutar el comando en consola:
+```bash
+php artisan db:seed
+```
+
+Se crean automáticamente los siguientes registros:
+1. **Ambiente de Prueba**:
+   * Código: `AMB-101`
+   * Nombre: `Aula 101 Sistemática`
+2. **Nodo ESP32 de Prueba**:
+   * `device_uid`: `ESP32_XX5R69`
+   * `device_token`: `secret_token_abc123` *(Guardado en BD como hash encriptado)*
+   * `environment_id`: Vinculado al `Aula 101 Sistemática`.
 
 ---
 
-### ❓ Pregunta 2: *"¿Cómo garantizan la seguridad para que nadie envíe datos falsos a la API?"*
-> 🗣️ **Respuesta**: *"Implementamos un **Middleware personalizado de autenticación de hardware** (`ValidateIoTDevice`). Cada petición debe incluir los encabezados `X-Device-UID` y `X-Device-Token`. En la base de datos guardamos el hash encriptado de la clave usando Bcrypt (`Hash::make`). El middleware valida con `Hash::check` antes de permitir que la petición toque el controlador."*
+## 🗣️ 7. Banco de Preguntas Técnicas para Sustentación / Evaluadores SENA
 
----
+Si un jurado o instructor realiza preguntas técnicas sobre la API durante la sustentación, estas son las respuestas exactas recomendadas:
 
-### ❓ Pregunta 3: *"¿Qué pasa si la base de datos falla a mitad de la inserción de datos?"*
-> 🗣️ **Respuesta**: *"Encapsulamos todo el proceso de guardado dentro de una **Transacción de Base de Datos (`DB::transaction`)**. Esto garantiza el principio **ACID** de atomicidad: si alguna inserción de las mediciones falla, se realiza un rollback automático y no se guardan datos corruptos o incompletos."*
+### ❓ 1. "¿Cómo se autentica el hardware y por qué no usaron JSON Web Tokens (JWT) o Cookies?"
+> 🗣️ **Respuesta**: *"Las cookies y sesiones son para navegadores web humanos, y JWT requiere expiración y refresco de tokens dinámicos que consumen memoria y ciclos en microcontroladores sencillos. Para hardware IoT implementamos una **Autenticación por Tokens Estáticos con Hashing Bcrypt (`X-Device-UID` y `X-Device-Token`)**. El hardware incluye sus credenciales en los encabezados HTTP, y el Middleware valida contra el Hash guardado en MySQL de forma eficiente."*
 
----
+### ❓ 2. "¿Por qué usaron Transacciones (`DB::transaction`) en el controlador?"
+> 🗣️ **Respuesta**: *"Porque la ingesta de telemetría afecta múltiples tablas relacionales al mismo tiempo (`sensor_readings`, `sensor_measurements` y la actualización de estado en `nodes`). La transacción garantiza las propiedades **ACID** (Atomicidad, Consistencia, Aislamiento y Durabilidad), asegurando que si alguna inserción de variable falla, se realice un rollback completo sin dejar registros corruptos."*
 
-### ❓ Pregunta 4: *"¿Qué sucede si un ESP32 no tiene aún un ambiente asignado por el Administrador?"*
-> 🗣️ **Respuesta**: *"El controlador cuenta con un mecanismo de resguardo (fallback): si el nodo no tiene un `environment_id` asignado en la tabla `nodes`, la API asigna automáticamente la lectura a un ambiente temporal con código `'UNASSIGNED'` ('Sin Asignar'). Esto evita fallos de clave foránea y permite que el Administrador relacione el nodo posteriormente desde el panel web."*
+### ❓ 3. "¿Cómo maneja la API a un nodo ESP32 nuevo que aún no ha sido asignado a un aula por el administrador?"
+> 🗣️ **Respuesta**: *"La API implementa un patrón de tolerancia a fallos (*fallback*). Si el nodo no tiene un `environment_id` asociado en la tabla `nodes`, el sistema asigna la lectura automáticamente a un registro de resguardo denominado `'UNASSIGNED'` ('Sin Asignar'). Esto permite recibir los datos sin perder información ni romper claves foráneas."*
 
 ---
 *Documentación oficial de backend • AirSense CEFA - SENA La Angostura*
