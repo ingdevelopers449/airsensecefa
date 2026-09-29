@@ -25,3 +25,7 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Documentos Privados del Líder de Proyecto (Tareas)
+/docs/tareas/
+/docs/TAREAS_EQUIPO_DESARROLLO.md
