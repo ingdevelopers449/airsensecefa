@@ -6,16 +6,16 @@
 // =========================================================================
 // ⚙️ 1. CONFIGURACIÓN DE RED Y DISPOSITIVO (EDITA ESTOS VALORES)
 // =========================================================================
-const char* WIFI_SSID     = "FAMILIA LOZADA";       // Escribe el SSID de tu Wi-Fi
-const char* WIFI_PASSWORD = "1077845912@";        // Escribe la clave del Wi-Fi
+const char* WIFI_SSID     = "iPhone de Luis Felipe";       // Escribe el SSID de tu Wi-Fi
+const char* WIFI_PASSWORD = "12345678910";        // Escribe la clave del Wi-Fi
 
 // Lista de Servidores API de destino (Agrega las IPs de tus compañeros de equipo)
 const char* API_SERVERS[] = {
-  "http://192.168.0.133/airsense-cefa/public/api/v1/nodes/telemetry", // IP Líder (Cable)
-  "http://192.168.0.116/airsense-cefa/public/api/v1/nodes/telemetry"  // IP Líder (Wi-Fi)
-  // "http://192.168.0.XXX/airsense-cefa/public/api/v1/nodes/telemetry", // IP Isabella
-  // "http://192.168.0.YYY/airsense-cefa/public/api/v1/nodes/telemetry", // IP Lizbeth
-  // "http://192.168.0.ZZZ/airsense-cefa/public/api/v1/nodes/telemetry"  // IP Michaell
+  // "http://192.168.0.133/airsense-cefa/public/api/v1/nodes/telemetry", // IP Líder (Cable)
+  "http://192.168.1.15/airsense-cefa/public/api/v1/nodes/telemetry", // IP Líder (Wi-Fi)
+  "http://172.20.10.14/airsense-cefa/public/api/v1/nodes/telemetry", // IP Isabella
+  "http://172.20.10.3/airsense-cefa/public/api/v1/nodes/telemetry", // IP Lizbeth
+  "http://172.20.10.2/airsense-cefa/public/api/v1/nodes/telemetry"   // IP Michaell
 };
 const int NUM_SERVERS = sizeof(API_SERVERS) / sizeof(API_SERVERS[0]);
 
