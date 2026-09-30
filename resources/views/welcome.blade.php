@@ -101,12 +101,12 @@
                     </li>
                 </ul>
 
-                <!-- Botones Iniciar Sesión / Registro / Dashboard -->
+                <!-- Botones Iniciar Sesión / Dashboard -->
                 <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
                     @if (Route::has('login'))
                         @auth
                             <a href="{{ url('/dashboard') }}" class="btn btn-sena px-4 py-2 rounded-2 fw-semibold d-inline-flex align-items-center gap-2 shadow-sm">
-                                <i class="bi bi-speedometer2"></i>
+                                <i class    ="bi bi-speedometer2"></i>
                                 <span>Dashboard</span>
                             </a>
                         @else
@@ -114,13 +114,6 @@
                                 <i class="bi bi-box-arrow-in-right"></i>
                                 <span>Iniciar sesión</span>
                             </a>
-
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="btn btn-outline-secondary px-3 py-2 rounded-2 fw-semibold d-inline-flex align-items-center gap-2 shadow-sm">
-                                    <i class="bi bi-person-plus"></i>
-                                    <span>Registro</span>
-                                </a>
-                            @endif
                         @endauth
                     @endif
                 </div>
