@@ -9,8 +9,15 @@
 const char* WIFI_SSID     = "FAMILIA LOZADA";       // Escribe el SSID de tu Wi-Fi
 const char* WIFI_PASSWORD = "1077845912@";        // Escribe la clave del Wi-Fi
 
-// Reemplaza 192.168.X.X por la dirección IP local de tu computador donde corre Laragon
-const char* API_URL = "http://192.168.0.116:8000/api/v1/nodes/telemetry";
+// Lista de Servidores API de destino (Agrega las IPs de tus compañeros de equipo)
+const char* API_SERVERS[] = {
+  "http://192.168.0.133/airsense-cefa/public/api/v1/nodes/telemetry", // IP Líder (Cable)
+  "http://192.168.0.116/airsense-cefa/public/api/v1/nodes/telemetry"  // IP Líder (Wi-Fi)
+  // "http://192.168.0.XXX/airsense-cefa/public/api/v1/nodes/telemetry", // IP Isabella
+  // "http://192.168.0.YYY/airsense-cefa/public/api/v1/nodes/telemetry", // IP Lizbeth
+  // "http://192.168.0.ZZZ/airsense-cefa/public/api/v1/nodes/telemetry"  // IP Michaell
+};
+const int NUM_SERVERS = sizeof(API_SERVERS) / sizeof(API_SERVERS[0]);
 
 // Credenciales de Seguridad del Nodo registradas en la Base de Datos
 const char* DEVICE_UID   = "ESP32_XX5R69";
@@ -138,18 +145,9 @@ int leerCO2() {
   return 450; // Valor de resguardo / aire ambiente por defecto si el sensor calienta
 }
 
-// Función para ensamblar el JSON y enviar por HTTP POST a Laravel
+// Función para ensamblar el JSON y enviar por HTTP POST a Laravel (Multi-destino)
 void enviarTelemetriaLaravel(int co2, float temp, float hum) {
   if (WiFi.status() != WL_CONNECTED) return;
-
-  HTTPClient http;
-  http.begin(API_URL);
-
-  // Encabezados HTTP de Autenticación IoT y Formato
-  http.addHeader("Content-Type", "application/json");
-  http.addHeader("Accept", "application/json");
-  http.addHeader("X-Device-UID", DEVICE_UID);
-  http.addHeader("X-Device-Token", DEVICE_TOKEN);
 
   // Crear el documento JSON
   StaticJsonDocument<512> doc;
@@ -178,15 +176,27 @@ void enviarTelemetriaLaravel(int co2, float temp, float hum) {
   String jsonPayload;
   serializeJson(doc, jsonPayload);
 
-  Serial.println("📤 Enviando datos a la API de Laravel...");
-  int httpResponseCode = http.POST(jsonPayload);
+  // Iterar por cada servidor del equipo
+  for (int i = 0; i < NUM_SERVERS; i++) {
+    WiFiClient client;
+    HTTPClient http;
+    http.begin(client, API_SERVERS[i]);
 
-  if (httpResponseCode > 0) {
-    String response = http.getString();
-    Serial.printf("✅ Respuesta Servidor [HTTP %d]: %s\n", httpResponseCode, response.c_str());
-  } else {
-    Serial.printf("❌ Error enviando HTTP POST: %s\n", http.errorToString(httpResponseCode).c_str());
+    http.addHeader("Content-Type", "application/json");
+    http.addHeader("Accept", "application/json");
+    http.addHeader("X-Device-UID", DEVICE_UID);
+    http.addHeader("X-Device-Token", DEVICE_TOKEN);
+
+    Serial.printf("📤 Enviando datos a Servidor [%d/%d]: %s\n", i + 1, NUM_SERVERS, API_SERVERS[i]);
+    int httpResponseCode = http.POST(jsonPayload);
+
+    if (httpResponseCode > 0) {
+      String response = http.getString();
+      Serial.printf("✅ [OK %d]: %s\n", httpResponseCode, response.c_str());
+    } else {
+      Serial.printf("⚠️ [No recibido]: %s\n", http.errorToString(httpResponseCode).c_str());
+    }
+
+    http.end();
   }
-
-  http.end();
 }
