@@ -18,7 +18,7 @@
         [
             'iniciales' => 'FE',
             'nombre' => 'Isabella Sifuentes Perdomo',
-            'rol' => 'Analítica de Datos & IA',
+            'rol' => 'Analítica de Datos',
             'programa' => 'ADSO - Ficha 3312595',
             'especialidad' => 'Diseño de interfaces web responsivas, componentes Bootstrap y experiencia de usuario.',
             'github' => 'https://github.com/',
