@@ -61,5 +61,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
+Route::get('/nodos', function () {
+    return view('admin.nodos.index');
+})->name('admin.nodos');
 require __DIR__.'/auth.php';
