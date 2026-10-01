@@ -26,7 +26,7 @@
 </p>
 
 <p align="center">
-  <em>Centro de Formación Agroindustrial La Angostura — SENA Regional Huila</em>
+  <em>Centro de Formacion Agroindustrial La Angostura — SENA Regional Huila</em>
 </p>
 
 ---
@@ -186,17 +186,42 @@ El proyecto cuenta con guias completas para el trabajo en equipo y control de ve
 ## Equipo de Desarrollo
 
 <p align="center">
-  <strong>Organizacion GitHub:</strong>
   <a href="https://github.com/ingdevelopers449">
     <img src="https://img.shields.io/badge/ingdevelopers449-Organization-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Organization">
   </a>
 </p>
 
-| Rol | Desarrollador | GitHub |
-|-----|---------------|--------|
-| Desarrolladora | Isabella | [@isabella](https://github.com/isabella) |
-| Desarrolladora | Lizbeth | [@lizbeth](https://github.com/lizbeth) |
-| Desarrollador | Michaell | [@michaell](https://github.com/michaell) |
+<div align="center">
+
+### Desarrolladores
+
+<table>
+  <tr>
+    <td align="center" width="220">
+      <img src="https://raw.githubusercontent.com/ingdevelopers449/airsensecefa/main/public/images/equipo/foto-adso-1.png" width="150" height="150" style="border-radius:12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" alt="Isabella"/>
+      <br/><br/>
+      <strong>Isabella</strong>
+      <br/>
+      <em>Desarrolladora Full-Stack</em>
+    </td>
+    <td align="center" width="220">
+      <img src="https://raw.githubusercontent.com/ingdevelopers449/airsensecefa/main/public/images/equipo/foto-adso-3.png" width="150" height="150" style="border-radius:12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" alt="Lizbeth"/>
+      <br/><br/>
+      <strong>Lizbeth</strong>
+      <br/>
+      <em>Desarrolladora Full-Stack</em>
+    </td>
+    <td align="center" width="220">
+      <img src="https://raw.githubusercontent.com/ingdevelopers449/airsensecefa/main/public/images/equipo/foto-adso-4.png" width="150" height="150" style="border-radius:12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" alt="Michaell"/>
+      <br/><br/>
+      <strong>Michaell</strong>
+      <br/>
+      <em>Desarrollador Full-Stack</em>
+    </td>
+  </tr>
+</table>
+
+</div>
 
 ---
 
