@@ -103,32 +103,75 @@ class InitialDataSeeder extends Seeder
             DB::table('system_settings')->updateOrInsert(['setting_key' => $s['setting_key']], $s);
         }
 
-        // 7. Ambientes y Nodos Iniciales (Ejemplo de prueba)
-        DB::table('environments')->updateOrInsert(
-            ['code' => 'AULA_101'],
-            [
-                'name' => 'Aula de Formación 101 - CEFA',
-                'description' => 'Ambiente de formación principal',
-                'is_active' => true,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]
-        );
+        // 7. Ambientes de prueba
+        $environmentsData = [
+            ['code' => 'AULA_101', 'name' => 'Aula de Formación 101 - CEFA', 'description' => 'Ambiente de formación principal', 'is_active' => true],
+            ['code' => 'LAB_FOOD', 'name' => 'Laboratorio de Procesamiento de Alimentos', 'description' => 'Laboratorio de análisis agroindustrial', 'is_active' => true],
+            ['code' => 'HAN_GAN', 'name' => 'Hangar de Ganadería y Bovinos', 'description' => 'Área de producción pecuaria', 'is_active' => true],
+            ['code' => 'ACOPIO', 'name' => 'Centro de Acopio Agroindustrial', 'description' => 'Almacén y recepción de insumos', 'is_active' => true],
+            ['code' => 'TALLER_AGRO', 'name' => 'Taller de Maquinaria Agrícola', 'description' => 'Mecanización y herramientas', 'is_active' => true],
+        ];
 
-        $envId = DB::table('environments')->where('code', 'AULA_101')->value('id');
+        foreach ($environmentsData as $envData) {
+            DB::table('environments')->updateOrInsert(
+                ['code' => $envData['code']],
+                array_merge($envData, ['created_at' => now(), 'updated_at' => now()])
+            );
+        }
 
-        DB::table('nodes')->updateOrInsert(
-            ['device_uid' => 'ESP32_XX5R69'],
+        $aula101Id = DB::table('environments')->where('code', 'AULA_101')->value('id');
+        $labFoodId = DB::table('environments')->where('code', 'LAB_FOOD')->value('id');
+        $hanGanId  = DB::table('environments')->where('code', 'HAN_GAN')->value('id');
+
+        // 8. Nodos IoT de prueba
+        $nodesData = [
             [
-                'environment_id' => $envId,
-                'name' => 'Nodo ESP32 La Angostura',
-                'device_token_hash' => Hash::make('secret_token_abc123'),
+                'device_uid' => 'ESP32_XX5R69',
+                'environment_id' => $aula101Id,
+                'name' => 'Nodo ESP32 Aula 101',
+                'device_token_hash' => Hash::make('secret_token_001'),
                 'token_version' => 1,
                 'is_active' => true,
                 'connectivity_status' => 'online',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]
-        );
+                'last_seen_at' => now(),
+            ],
+            [
+                'device_uid' => 'ESP32_LAB_002',
+                'environment_id' => $labFoodId,
+                'name' => 'Nodo ESP32 Lab Alimentos',
+                'device_token_hash' => Hash::make('secret_token_002'),
+                'token_version' => 1,
+                'is_active' => true,
+                'connectivity_status' => 'online',
+                'last_seen_at' => now()->subMinutes(15),
+            ],
+            [
+                'device_uid' => 'ESP32_AGRO_003',
+                'environment_id' => null,
+                'name' => 'Nodo ESP32 Pendiente Asignar',
+                'device_token_hash' => Hash::make('secret_token_003'),
+                'token_version' => 1,
+                'is_active' => true,
+                'connectivity_status' => 'offline',
+                'last_seen_at' => now()->subHours(2),
+            ],
+            [
+                'device_uid' => 'ESP32_HAN_004',
+                'environment_id' => $hanGanId,
+                'name' => 'Nodo ESP32 Hangar Ganadería',
+                'device_token_hash' => Hash::make('secret_token_004'),
+                'token_version' => 1,
+                'is_active' => true,
+                'connectivity_status' => 'online',
+                'last_seen_at' => now()->subMinutes(5),
+            ],
+        ];
+
+        foreach ($nodesData as $nodeData) {
+            DB::table('nodes')->updateOrInsert(
+                ['device_uid' => $nodeData['device_uid']],
+                array_merge($nodeData, ['created_at' => now(), 'updated_at' => now()])
+            );
+        }
     }
 }

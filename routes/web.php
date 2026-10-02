@@ -43,6 +43,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     })->name('dashboard');
 
     Route::get('/nodos', [NodoController::class, 'index'])->name('nodos');
+    Route::post('/nodos/asignar-ambiente', [NodoController::class, 'asignarAmbiente'])->name('nodos.asignar-ambiente');
 });
 
 // 2. Grupo SST / EHS CEFA

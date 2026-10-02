@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Node;
+use App\Models\Environment;
 use Illuminate\Http\Request;
 
 class NodoController extends Controller
@@ -13,10 +14,42 @@ class NodoController extends Controller
      */
     public function index()
     { 
-        $nodes = Node::with('environment')->get();
+    // Traemos todos los nodos junto con su ambiente
+    $nodes = Node::with('environment')->get();
 
-        return view('admin.nodos.index', compact('nodes'));
+    // Traemos los ambientes activos para mostrarlos en el select
+    $environments = Environment::where('is_active', true)
+        ->orderBy('name')
+        ->get();
+
+    // Enviamos las dos variables a la vista
+    return view('admin.nodos.index', compact('nodes', 'environments'));
+
     }
+
+    /** Asigna un ambiente a un nodo. */
+    public function asignarAmbiente(Request $request)
+{
+    // Validamos los datos recibidos
+    $request->validate([
+        'node_id' => 'required|exists:nodes,id',
+        'environment_id' => 'required|exists:environments,id',
+    ]);
+
+    // Buscamos el nodo
+    $node = Node::findOrFail($request->node_id);
+
+    // Cambiamos el ambiente asignado
+    $node->environment_id = $request->environment_id;
+
+    // Guardamos los cambios
+    $node->save();
+
+    // Regresamos a la página de nodos
+    return redirect()
+        ->route('admin.nodos')
+        ->with('success', 'Ambiente asignado correctamente.');
+}
 
     /**
      * Show the form for creating a new resource.
