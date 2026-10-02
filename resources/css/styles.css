@@ -383,3 +383,40 @@ body {
     margin-top: 10px;
     color: #64748b;
 }
+
+/* Botón Asignar Ambiente */
+.btn-asignar {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: #e0e7ff;
+    color: #4338ca;
+    border: 1px solid #c7d2fe;
+    border-radius: 8px;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-asignar:hover {
+    background: #4338ca;
+    color: #ffffff;
+    border-color: #4338ca;
+}
+
+/* Alertas de Éxito / Error */
+.alerta-exito {
+    padding: 12px 18px;
+    background: #dcfce7;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
