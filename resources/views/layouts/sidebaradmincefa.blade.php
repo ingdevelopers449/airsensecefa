@@ -162,10 +162,6 @@
             <header class="h-16 bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-4 px-lg-6 flex items-center justify-between sticky top-0 z-30 shadow-xs">
                 <div class="flex items-center gap-3">
                     <h1 class="text-lg font-bold text-slate-800 font-heading hidden sm:block m-0">@yield('tituloPagina', 'Dashboard Principal')</h1>
-                    <span class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/80">
-                        <span class="w-2 h-2 rounded-full bg-[#39A900] animate-pulse"></span>
-                        Sistema En Línea
-                    </span>
                 </div>
 
                 <!-- User Dropdown Menu -->

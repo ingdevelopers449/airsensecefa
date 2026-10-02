@@ -175,287 +175,211 @@ body {
     }
 }
 
-/* =========================================================
-   Inicio de estilos para Nodos IoT (resources/views/admin/nodos/index.blade.php)
-   ========================================================= */
+/* ================================
+   GESTIÓN DE NODOS IOT
+================================ */
 
 .contenedor-nodos {
-    width: 100%;
-    background: white;
-    border: 1px solid #e1e7e5;
-    border-radius: 20px;
-    padding: 30px;
+    padding: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
 }
-
-.encabezado-nodos {
-    margin-bottom: 25px;
-}
-
-.titulo-nodos {
-    color: #16866e;
-    font-size: 13px;
-    font-weight: bold;
-    letter-spacing: 2px;
-    margin-bottom: 8px;
-}
-
-.encabezado-nodos h1 {
-    margin: 0;
-    color: #202927;
-    font-size: 28px;
-    font-weight: 700;
-}
-
-.descripcion-nodos {
-    margin-top: 8px;
-    color: #7b8582;
-    font-size: 14px;
-}
-
-/* FILTROS Y BUSCADOR */
 
 .herramientas-nodos {
     display: flex;
-    gap: 15px;
-    margin-bottom: 25px;
-    align-items: stretch;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 24px;
 }
 
 .filtros-nodos {
     display: flex;
-    background: #f3f6f5;
-    border-radius: 12px;
-    overflow: hidden;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .filtro-nodo {
-    padding: 15px 20px;
-    color: #68716e;
-    font-size: 14px;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    white-space: nowrap;
+    gap: 8px;
+    padding: 8px 16px;
+    background: #f1f5f9;
+    color: #475569;
+    border-radius: 999px;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.filtro-nodo:hover {
+    background: #e2e8f0;
+    color: #1e293b;
 }
 
 .filtro-nodo.activo {
-    background: white;
-    color: #222;
-    font-weight: 600;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    background: rgba(57, 169, 0, 0.12);
+    color: var(--sena-green, #39A900);
+    border-color: rgba(57, 169, 0, 0.3);
+    font-weight: 700;
 }
 
 .numero-filtro {
-    background: #e5ebe8;
-    color: #34413d;
-    border-radius: 20px;
+    background: #ffffff;
+    color: #475569;
     padding: 2px 8px;
-    margin-left: 6px;
+    border-radius: 999px;
     font-size: 12px;
-    font-weight: bold;
+    font-weight: 700;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.buscador-nodo {
-    flex: 1;
+.filtro-nodo.activo .numero-filtro {
+    background: var(--sena-green, #39A900);
+    color: #ffffff;
 }
 
 .buscador-nodo input {
-    width: 100%;
-    height: 100%;
-    padding: 15px;
-    border: 1px solid #dce3e0;
+    padding: 9px 16px;
+    font-size: 14px;
+    border: 1px solid #cbd5e1;
     border-radius: 12px;
     outline: none;
-    font-size: 14px;
+    min-width: 260px;
+    transition: all 0.2s ease;
+    background: #ffffff;
 }
 
 .buscador-nodo input:focus {
-    border-color: #39A900;
-    box-shadow: 0 0 0 3px rgba(57, 169, 0, 0.08);
+    border-color: var(--sena-green, #39A900);
+    box-shadow: 0 0 0 3px rgba(57, 169, 0, 0.15);
 }
 
-/* LISTA */
-
-.lista-nodos {
-    border: 1px solid #e1e7e5;
-    border-radius: 18px;
-    overflow: hidden;
-    background: white;
+.tabla-nodos {
+    width: 100%;
+    margin-top: 20px;
 }
 
-.nodo {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 22px;
-    border-bottom: 1px solid #e5e9e8;
+.tabla-contenedor {
+    width: 100%;
+    overflow-x: auto;
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.tabla-contenedor table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-contenedor thead {
+    background: #f8fafc;
+}
+
+.tabla-contenedor th {
+    padding: 16px 18px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+    color: #475569;
+    border-bottom: 1px solid #e5e7eb;
+    white-space: nowrap;
+}
+
+.tabla-contenedor td {
+    padding: 17px 18px;
+    font-size: 14px;
+    color: #334155;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.tabla-contenedor tbody tr {
     transition: background 0.2s ease;
 }
 
-.nodo:last-child {
-    border-bottom: none;
+.tabla-contenedor tbody tr:hover {
+    background: #f8fafc;
 }
 
-.nodo:hover {
-    background: #fafcfb;
+.device-uid {
+    font-weight: 600;
+    color: #4f46e5;
 }
 
-/* ICONO */
-
-.icono-nodo {
-    width: 50px;
-    height: 50px;
-    min-width: 50px;
-    border-radius: 14px;
-    background: #e5f4ef;
-    color: #16866e;
+.ambiente-nodo {
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: 20px;
+    gap: 8px;
 }
 
-.icono-nodo.sin-conexion {
-    background: #eef0ef;
-    color: #7c8582;
+.ambiente-nodo i {
+    color: #6366f1;
 }
 
-/* INFORMACION */
-
-.informacion-nodo {
-    flex: 1;
-    min-width: 220px;
-}
-
-.nombre-nodo {
-    font-weight: 700;
-    color: #202927;
-    margin-bottom: 8px;
-    font-size: 15px;
-}
-
-.datos-nodo {
-    color: #7c8582;
-    font-size: 13px;
-}
-
-/* ESTADOS */
-
-.estado-nodo {
+.badge-conectividad {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 600;
-    margin-left: 7px;
-    vertical-align: middle;
+    gap: 7px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
 }
 
-.online {
-    background: #e2f4ed;
-    color: #16866e;
+.badge-conectividad.online {
+    background: #dcfce7;
+    color: #166534;
 }
 
-.offline {
-    background: #eeeeee;
-    color: #777;
+.badge-conectividad.offline {
+    background: #fee2e2;
+    color: #991b1b;
 }
 
-.cambio {
-    background: #fff2d6;
-    color: #a87516;
+.badge-conectividad.unknown {
+    background: #e5e7eb;
+    color: #4b5563;
 }
 
-/* UBICACION */
-
-.ubicacion-nodo {
-    display: flex;
-    gap: 30px;
-    min-width: 200px;
+.punto-estado {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
 }
 
-.ubicacion-nodo small {
-    display: block;
-    color: #888;
-    margin-bottom: 5px;
-    font-size: 11px;
-}
-
-.ubicacion-nodo strong {
-    color: #202927;
-    font-size: 13px;
-}
-
-/* BOTON EDITAR */
-
-.editar-nodo {
-    width: 46px;
-    height: 46px;
-    border: 1px solid #dfe5e3;
-    border-radius: 12px;
-    background: white;
-    color: #53605c;
+.ultima-transmision {
     display: flex;
     align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s ease;
+    gap: 8px;
 }
 
-.editar-nodo:hover {
-    background: #f3f7f5;
-    border-color: #39A900;
-    color: #16866e;
+.ultima-transmision i {
+    color: #64748b;
 }
 
-/* RESPONSIVE */
-
-@media (max-width: 1000px) {
-
-    .herramientas-nodos {
-        flex-direction: column;
-    }
-
-    .filtros-nodos {
-        width: 100%;
-        overflow-x: auto;
-    }
-
-    .ubicacion-nodo {
-        min-width: 180px;
-        gap: 15px;
-    }
-
+.sin-transmision {
+    color: #94a3b8;
+    font-style: italic;
 }
 
-@media (max-width: 750px) {
-
-    .contenedor-nodos {
-        padding: 20px;
-    }
-
-    .nodo {
-        flex-wrap: wrap;
-    }
-
-    .informacion-nodo {
-        min-width: calc(100% - 75px);
-    }
-
-    .ubicacion-nodo {
-        width: 100%;
-        margin-left: 70px;
-    }
-
-    .editar-nodo {
-        margin-left: auto;
-    }
-
+.tabla-vacia {
+    text-align: center !important;
+    padding: 45px !important;
 }
 
-/* =========================================================
-   Fin de estilos para Nodos IoT (resources/views/admin/nodos/index.blade.php)
-   ========================================================= */
+.tabla-vacia i {
+    font-size: 32px;
+    color: #94a3b8;
+}
 
-
+.tabla-vacia p {
+    margin-top: 10px;
+    color: #64748b;
+}

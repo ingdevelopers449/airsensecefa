@@ -54,266 +54,132 @@
 
     <!-- LISTA DE NODOS -->
 
-    <div class="lista-nodos">
+    <!-- TABLA DE NODOS -->
 
+<div class="tabla-nodos">
 
-        <!-- NODO 1 -->
+    <div class="tabla-contenedor">
 
-        <div class="nodo">
+        <table>
 
-            <div class="icono-nodo">
-                <i class="fas fa-wifi"></i>
-            </div>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>UID Dispositivo</th>
+                    <th>Ambiente Asignado</th>
+                    <th>Estado de Conectividad</th>
+                    <th>Última Transmisión</th>
+                </tr>
+            </thead>
 
+            <tbody>
 
-            <div class="informacion-nodo">
+                @forelse ($nodes as $node)
 
-                <div class="nombre-nodo">
+                    <tr>
 
-                    Hangar de ganadería
+                        <!-- ID -->
+                        <td>
+                            <strong>
+                                #{{ $node->id }}
+                            </strong>
+                        </td>
 
-                    <span class="estado-nodo online">
-                        ● En línea
-                    </span>
+                        <!-- DEVICE UID -->
+                        <td>
+                            <span class="device-uid">
+                                {{ $node->device_uid }}
+                            </span>
+                        </td>
 
-                </div>
+                        <!-- AMBIENTE -->
+                        <td>
+                            <div class="ambiente-nodo">
 
-                <div class="datos-nodo">
-                    ESP-001 · Token: ASCE-4321-•••• · Agropecuaria
-                </div>
+                                <i class="fas fa-building"></i>
 
-            </div>
+                                <span>
+                                    {{ $node->environment?->name ?? 'Sin asignar' }}
+                                </span>
 
+                            </div>
+                        </td>
 
-            <div class="ubicacion-nodo">
+                        <!-- ESTADO -->
+                        <td>
+    @if ($node->connectivity_status === 'online')
 
-                <div>
-                    <small>Latitud</small>
-                    <strong>2.92780</strong>
-                </div>
+        <span class="badge-conectividad online">
+            <span class="punto-estado"></span>
+            Online
+        </span>
 
-                <div>
-                    <small>Longitud</small>
-                    <strong>-75.2810</strong>
-                </div>
+    @elseif ($node->connectivity_status === 'offline')
 
-            </div>
+        <span class="badge-conectividad offline">
+            <span class="punto-estado"></span>
+            Offline
+        </span>
 
+    @else
 
-            <button class="editar-nodo" title="Editar nodo">
-                <i class="fas fa-pen"></i>
-            </button>
+        <span class="badge-conectividad unknown">
+            <span class="punto-estado"></span>
+            Desconocido
+        </span>
 
-        </div>
+    @endif
+</td>
 
+                        <!-- ÚLTIMA TRANSMISIÓN -->
+                        <td>
 
-        <!-- NODO 2 -->
+                            @if ($node->last_seen_at)
 
-        <div class="nodo">
+                                <div class="ultima-transmision">
 
-            <div class="icono-nodo">
-                <i class="fas fa-wifi"></i>
-            </div>
+                                    <i class="far fa-clock"></i>
 
+                                    <span>
+                                        {{ $node->last_seen_at->format('d/m/Y H:i') }}
+                                    </span>
 
-            <div class="informacion-nodo">
+                                </div>
 
-                <div class="nombre-nodo">
+                            @else
 
-                    Centro de acopio
+                                <span class="sin-transmision">
+                                    Nunca
+                                </span>
 
-                    <span class="estado-nodo online">
-                        ● En línea
-                    </span>
+                            @endif
 
-                    <span class="estado-nodo cambio">
-                        ● Ubicación cambió
-                    </span>
+                        </td>
 
-                </div>
+                    </tr>
 
-                <div class="datos-nodo">
-                    ESP-002 · Token: ASCE-4322-•••• · Agroindustrial
-                </div>
+                @empty
 
-            </div>
+                    <tr>
 
+                        <td colspan="5" class="tabla-vacia">
 
-            <div class="ubicacion-nodo">
+                            <i class="fas fa-microchip"></i>
 
-                <div>
-                    <small>Latitud</small>
-                    <strong>2.92781</strong>
-                </div>
+                            <p>No hay nodos registrados.</p>
 
-                <div>
-                    <small>Longitud</small>
-                    <strong>-75.2811</strong>
-                </div>
+                        </td>
 
-            </div>
+                    </tr>
 
+                @endforelse
 
-            <button class="editar-nodo" title="Editar nodo">
-                <i class="fas fa-pen"></i>
-            </button>
+            </tbody>
 
-        </div>
-
-
-        <!-- NODO 3 -->
-
-        <div class="nodo">
-
-            <div class="icono-nodo">
-                <i class="fas fa-wifi"></i>
-            </div>
-
-
-            <div class="informacion-nodo">
-
-                <div class="nombre-nodo">
-
-                    Ambiente 204
-
-                    <span class="estado-nodo online">
-                        ● En línea
-                    </span>
-
-                </div>
-
-                <div class="datos-nodo">
-                    ESP-003 · Token: ASCE-4323-•••• · Académica
-                </div>
-
-            </div>
-
-
-            <div class="ubicacion-nodo">
-
-                <div>
-                    <small>Latitud</small>
-                    <strong>2.92782</strong>
-                </div>
-
-                <div>
-                    <small>Longitud</small>
-                    <strong>-75.2812</strong>
-                </div>
-
-            </div>
-
-
-            <button class="editar-nodo" title="Editar nodo">
-                <i class="fas fa-pen"></i>
-            </button>
-
-        </div>
-
-
-        <!-- NODO 4 -->
-
-        <div class="nodo">
-
-            <div class="icono-nodo">
-                <i class="fas fa-wifi"></i>
-            </div>
-
-
-            <div class="informacion-nodo">
-
-                <div class="nombre-nodo">
-
-                    Laboratorio de alimentos
-
-                    <span class="estado-nodo online">
-                        ● En línea
-                    </span>
-
-                </div>
-
-                <div class="datos-nodo">
-                    ESP-004 · Token: ASCE-4324-•••• · Laboratorio
-                </div>
-
-            </div>
-
-
-            <div class="ubicacion-nodo">
-
-                <div>
-                    <small>Latitud</small>
-                    <strong>2.92783</strong>
-                </div>
-
-                <div>
-                    <small>Longitud</small>
-                    <strong>-75.2813</strong>
-                </div>
-
-            </div>
-
-
-            <button class="editar-nodo" title="Editar nodo">
-                <i class="fas fa-pen"></i>
-            </button>
-
-        </div>
-
-
-        <!-- NODO 5 -->
-
-        <div class="nodo">
-
-            <div class="icono-nodo sin-conexion">
-                <i class="fas fa-wifi"></i>
-            </div>
-
-
-            <div class="informacion-nodo">
-
-                <div class="nombre-nodo">
-
-                    Bloque administrativo
-
-                    <span class="estado-nodo offline">
-                        ● Sin conexión
-                    </span>
-
-                </div>
-
-                <div class="datos-nodo">
-                    ESP-005 · Token: ASCE-4325-•••• · Administrativa
-                </div>
-
-            </div>
-
-
-            <div class="ubicacion-nodo">
-
-                <div>
-                    <small>Latitud</small>
-                    <strong>2.92784</strong>
-                </div>
-
-                <div>
-                    <small>Longitud</small>
-                    <strong>-75.2814</strong>
-                </div>
-
-            </div>
-
-
-            <button class="editar-nodo" title="Editar nodo">
-                <i class="fas fa-pen"></i>
-            </button>
-
-        </div>
-
+        </table>
 
     </div>
 
 </div>
-
 
 @endsection
