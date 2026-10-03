@@ -141,9 +141,14 @@
                         </div>
                     </div>
 
-                    <a href="{{ route('profile.edit') }}" class="btn btn-sm text-white-50 hover-text-white p-1 ms-1" title="Configurar Perfil">
-                        <i class="bi bi-gear-fill" style="font-size: 14px;"></i>
-                    </a>
+                    <div class="d-flex align-items-center gap-1 ms-1">
+                        <a href="{{ route('profile.edit') }}" class="btn btn-sm text-white-50 hover-text-white p-1" title="Configurar Perfil">
+                            <i class="bi bi-gear-fill" style="font-size: 14px;"></i>
+                        </a>
+                        <button type="button" onclick="confirmarCierreSesion()" class="btn btn-sm text-white-50 hover-text-danger p-1" title="Cerrar Sesión">
+                            <i class="bi bi-box-arrow-right text-rose-400" style="font-size: 14px;"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </aside>
@@ -193,15 +198,17 @@
 
                         <div class="dropdown-divider my-1"></div>
 
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="dropdown-item d-flex align-items-center gap-2 py-2 px-2.5 rounded-2 text-danger fw-bold bg-transparent border-0">
-                                <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
-                            </button>
-                        </form>
+                        <button type="button" onclick="confirmarCierreSesion()" class="dropdown-item d-flex align-items-center gap-2 py-2 px-2.5 rounded-2 text-danger fw-bold bg-transparent border-0">
+                            <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                        </button>
                     </div>
                 </div>
             </header>
+
+            <!-- Formulario oculto de Cierre de Sesión -->
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
 
             <!-- Alert Toast Notifications & Content Canvas -->
             <main class="flex-1 p-4 p-lg-6 max-w-7xl w-full mx-auto">
@@ -234,6 +241,34 @@
 
     <!-- Bootstrap 5.3 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script de Confirmación SweetAlert2 para Cierre de Sesión -->
+    <script>
+        function confirmarCierreSesion() {
+            Swal.fire({
+                title: '¿Cerrar sesión en AirSense?',
+                text: 'Se cerrará tu sesión activa y tendrás que volver a autenticarte.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: '<i class="bi bi-box-arrow-right me-1"></i> Sí, cerrar sesión',
+                cancelButtonText: 'Cancelar',
+                reverseButtons: true,
+                customClass: {
+                    popup: 'rounded-4 shadow-lg border-0',
+                    confirmButton: 'btn btn-danger px-3 py-2 font-semibold',
+                    cancelButton: 'btn btn-secondary px-3 py-2 font-semibold me-2'
+                },
+                buttonsStyling: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('logout-form').submit();
+                }
+            });
+        }
+    </script>
+
     @yield('js')
 </body>
 </html>
