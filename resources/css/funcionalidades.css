@@ -1,0 +1,34 @@
+.funcionalidades-hero {
+    position: relative;
+    background-color: var(--sena-dark, #00324D);
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    padding: 3rem 0;
+}
+.card-funcionalidad {
+    border-radius: 0.75rem;
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-funcionalidad:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.08);
+}
+.card-funcionalidad .icon-circle {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+.border-left-green { border-left: 4px solid #39A900 !important; }
+.border-left-red { border-left: 4px solid #dc3545 !important; }
+.border-left-purple { border-left: 4px solid #6f42c1 !important; }
+.border-left-blue { border-left: 4px solid #0d6efd !important; }
+.border-left-yellow { border-left: 4px solid #ffc107 !important; }
