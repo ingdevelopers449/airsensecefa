@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\NodoController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Ehs\EHSController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -60,6 +61,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
 // 2. Grupo SST / EHS CEFA
 Route::middleware(['auth'])->prefix('ehscefa')->name('ehscefa.')->group(function () {
+
+    // Ruta del Módulo Estado de Hardware
+    Route::get('/hardware/nodo', [EHSController::class, 'estadoHardware'])->name('hardware.nodo');
+
     Route::get('/dashboard', function () {
         $user = Auth::user();
         $roleCode = $user->role ? $user->role->code : null;
