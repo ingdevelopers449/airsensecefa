@@ -21,63 +21,7 @@
     <!-- Scripts and Styles -->
     @vite(['resources/css/app.css', 'resources/css/styles.css', 'resources/css/login.css', 'resources/js/app.js'])
 
-    <style>
-        /* Estilos y Micro-animaciones para el Login */
-        .login-fade-in {
-            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .pulse-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #22c55e;
-            border-radius: 50%;
-            display: inline-block;
-            box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
-            animation: pulse-green 2s infinite;
-        }
-
-        @keyframes pulse-green {
-            0% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
-            }
-            70% {
-                transform: scale(1);
-                box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
-            }
-            100% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
-            }
-        }
-
-        /* Input Focus Enhancements */
-        .form-control-icon:focus {
-            border-color: #39a900 !important;
-            box-shadow: 0 0 0 0.25rem rgba(57, 169, 0, 0.15) !important;
-        }
-
-        .spin-icon {
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
 </head>
 <body class="login-page">
 
