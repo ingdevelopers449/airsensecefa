@@ -68,12 +68,12 @@
                     <div class="space-y-1">
                         <p class="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">Seguridad & Salud (SST)</p>
 
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('contingencias.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehscefa.contingencias.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-book-medical w-4 text-center text-[#39A900]"></i>
                             <span>Manual de Contingencia</span>
                         </a>
 
-                        <a href="" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('alertas.*') ? 'bg-rose-400/20 text-rose-400 font-bold border-l-4 border-rose-400' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehscefa.alertas.*') ? 'bg-rose-400/20 text-rose-400 font-bold border-l-4 border-rose-400' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <span class="flex items-center gap-2.5">
                                 <i class="fas fa-bell text-rose-400 w-4 text-center"></i>
                                 <span>Alertas Críticas</span>
@@ -85,12 +85,12 @@
                     <div class="space-y-1">
                         <p class="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">Infraestructura & Mapa</p>
 
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehs.nodos.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehscefa.nodos.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-map-marked-alt w-4 text-center text-[#39A900]"></i>
                             <span>Nodos IoT en Mapa</span>
                         </a>
 
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehs.conectividad.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="{{ route('ehscefa.hardware.nodo') }}" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehscefa.hardware.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-wifi w-4 text-center text-[#39A900]"></i>
                             <span>Estado de Hardware</span>
                         </a>
@@ -100,12 +100,12 @@
                     <div class="space-y-1">
                         <p class="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">Auditoría Epidemiológica</p>
 
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehs.historico.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehscefa.historico.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-calendar-alt w-4 text-center text-[#39A900]"></i>
                             <span>Historial de Aire (1 Año)</span>
                         </a>
 
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehs.reportes.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehscefa.reportes.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-file-export w-4 text-center text-[#39A900]"></i>
                             <span>Reportes Protegidos</span>
                         </a>
@@ -115,7 +115,7 @@
                     <div class="space-y-1">
                         <p class="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">Modelación & Predicción</p>
 
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehs.predictivo.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehscefa.predictivo.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-brain w-4 text-center text-[#39A900]"></i>
                             <span>Análisis Predictivo (IA)</span>
                         </a>
