@@ -71,6 +71,22 @@ class SyncCloudTelemetry extends Command
                     ]
                 );
 
+                // Actualizar coordenadas GPS en el Nodo si están disponibles
+                $reportedLat = $nodeData['latitude'] ?? ($item['reported_latitude'] ?? null);
+                $reportedLng = $nodeData['longitude'] ?? ($item['reported_longitude'] ?? null);
+
+                $updateData = [
+                    'connectivity_status' => 'online',
+                    'last_seen_at' => now(),
+                ];
+
+                if ($reportedLat && $reportedLng) {
+                    $updateData['latitude'] = $reportedLat;
+                    $updateData['longitude'] = $reportedLng;
+                }
+
+                $node->update($updateData);
+
                 // 2. Asegurar Ambiente local
                 $envData = $item['environment'] ?? null;
                 $environmentId = $node->environment_id;

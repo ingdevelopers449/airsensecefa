@@ -124,6 +124,8 @@
                             $ultimaLectura = $nodo->readings->first();
                             $minutosDiferencia = $ultimaLectura ? $ultimaLectura->created_at->diffInMinutes(now()) : 999;
                             $enLinea = $minutosDiferencia <= 5;
+                            $lat = $nodo->latitude ?? ($ultimaLectura->reported_latitude ?? null);
+                            $lng = $nodo->longitude ?? ($ultimaLectura->reported_longitude ?? null);
                         @endphp
                         <tr>
                             <td class="ps-4">
@@ -154,9 +156,9 @@
                                 @endif
                             </td>
                             <td>
-                                @if($nodo->latitude && $nodo->longitude)
-                                    <a href="https://maps.google.com/?q={{ $nodo->latitude }},{{ $nodo->longitude }}" target="_blank" class="text-decoration-none text-primary fw-medium small">
-                                        <i class="bi bi-geo-alt me-1"></i>{{ number_format($nodo->latitude, 5) }}, {{ number_format($nodo->longitude, 5) }}
+                                @if($lat && $lng)
+                                    <a href="https://maps.google.com/?q={{ $lat }},{{ $lng }}" target="_blank" class="text-decoration-none text-primary fw-medium small">
+                                        <i class="bi bi-geo-alt me-1"></i>{{ number_format($lat, 5) }}, {{ number_format($lng, 5) }}
                                     </a>
                                 @else
                                     <span class="text-muted small">Sin señal GPS</span>
@@ -171,7 +173,7 @@
                                 @endif
                             </td>
                             <td class="text-end pe-4">
-                                <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3" onclick="verDetallesNodo('{{ $nodo->device_uid }}', '{{ $nodo->name }}', '{{ $nodo->latitude }}', '{{ $nodo->longitude }}')">
+                                <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill px-3" onclick="verDetallesNodo('{{ $nodo->device_uid }}', '{{ $nodo->name }}', '{{ $lat }}', '{{ $lng }}')">
                                     <i class="bi bi-info-circle me-1"></i> Detalle
                                 </button>
                             </td>
