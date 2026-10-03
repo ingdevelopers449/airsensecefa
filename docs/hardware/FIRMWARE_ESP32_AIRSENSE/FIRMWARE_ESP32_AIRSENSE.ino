@@ -1,4 +1,5 @@
 #include <WiFi.h>
+#include <WiFiClientSecure.h>
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
 #include <DHT.h>
@@ -237,7 +238,8 @@ void procesarPendientesOffline() {
     bool enviadoExitoso = false;
 
     for (int i = 0; i < NUM_SERVERS; i++) {
-      WiFiClient client;
+      WiFiClientSecure client;
+      client.setInsecure(); // Desactivar validación de cadena SSL para acelerar el envío IoT
       HTTPClient http;
       http.begin(client, API_SERVERS[i]);
       http.addHeader("Content-Type", "application/json");
@@ -249,6 +251,9 @@ void procesarPendientesOffline() {
       int httpCode = http.POST(lineaPayload);
       if (httpCode > 0 && httpCode < 300) {
         enviadoExitoso = true;
+        Serial.printf("✅ [SYNC OFFLINE OK %d]: Entregado a %s\n", httpCode, API_SERVERS[i]);
+      } else {
+        Serial.printf("⚠️ [SYNC OFFLINE ERROR %d]: %s (%s)\n", httpCode, http.errorToString(httpCode).c_str(), API_SERVERS[i]);
       }
       http.end();
       if (enviadoExitoso) break;
@@ -326,7 +331,8 @@ void enviarTelemetriaLaravel(int co2, float temp, float hum, float lat, float lo
 
   // Iterar por cada servidor del equipo
   for (int i = 0; i < NUM_SERVERS; i++) {
-    WiFiClient client;
+    WiFiClientSecure client;
+    client.setInsecure(); // Permitir cifrado SSL HTTPS sin requerir certificado CA embebido
     HTTPClient http;
     http.begin(client, API_SERVERS[i]);
 
