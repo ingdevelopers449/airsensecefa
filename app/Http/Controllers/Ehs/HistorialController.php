@@ -10,9 +10,6 @@ use Carbon\Carbon;
 
 class HistorialController extends Controller
 {
-    /**
-     * Muestra el historial de lecturas ambientales con filtros y métricas.
-     */
     public function index(Request $request)
     {
         // 1. Parámetros de filtro con valores por defecto

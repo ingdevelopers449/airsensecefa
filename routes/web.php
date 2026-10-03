@@ -6,6 +6,7 @@ use App\Http\Controllers\Ehs\EHSController;
 use App\Http\Controllers\Ehs\ContingenciaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\Ehs\HistorialController;
+use App\Http\Controllers\Ehs\ReporteController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -70,6 +71,9 @@ Route::middleware(['auth'])->prefix('ehscefa')->name('ehscefa.')->group(function
     Route::post('/contingencias', [ContingenciaController::class, 'store'])->name('contingencias.store');
     Route::put('/contingencias/{id}', [ContingenciaController::class, 'update'])->name('contingencias.update');
     Route::delete('/contingencias/{id}', [ContingenciaController::class, 'destroy'])->name('contingencias.destroy');
+    Route::get('/reportes', [ReporteController::class, 'index'])->name('reportes.index');
+    Route::get('/reportes/imprimir-pdf', [ReporteController::class, 'imprimirPdf'])->name('reportes.pdf');
+    Route::get('/reportes/exportar-csv', [ReporteController::class, 'exportarCsv'])->name('reportes.csv');
 
     Route::get('/historico', [HistorialController::class, 'index'])->name('historico.index');
 
