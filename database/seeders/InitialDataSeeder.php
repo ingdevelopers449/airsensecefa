@@ -105,11 +105,11 @@ class InitialDataSeeder extends Seeder
 
         // 7. Ambientes de prueba
         $environmentsData = [
-            ['code' => 'AULA_101', 'name' => 'Aula de Formación 101 - CEFA', 'description' => 'Ambiente de formación principal', 'is_active' => true],
-            ['code' => 'LAB_FOOD', 'name' => 'Laboratorio de Procesamiento de Alimentos', 'description' => 'Laboratorio de análisis agroindustrial', 'is_active' => true],
-            ['code' => 'HAN_GAN', 'name' => 'Hangar de Ganadería y Bovinos', 'description' => 'Área de producción pecuaria', 'is_active' => true],
-            ['code' => 'ACOPIO', 'name' => 'Centro de Acopio Agroindustrial', 'description' => 'Almacén y recepción de insumos', 'is_active' => true],
-            ['code' => 'TALLER_AGRO', 'name' => 'Taller de Maquinaria Agrícola', 'description' => 'Mecanización y herramientas', 'is_active' => true],
+            ['code' => 'HAN_GAN', 'name' => 'Hangar de ganadería', 'description' => 'Agropecuaria', 'is_active' => true],
+            ['code' => 'ACOPIO', 'name' => 'Centro de acopio', 'description' => 'Agroindustrial', 'is_active' => true],
+            ['code' => 'AMB_204', 'name' => 'Ambiente 204', 'description' => 'Académica', 'is_active' => true],
+            ['code' => 'LAB_FOOD', 'name' => 'Laboratorio de alimentos', 'description' => 'Laboratorio', 'is_active' => true],
+            ['code' => 'ADMIN_BLK', 'name' => 'Bloque administrativo', 'description' => 'Administrativa', 'is_active' => true],
         ];
 
         foreach ($environmentsData as $envData) {
@@ -119,51 +119,72 @@ class InitialDataSeeder extends Seeder
             );
         }
 
-        $aula101Id = DB::table('environments')->where('code', 'AULA_101')->value('id');
-        $labFoodId = DB::table('environments')->where('code', 'LAB_FOOD')->value('id');
         $hanGanId  = DB::table('environments')->where('code', 'HAN_GAN')->value('id');
+        $acopioId  = DB::table('environments')->where('code', 'ACOPIO')->value('id');
+        $amb204Id  = DB::table('environments')->where('code', 'AMB_204')->value('id');
+        $labFoodId = DB::table('environments')->where('code', 'LAB_FOOD')->value('id');
 
-        // 8. Nodos IoT de prueba
+        // 8. Nodos IoT de prueba con coordenadas exactas de la referencia
         $nodesData = [
             [
-                'device_uid' => 'ESP32_XX5R69',
-                'environment_id' => $aula101Id,
-                'name' => 'Nodo ESP32 Aula 101',
+                'device_uid' => 'ESP-001',
+                'environment_id' => $hanGanId,
+                'name' => 'Hangar de ganadería',
                 'device_token_hash' => Hash::make('secret_token_001'),
                 'token_version' => 1,
                 'is_active' => true,
                 'connectivity_status' => 'online',
+                'last_reported_latitude' => 2.92780,
+                'last_reported_longitude' => -75.2810,
                 'last_seen_at' => now(),
             ],
             [
-                'device_uid' => 'ESP32_LAB_002',
-                'environment_id' => $labFoodId,
-                'name' => 'Nodo ESP32 Lab Alimentos',
+                'device_uid' => 'ESP-002',
+                'environment_id' => $acopioId,
+                'name' => 'Centro de acopio',
                 'device_token_hash' => Hash::make('secret_token_002'),
                 'token_version' => 1,
                 'is_active' => true,
                 'connectivity_status' => 'online',
-                'last_seen_at' => now()->subMinutes(15),
+                'last_reported_latitude' => 2.92781,
+                'last_reported_longitude' => -75.2811,
+                'last_seen_at' => now()->subMinutes(5),
             ],
             [
-                'device_uid' => 'ESP32_AGRO_003',
-                'environment_id' => null,
-                'name' => 'Nodo ESP32 Pendiente Asignar',
+                'device_uid' => 'ESP-003',
+                'environment_id' => $amb204Id,
+                'name' => 'Ambiente 204',
                 'device_token_hash' => Hash::make('secret_token_003'),
                 'token_version' => 1,
                 'is_active' => true,
-                'connectivity_status' => 'offline',
-                'last_seen_at' => now()->subHours(2),
+                'connectivity_status' => 'online',
+                'last_reported_latitude' => 2.92782,
+                'last_reported_longitude' => -75.2812,
+                'last_seen_at' => now()->subMinutes(10),
             ],
             [
-                'device_uid' => 'ESP32_HAN_004',
-                'environment_id' => $hanGanId,
-                'name' => 'Nodo ESP32 Hangar Ganadería',
+                'device_uid' => 'ESP-004',
+                'environment_id' => $labFoodId,
+                'name' => 'Laboratorio de alimentos',
                 'device_token_hash' => Hash::make('secret_token_004'),
                 'token_version' => 1,
                 'is_active' => true,
                 'connectivity_status' => 'online',
-                'last_seen_at' => now()->subMinutes(5),
+                'last_reported_latitude' => 2.92783,
+                'last_reported_longitude' => -75.2813,
+                'last_seen_at' => now()->subMinutes(12),
+            ],
+            [
+                'device_uid' => 'ESP-005',
+                'environment_id' => null,
+                'name' => 'Bloque administrativo',
+                'device_token_hash' => Hash::make('secret_token_005'),
+                'token_version' => 1,
+                'is_active' => true,
+                'connectivity_status' => 'offline',
+                'last_reported_latitude' => 2.92784,
+                'last_reported_longitude' => -75.2814,
+                'last_seen_at' => now()->subHours(3),
             ],
         ];
 
