@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Ehs\EHSController;
 use App\Http\Controllers\Ehs\ContingenciaController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\Ehs\HistorialController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -66,9 +67,11 @@ Route::middleware(['auth'])->prefix('ehscefa')->name('ehscefa.')->group(function
     // Ruta del Módulo Estado de Hardware
     Route::get('/hardware/nodo', [EHSController::class, 'estadoHardware'])->name('hardware.nodo');
     Route::get('/contingencias', [ContingenciaController::class, 'index'])->name('contingencias.index');
-Route::post('/contingencias', [ContingenciaController::class, 'store'])->name('contingencias.store');
-Route::put('/contingencias/{id}', [ContingenciaController::class, 'update'])->name('contingencias.update');
-Route::delete('/contingencias/{id}', [ContingenciaController::class, 'destroy'])->name('contingencias.destroy');
+    Route::post('/contingencias', [ContingenciaController::class, 'store'])->name('contingencias.store');
+    Route::put('/contingencias/{id}', [ContingenciaController::class, 'update'])->name('contingencias.update');
+    Route::delete('/contingencias/{id}', [ContingenciaController::class, 'destroy'])->name('contingencias.destroy');
+
+    Route::get('/historico', [HistorialController::class, 'index'])->name('historico.index');
 
     Route::get('/dashboard', function () {
         $user = Auth::user();

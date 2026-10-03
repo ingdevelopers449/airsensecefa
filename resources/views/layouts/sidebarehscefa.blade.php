@@ -100,7 +100,7 @@
                     <div class="space-y-1">
                         <p class="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">Auditoría Epidemiológica</p>
 
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehscefa.historico.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="{{ route('ehscefa.historico.index') }}" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehscefa.historico.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-calendar-alt w-4 text-center text-[#39A900]"></i>
                             <span>Historial de Aire (1 Año)</span>
                         </a>
