@@ -99,7 +99,7 @@
                             <span>Umbrales de Alerta</span>
                         </a>
 
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('nodos.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="{{ route('admin.nodos')}}" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('nodos.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-microchip w-4 text-center text-[#39A900]"></i>
                             <span>Nodos IoT (ESP32)</span>
                         </a>
@@ -162,10 +162,6 @@
             <header class="h-16 bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-4 px-lg-6 flex items-center justify-between sticky top-0 z-30 shadow-xs">
                 <div class="flex items-center gap-3">
                     <h1 class="text-lg font-bold text-slate-800 font-heading hidden sm:block m-0">@yield('tituloPagina', 'Dashboard Principal')</h1>
-                    <span class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/80">
-                        <span class="w-2 h-2 rounded-full bg-[#39A900] animate-pulse"></span>
-                        Sistema En Línea
-                    </span>
                 </div>
 
                 <!-- User Dropdown Menu -->

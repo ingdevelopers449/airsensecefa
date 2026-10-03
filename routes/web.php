@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\NodoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Auth;
@@ -52,6 +53,9 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
         return view('admin.dashboard');
     })->name('dashboard');
+
+    Route::get('/nodos', [NodoController::class, 'index'])->name('nodos');
+    Route::post('/nodos/asignar-ambiente', [NodoController::class, 'asignarAmbiente'])->name('nodos.asignar-ambiente');
 });
 
 // 2. Grupo SST / EHS CEFA
@@ -90,4 +94,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::redirect('/nodos', '/admin/nodos');
+
 require __DIR__.'/auth.php';
+
