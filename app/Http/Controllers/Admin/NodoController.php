@@ -22,8 +22,12 @@ class NodoController extends Controller
         ->orderBy('name')
         ->get();
 
-    // Enviamos las dos variables a la vista
-    return view('admin.nodos.index', compact('nodes', 'environments'));
+    // Contadores de prueba para demostración (No registrados y Cambio de ubicación)
+    $unregisteredCount = 1;
+    $locationChangedCount = 1;
+
+    // Enviamos las variables a la vista
+    return view('admin.nodos.index', compact('nodes', 'environments', 'unregisteredCount', 'locationChangedCount'));
 
     }
 

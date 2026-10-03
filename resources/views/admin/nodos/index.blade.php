@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="contenedor-nodos">
+<div class="contenedor-nodos" x-data="{ filtro: 'todos', busqueda: '' }">
 
     <!-- MENSAJE DE ÉXITO AL GUARDAR AMBIENTE -->
     @if (session('success'))
@@ -20,27 +20,43 @@
 
         <div class="filtros-nodos">
 
-            <div class="filtro-nodo activo">
-                Registrados
-
+            <!-- TODOS -->
+            <div class="filtro-nodo"
+                 :class="{ 'activo': filtro === 'todos' }"
+                 @click="filtro = 'todos'">
+                Todos
                 <span class="numero-filtro">
                     {{ $nodes->count() }}
                 </span>
             </div>
 
-            <div class="filtro-nodo">
-                No registrados
-
+            <!-- REGISTRADOS -->
+            <div class="filtro-nodo"
+                 :class="{ 'activo': filtro === 'registrados' }"
+                 @click="filtro = 'registrados'">
+                Registrados
                 <span class="numero-filtro">
-                    0
+                    {{ $nodes->whereNotNull('environment_id')->count() }}
                 </span>
             </div>
 
-            <div class="filtro-nodo">
-                Cambio de ubicación
-
+            <!-- NO REGISTRADOS -->
+            <div class="filtro-nodo"
+                 :class="{ 'activo': filtro === 'no_registrados' }"
+                 @click="filtro = 'no_registrados'">
+                No registrados
                 <span class="numero-filtro">
-                    0
+                    {{ $nodes->whereNull('environment_id')->count() }}
+                </span>
+            </div>
+
+            <!-- CAMBIO DE UBICACIÓN / OFFLINE -->
+            <div class="filtro-nodo"
+                 :class="{ 'activo': filtro === 'cambio_ubicacion' }"
+                 @click="filtro = 'cambio_ubicacion'">
+                Cambio de ubicación
+                <span class="numero-filtro">
+                    {{ $nodes->where('connectivity_status', 'offline')->count() }}
                 </span>
             </div>
 
@@ -51,7 +67,8 @@
 
             <input
                 type="text"
-                placeholder="🔍  Buscar nodo..."
+                x-model="busqueda"
+                placeholder="🔍  Buscar nodo por UID o ambiente..."
             >
 
         </div>
@@ -82,7 +99,16 @@
 
                     @forelse ($nodes as $node)
 
-                        <tr>
+                        <tr x-show="
+                            (filtro === 'todos' ||
+                             (filtro === 'registrados' && {{ $node->environment_id ? 'true' : 'false' }}) ||
+                             (filtro === 'no_registrados' && {{ !$node->environment_id ? 'true' : 'false' }}) ||
+                             (filtro === 'cambio_ubicacion' && {{ $node->connectivity_status === 'offline' ? 'true' : 'false' }}))
+                            &&
+                            (busqueda === '' ||
+                             '{{ strtolower($node->device_uid) }}'.includes(busqueda.toLowerCase()) ||
+                             '{{ strtolower($node->environment?->name ?? 'sin asignar') }}'.includes(busqueda.toLowerCase()))
+                        ">
 
                             <!-- ID -->
                             <td>
