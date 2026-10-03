@@ -153,4 +153,23 @@ class IoTTelemetryController extends Controller
             'timestamp' => now()->toDateTimeString()
         ], Response::HTTP_OK);
     }
+
+    /**
+     * Retorna las últimas lecturas registradas para consumo de sincronización local o mapas.
+     */
+    public function latestTelemetry(Request $request): Response
+    {
+        $limit = min((int) $request->query('limit', 20), 100);
+
+        $readings = SensorReading::with(['node', 'environment', 'measurements'])
+            ->orderBy('id', 'desc')
+            ->limit($limit)
+            ->get();
+
+        return response()->json([
+            'status' => 'success',
+            'count' => $readings->count(),
+            'data' => $readings
+        ], Response::HTTP_OK);
+    }
 }
