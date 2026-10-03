@@ -38,14 +38,6 @@
             }
         }
 
-        .map-overlay-card {
-            background: rgba(10, 42, 67, 0.75);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #ffffff;
-        }
-
         .pulse-dot {
             width: 8px;
             height: 8px;
@@ -96,22 +88,16 @@
         <div class="col-lg-6 d-none d-lg-block h-100 position-relative">
             <div style="background-image: url('{{ asset('images/Mapa.Sena.png') }}'); background-size: cover; background-position: center; width: 100%; height: 100%; filter: brightness(0.92);"></div>
             
-            <!-- Overlay degradado oscuro sutil -->
-            <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(180deg, rgba(10, 42, 67, 0.2) 0%, rgba(10, 42, 67, 0.7) 100%);"></div>
-
-            <!-- Tarjeta Informativa Flotante -->
-            <div class="position-absolute bottom-0 start-0 p-4 p-xl-5 w-100">
-                <div class="map-overlay-card p-4 rounded-4 shadow-lg">
-                    <div class="d-flex align-items-center gap-2 mb-2">
-                        <span class="pulse-dot"></span>
-                        <span class="badge bg-success-subtle text-success fw-bold px-2 py-1 rounded-pill" style="font-size: 0.75rem;">
-                            Red IoT Activa
-                        </span>
-                    </div>
-                    <h5 class="fw-bold mb-1 text-white">Monitoreo de Calidad del Aire</h5>
-                    <p class="small text-white-50 mb-0" style="font-size: 0.85rem;">
-                        SENA Centro de Formación Agroindustrial CEFA — Supervisión ambiental continua y diagnóstico en tiempo real.
-                    </p>
+            <!-- Píldora Flotante Limpia e Institucional -->
+            <div class="position-absolute bottom-0 start-0 p-4 p-xl-5">
+                <div class="bg-white shadow-sm border rounded-pill px-3 py-2 d-inline-flex align-items-center gap-2">
+                    <span class="pulse-dot"></span>
+                    <span class="fw-semibold text-dark small" style="font-size: 0.85rem;">
+                        Red de Monitoreo Ambiental CEFA
+                    </span>
+                    <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-2 py-1" style="font-size: 0.7rem;">
+                        <i class="bi bi-wifi me-1"></i>En línea
+                    </span>
                 </div>
             </div>
         </div>
