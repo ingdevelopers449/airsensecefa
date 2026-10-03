@@ -31,7 +31,7 @@
                 <!-- Variable Ambiental -->
                 <div class="col-12 col-sm-6 col-md-3">
                     <label class="form-label small fw-semibold text-muted mb-1">Variable Ambiental</label>
-                    <select name="variable_type" class="form-select form-select-sm rounded-3">
+                    <select name="variable_type" class="form-select form-select-sm rounded-3" onchange="this.form.submit()">
                         <option value="co2" {{ $variableType === 'co2' ? 'selected' : '' }}>CO2 (Gas Monóxido / PPM)</option>
                         <option value="temperature" {{ $variableType === 'temperature' ? 'selected' : '' }}>Temperatura (°C)</option>
                         <option value="humidity" {{ $variableType === 'humidity' ? 'selected' : '' }}>Humedad Relativa (%)</option>
@@ -41,7 +41,7 @@
                 <!-- Ambiente / Nodo -->
                 <div class="col-12 col-sm-6 col-md-3">
                     <label class="form-label small fw-semibold text-muted mb-1">Ambiente / Aula</label>
-                    <select name="environment_id" class="form-select form-select-sm rounded-3">
+                    <select name="environment_id" class="form-select form-select-sm rounded-3" onchange="this.form.submit()">
                         <option value="">Todos los Ambientes</option>
                         @foreach($environments as $env)
                             <option value="{{ $env->id }}" {{ $environmentId == $env->id ? 'selected' : '' }}>
@@ -52,22 +52,15 @@
                 </div>
 
                 <!-- Fecha Inicio -->
-                <div class="col-6 col-md-2">
+                <div class="col-6 col-md-3">
                     <label class="form-label small fw-semibold text-muted mb-1">Fecha Desde</label>
-                    <input type="date" name="start_date" value="{{ $startDate }}" class="form-control form-control-sm rounded-3">
+                    <input type="date" name="start_date" value="{{ $startDate }}" class="form-control form-control-sm rounded-3" onchange="this.form.submit()">
                 </div>
 
                 <!-- Fecha Fin -->
-                <div class="col-6 col-md-2">
+                <div class="col-6 col-md-3">
                     <label class="form-label small fw-semibold text-muted mb-1">Fecha Hasta</label>
-                    <input type="date" name="end_date" value="{{ $endDate }}" class="form-control form-control-sm rounded-3">
-                </div>
-
-                <!-- Botón Filtrar -->
-                <div class="col-12 col-md-2 d-grid">
-                    <button type="submit" class="btn btn-primary btn-sm rounded-3 shadow-sm">
-                        <i class="bi bi-funnel me-1"></i> Aplicar Filtros
-                    </button>
+                    <input type="date" name="end_date" value="{{ $endDate }}" class="form-control form-control-sm rounded-3" onchange="this.form.submit()">
                 </div>
 
             </form>
