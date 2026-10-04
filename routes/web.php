@@ -7,6 +7,7 @@ use App\Http\Controllers\Ehs\ContingenciaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\Ehs\HistorialController;
 use App\Http\Controllers\Ehs\ReporteController;
+use App\Http\Controllers\Ehs\PredictivoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -76,6 +77,7 @@ Route::middleware(['auth'])->prefix('ehscefa')->name('ehscefa.')->group(function
     Route::get('/reportes/exportar-csv', [ReporteController::class, 'exportarCsv'])->name('reportes.csv');
 
     Route::get('/historico', [HistorialController::class, 'index'])->name('historico.index');
+    Route::get('/predictivo', [PredictivoController::class, 'index'])->name('predictivo.index');
 
     Route::get('/dashboard', function () {
         $user = Auth::user();
