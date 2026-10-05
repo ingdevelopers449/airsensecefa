@@ -9,8 +9,8 @@
 // =========================================================================
 // ⚙️ 1. CONFIGURACIÓN DE RED Y DISPOSITIVO (EDITA ESTOS VALORES)
 // =========================================================================
-const char* WIFI_SSID     = "FAMILIA LOZADA";       // Escribe el SSID de tu Wi-Fi
-const char* WIFI_PASSWORD = "1077845912@";        // Escribe la clave del Wi-Fi
+const char* WIFI_SSID     = "APRENDICES";       // Escribe el SSID de tu Wi-Fi
+const char* WIFI_PASSWORD = "Apr3nd1z2025**";        // Escribe la clave del Wi-Fi
 
 // Lista de Servidores API de destino
 const char* API_SERVERS[] = {
@@ -33,10 +33,16 @@ const char* OFFLINE_FILE = "/offline_queue.json";
 // =========================================================================
 // 🔌 2. CONFIGURACIÓN DE SENSORES (PINES GPIO)
 // =========================================================================
-// Sensor DHT11 (Temperatura y Humedad)
-#define DHTPIN 4
+// Arreglo de 4 Sensores DHT11/DHT22 para Promediado de Alta Precisión
 #define DHTTYPE DHT11
-DHT dht(DHTPIN, DHTTYPE);
+const uint8_t DHT_PINS[4] = {4, 14, 27, 26}; // GPIOs asignados a los 4 sensores DHT (EVITA GPIO 12 que bloquea la Flash)
+
+DHT dhts[4] = {
+  DHT(DHT_PINS[0], DHTTYPE),
+  DHT(DHT_PINS[1], DHTTYPE),
+  DHT(DHT_PINS[2], DHTTYPE),
+  DHT(DHT_PINS[3], DHTTYPE)
+};
 
 // Sensor MH-Z16 / MH-Z19B (CO2 por Puerto Serial 2)
 #define RX2_PIN 16
@@ -73,7 +79,7 @@ void setup() {
   delay(1000);
 
   Serial.println("\n==============================================");
-  Serial.println("🌿 AirSense CEFA - Nodo IoT ESP32 (LittleFS Buffer Active)");
+  Serial.println("🌿 AirSense CEFA - Nodo IoT ESP32 (4x DHT Average Sensor Array)");
   Serial.println("==============================================");
 
   // Inicializar Sistema de Archivos LittleFS
@@ -83,8 +89,13 @@ void setup() {
     Serial.println("💾 LittleFS montado correctamente.");
   }
 
-  // Inicializar Sensores
-  dht.begin();
+  // Inicializar los 4 Sensores DHT
+  for (int i = 0; i < 4; i++) {
+    dhts[i].begin();
+    Serial.printf("🌡️ Inicializado Sensor DHT #%d en GPIO %d\n", i + 1, DHT_PINS[i]);
+  }
+
+  // Inicializar Puertos Seriales para CO2 y GPS
   sensorSerial.begin(9600, SERIAL_8N1, RX2_PIN, TX2_PIN);
   gpsSerial.begin(9600, SERIAL_8N1, GPS_RX_PIN, GPS_TX_PIN);
 
@@ -115,23 +126,59 @@ void loop() {
     ultimaLecturaMs = msActuales;
 
     Serial.println("\n----------------------------------------------");
-    Serial.println("📊 Tomando lecturas de sensores...");
+    Serial.println("📊 Tomando lecturas de los 4 sensores DHT...");
 
-    // 1. Leer DHT11
-    float temperatura = dht.readTemperature();
-    float humedad     = dht.readHumidity();
+    // 1. Leer y promediar los 4 sensores DHT
+    float sumaTemp = 0.0;
+    float sumaHum  = 0.0;
+    int okTempCount = 0;
+    int okHumCount  = 0;
 
-    // 2. Leer MH-Z16
+    for (int i = 0; i < 4; i++) {
+      float t = dhts[i].readTemperature();
+      float h = dhts[i].readHumidity();
+
+      if (!isnan(t)) {
+        sumaTemp += t;
+        okTempCount++;
+        Serial.printf("  └─ DHT #%d (GPIO %d): %.1f °C\n", i + 1, DHT_PINS[i], t);
+      } else {
+        Serial.printf("  └─ ⚠️ DHT #%d (GPIO %d): Error al leer Temperatura (NaN)\n", i + 1, DHT_PINS[i]);
+      }
+
+      if (!isnan(h)) {
+        sumaHum += h;
+        okHumCount++;
+      }
+    }
+
+    float tempPromedio = (okTempCount > 0) ? (sumaTemp / okTempCount) : 0.0;
+    float humPromedio  = (okHumCount > 0)  ? (sumaHum / okHumCount)   : 0.0;
+
+    // 2. Leer MH-Z16 (CO2)
     int co2Ppm = leerCO2();
 
     // Validar lecturas
-    if (isnan(temperatura) || isnan(humedad)) {
-      Serial.println("⚠️ Error leyendo el sensor DHT11. Se reintentará...");
+    if (okTempCount == 0 || okHumCount == 0) {
+      Serial.println("⚠️ No se pudo obtener lectura válida de ningún sensor DHT. Reintentando...");
     } else {
-      Serial.printf("🌡️ Temp: %.1f °C | 💧 Hum: %.1f %% | 💨 CO2: %d ppm\n", temperatura, humedad, co2Ppm);
+      Serial.println("----------------------------------------------");
+      Serial.printf("🌡️ TEMP PROMEDIO (%d/4 Sensores): %.2f °C\n", okTempCount, tempPromedio);
+      Serial.printf("💧 HUM PROMEDIO  (%d/4 Sensores): %.2f %%\n", okHumCount, humPromedio);
+      Serial.printf("💨 CO2 (MH-Z16): %d ppm\n", co2Ppm);
       
-      // 3. Enviar lecturas a la API de Laravel (con coordenadas GPS)
-      enviarTelemetriaLaravel(co2Ppm, temperatura, humedad, nodoLatitud, nodoLongitud);
+      // Estado limpio de GPS
+      if (gps.location.isValid()) {
+        Serial.printf("📍 GPS Status: 🟢 CONECTADO (Lat: %.6f, Lon: %.6f)\n", nodoLatitud, nodoLongitud);
+      } else if (gps.charsProcessed() < 10) {
+        Serial.println("📍 GPS Status: 🔴 ERROR DE CONEXIÓN GPS (Sin comunicación en GPIO 18/19)");
+      } else {
+        Serial.printf("📍 GPS Status: ⚠️ BUSCANDO SATÉLITES (%lu caracteres NMEA)\n", gps.charsProcessed());
+      }
+      Serial.println("----------------------------------------------");
+
+      // 3. Enviar lecturas promediadas a la API de Laravel
+      enviarTelemetriaLaravel(co2Ppm, tempPromedio, humPromedio, nodoLatitud, nodoLongitud);
     }
   }
 }
@@ -191,13 +238,6 @@ void actualizarCoordenadasGPS() {
   if (gps.location.isUpdated() && gps.location.isValid()) {
     nodoLatitud  = gps.location.lat();
     nodoLongitud = gps.location.lng();
-    Serial.printf("📍 [GPS FIX OK] Lat: %.6f | Lon: %.6f | Satélites: %d\n", nodoLatitud, nodoLongitud, gps.satellites.value());
-  } else if (millis() % 10000 < 50) { // Diagnóstico periódico cada 10 segundos
-    if (gps.charsProcessed() < 10) {
-      Serial.println("⚠️ [GPS DIAGNÓSTICO] Sin comunicación serial en GPIO 18/19. Revisa/invierte los cables RX-TX.");
-    } else {
-      Serial.printf("⚠️ [GPS DIAGNÓSTICO] Buscando satélites (Caracteres NMEA recibidos: %lu)... Saca la antena hacia una ventana.\n", gps.charsProcessed());
-    }
   }
 }
 
@@ -306,13 +346,13 @@ void enviarTelemetriaLaravel(int co2, float temp, float hum, float lat, float lo
   m1["value"]         = co2;
   m1["unit"]          = "ppm";
 
-  // Variable 2: Temperatura
+  // Variable 2: Temperatura Promediada
   JsonObject m2 = measurements.createNestedObject();
   m2["variable_type"] = "temperature";
   m2["value"]         = temp;
   m2["unit"]          = "°C";
 
-  // Variable 3: Humedad
+  // Variable 3: Humedad Promediada
   JsonObject m3 = measurements.createNestedObject();
   m3["variable_type"] = "humidity";
   m3["value"]         = hum;

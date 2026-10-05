@@ -68,12 +68,12 @@
                     <div class="space-y-1">
                         <p class="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">Seguridad & Salud (SST)</p>
 
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('contingencias.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="{{ route('ehscefa.contingencias.index') }}" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehscefa.contingencias.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-book-medical w-4 text-center text-[#39A900]"></i>
                             <span>Manual de Contingencia</span>
                         </a>
 
-                        <a href="" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('alertas.*') ? 'bg-rose-400/20 text-rose-400 font-bold border-l-4 border-rose-400' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehscefa.alertas.*') ? 'bg-rose-400/20 text-rose-400 font-bold border-l-4 border-rose-400' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <span class="flex items-center gap-2.5">
                                 <i class="fas fa-bell text-rose-400 w-4 text-center"></i>
                                 <span>Alertas Críticas</span>
@@ -85,12 +85,12 @@
                     <div class="space-y-1">
                         <p class="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">Infraestructura & Mapa</p>
 
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehs.nodos.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehscefa.nodos.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-map-marked-alt w-4 text-center text-[#39A900]"></i>
                             <span>Nodos IoT en Mapa</span>
                         </a>
 
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehs.conectividad.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="{{ route('ehscefa.hardware.nodo') }}" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehscefa.hardware.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-wifi w-4 text-center text-[#39A900]"></i>
                             <span>Estado de Hardware</span>
                         </a>
@@ -100,12 +100,12 @@
                     <div class="space-y-1">
                         <p class="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">Auditoría Epidemiológica</p>
 
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehs.historico.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="{{ route('ehscefa.historico.index') }}" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehscefa.historico.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-calendar-alt w-4 text-center text-[#39A900]"></i>
                             <span>Historial de Aire (1 Año)</span>
                         </a>
 
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehs.reportes.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="{{ route('ehscefa.reportes.index') }}" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehscefa.reportes.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-file-export w-4 text-center text-[#39A900]"></i>
                             <span>Reportes Protegidos</span>
                         </a>
@@ -115,7 +115,7 @@
                     <div class="space-y-1">
                         <p class="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">Modelación & Predicción</p>
 
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehs.predictivo.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="{{ route('ehscefa.predictivo.index') }}" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehscefa.predictivo.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-brain w-4 text-center text-[#39A900]"></i>
                             <span>Análisis Predictivo (IA)</span>
                         </a>
@@ -123,15 +123,31 @@
                 </div>
             </div>
 
-            <!-- Footer User Badge -->
-            <div class="p-3.5 bg-[#001522] border-t border-[#003B5C]/70">
-                <div class="flex items-center gap-2.5">
-                    <div class="w-9 h-9 rounded-xl bg-[#39A900] text-white flex items-center justify-center font-bold text-base shadow-sm">
-                        {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+            <!-- Footer User Badge - Bootstrap 5 Clean -->
+            <div class="p-3 border-top border-secondary-subtle" style="background-color: #001522;">
+                <div class="d-flex align-items-center justify-content-between p-2 rounded-3 border" style="background-color: #002237; border-color: rgba(255,255,255,0.1) !important;">
+                    <div class="d-flex align-items-center gap-2 overflow-hidden">
+                        <div class="position-relative flex-shrink-0">
+                            <div class="rounded-3 text-white d-flex align-items-center justify-content-center fw-bold shadow-sm" style="width: 36px; height: 36px; background-color: #39A900; font-size: 14px;">
+                                {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                            </div>
+                            <span class="position-absolute bottom-0 end-0 p-1 bg-success border border-dark rounded-circle" title="Sesión activa">
+                                <span class="visually-hidden">En línea</span>
+                            </span>
+                        </div>
+                        <div class="lh-sm overflow-hidden">
+                            <div class="text-white fw-bold text-truncate" style="font-size: 13px;">{{ Auth::user()->name }}</div>
+                            <div class="fw-semibold text-truncate" style="font-size: 11px; color: #86efac;">Especialista EHS & SST</div>
+                        </div>
                     </div>
-                    <div class="flex-1 min-w-0">
-                        <p class="text-xs font-semibold text-white truncate m-0">{{ Auth::user()->name }}</p>
-                        <p class="text-[10.5px] text-[#39A900] font-medium m-0">Administrador General</p>
+
+                    <div class="d-flex align-items-center gap-1 ms-1">
+                        <a href="{{ route('profile.edit') }}" class="btn btn-sm text-white-50 hover-text-white p-1" title="Configurar Perfil">
+                            <i class="bi bi-gear-fill" style="font-size: 14px;"></i>
+                        </a>
+                        <button type="button" onclick="confirmarCierreSesion()" class="btn btn-sm text-white-50 hover-text-danger p-1" title="Cerrar Sesión">
+                            <i class="bi bi-box-arrow-right text-rose-400" style="font-size: 14px;"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -140,46 +156,59 @@
         <!-- Main Content Canvas -->
         <div class="flex-1 flex flex-col min-w-0 lg:ml-64 w-full bg-slate-50">
             <!-- Header Navbar Sticky -->
-            <header class="h-16 bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-4 px-lg-6 flex items-center justify-between sticky top-0 z-30 shadow-xs">
+            <header class="h-16 bg-white border-b border-slate-200 px-4 px-lg-6 flex items-center justify-between sticky top-0 z-30 shadow-sm">
                 <div class="flex items-center gap-3">
                     <h1 class="text-lg font-bold text-slate-800 font-heading hidden sm:block m-0">@yield('tituloPagina', 'Dashboard Principal')</h1>
-                    <span class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/80">
-                        <span class="w-2 h-2 rounded-full bg-[#39A900] animate-pulse"></span>
+                    <span class="badge bg-success-subtle text-success border border-success-subtle px-2.5 py-1.5 rounded-pill font-semibold">
+                        <i class="bi bi-circle-fill text-success me-1" style="font-size: 8px;"></i>
                         Sistema En Línea
                     </span>
                 </div>
 
-                <!-- User Dropdown Menu -->
-                <div class="flex items-center gap-4" x-data="{ open: false }">
-                    <div class="relative">
-                        <button @click="open = !open" class="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-100 transition-colors focus:outline-none">
-                            <span class="text-sm font-semibold text-slate-700">{{ Auth::user()->name }}</span>
-                            <i class="fas fa-chevron-down text-xs text-slate-400"></i>
-                        </button>
-
-                        <div x-show="open" @click.away="open = false" x-cloak
-                             class="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 z-50 transition-all">
-                            <div class="px-4 py-3 border-b border-slate-100">
-                                <p class="text-xs text-slate-400 font-medium m-0">Sesión activa</p>
-                                <p class="text-sm font-bold text-slate-800 truncate m-0">{{ Auth::user()->email }}</p>
-                            </div>
-                            <a href="{{ route('profile.edit') }}" class="flex items-center gap-2 px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 transition-colors text-decoration-none">
-                                <i class="fas fa-user-cog text-slate-400"></i> Mi Perfil
-                            </a>
-                            <a href="{{ url('/') }}" target="_blank" class="flex items-center gap-2 px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50 transition-colors text-decoration-none">
-                                <i class="fas fa-external-link-alt text-slate-400"></i> Ver Sitio Web
-                            </a>
-                            <div class="border-t border-slate-100 my-1"></div>
-                            <form action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-rose-600 hover:bg-rose-50 transition-colors font-medium border-0 bg-transparent">
-                                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
-                                </button>
-                            </form>
+                <!-- User Profile Dropdown (Bootstrap 5 Clean) -->
+                <div class="relative" x-data="{ open: false }">
+                    <button @click="open = !open" type="button" class="btn btn-light bg-white border border-secondary-subtle rounded-pill px-3 py-1.5 d-flex align-items-center gap-2 shadow-sm focus-ring">
+                        <div class="rounded-circle text-white d-flex align-items-center justify-content-center fw-bold" style="width: 30px; height: 30px; background-color: #003B5C; font-size: 12px;">
+                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                         </div>
+                        <div class="text-start d-none d-sm-block lh-1">
+                            <div class="fw-bold text-dark" style="font-size: 13px;">{{ Auth::user()->name }}</div>
+                            <small class="text-muted" style="font-size: 10.5px;">EHS & Salud Ocupacional</small>
+                        </div>
+                        <i class="bi bi-chevron-down text-muted ms-1" style="font-size: 10px;"></i>
+                    </button>
+
+                    <div x-show="open" @click.away="open = false" x-cloak
+                         class="position-absolute end-0 mt-2 bg-white rounded-3 shadow-lg border border-secondary-subtle p-2 z-30" style="width: 250px;">
+                        
+                        <div class="p-2.5 bg-light rounded-2 mb-1 border border-secondary-subtle">
+                            <div class="fw-bold text-dark text-truncate" style="font-size: 13px;">{{ Auth::user()->name }}</div>
+                            <div class="text-muted text-truncate" style="font-size: 11.5px;">{{ Auth::user()->email }}</div>
+                            <span class="badge bg-success-subtle text-success border border-success-subtle mt-1.5 fw-semibold">
+                                <i class="bi bi-shield-check me-1"></i> Auditor EHS Autorizado
+                            </span>
+                        </div>
+
+                        <a class="dropdown-item d-flex align-items-center gap-2 py-2 px-2.5 rounded-2 text-secondary fw-semibold" href="{{ route('profile.edit') }}">
+                            <i class="bi bi-person-gear text-secondary"></i> Mi Perfil
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center gap-2 py-2 px-2.5 rounded-2 text-secondary fw-semibold" href="{{ url('/') }}" target="_blank">
+                            <i class="bi bi-box-arrow-up-right text-secondary"></i> Ver Sitio Web
+                        </a>
+
+                        <div class="dropdown-divider my-1"></div>
+
+                        <button type="button" onclick="confirmarCierreSesion()" class="dropdown-item d-flex align-items-center gap-2 py-2 px-2.5 rounded-2 text-danger fw-bold bg-transparent border-0">
+                            <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                        </button>
                     </div>
                 </div>
             </header>
+
+            <!-- Formulario oculto de Cierre de Sesión -->
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
 
             <!-- Alert Toast Notifications & Content Canvas -->
             <main class="flex-1 p-4 p-lg-6 max-w-7xl w-full mx-auto">
@@ -212,6 +241,34 @@
 
     <!-- Bootstrap 5.3 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script de Confirmación SweetAlert2 para Cierre de Sesión -->
+    <script>
+        function confirmarCierreSesion() {
+            Swal.fire({
+                title: '¿Cerrar sesión en AirSense?',
+                text: 'Se cerrará tu sesión activa y tendrás que volver a autenticarte.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: '<i class="bi bi-box-arrow-right me-1"></i> Sí, cerrar sesión',
+                cancelButtonText: 'Cancelar',
+                reverseButtons: true,
+                customClass: {
+                    popup: 'rounded-4 shadow-lg border-0',
+                    confirmButton: 'btn btn-danger px-3 py-2 font-semibold',
+                    cancelButton: 'btn btn-secondary px-3 py-2 font-semibold me-2'
+                },
+                buttonsStyling: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('logout-form').submit();
+                }
+            });
+        }
+    </script>
+
     @yield('js')
 </body>
 </html>
