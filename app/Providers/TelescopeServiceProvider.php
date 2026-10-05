@@ -27,7 +27,8 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
                    $entry->isFailedRequest() ||
                    $entry->isFailedJob() ||
                    $entry->isScheduledTask() ||
-                   $entry->hasMonitoredTag();
+                   $entry->hasMonitoredTag() ||
+                   (isset($entry->content['uri']) && str_contains($entry->content['uri'], 'api/v1/nodes'));
         });
     }
 
@@ -58,8 +59,9 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
     {
         Gate::define('viewTelescope', function (User $user) {
             return in_array($user->email, [
-                //
-            ]);
+                'ing.diego.mendez@gmail.com',
+                'pipelozada994@gmail.com',
+            ]) || ($user->role && $user->role->code === 'ADMIN');
         });
     }
 }

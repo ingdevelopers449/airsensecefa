@@ -35,6 +35,18 @@ class DatabaseSeeder extends Seeder
             // ADMIN
             [
                 'role_id' => $adminRoleId,
+                'name' => 'Administrador AirSense CEFA',
+                'email' => 'ingdeveloper994@airsensecefa.site',
+                'password' => $passwordHash,
+                'is_active' => true,
+                'email_verified_at' => now(),
+                'last_login_at' => null,
+                'remember_token' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'role_id' => $adminRoleId,
                 'name' => 'Diego Mendez (Coordinador)',
                 'email' => 'ing.diego.mendez@gmail.com',
                 'password' => $passwordHash,
