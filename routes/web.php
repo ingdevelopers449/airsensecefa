@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\NodoController;
+use App\Http\Controllers\Admin\UsuarioController;
 use App\Http\Controllers\InstructorDashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Ehs\EHSController;
@@ -11,7 +12,7 @@ use App\Http\Controllers\Ehs\PredictivoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+Route::get('/', function () {   
     if (Auth::check()) {
         $user = Auth::user();
         $roleCode = $user->role ? $user->role->code : null;
