@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\NodoController;
+use App\Http\Controllers\InstructorDashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Auth;
@@ -75,17 +76,7 @@ Route::middleware(['auth'])->prefix('ehscefa')->name('ehscefa.')->group(function
 
 // 3. Grupo Instructor
 Route::middleware(['auth'])->prefix('instructor')->name('instructor.')->group(function () {
-    Route::get('/dashboard', function () {
-        $user = Auth::user();
-        $roleCode = $user->role ? $user->role->code : null;
-        $roleId = $user->role_id;
-
-        if ($roleCode !== 'INSTRUCTOR' && $roleId != 3 && $roleCode !== 'ADMIN' && $roleId != 1) {
-            return redirect()->route('dashboard');
-        }
-
-        return view('instructor.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [InstructorDashboardController::class, 'index'])->name('dashboard');
 });
 
 Route::middleware('auth')->group(function () {
