@@ -5,9 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Ehs\EHSController;
 use App\Http\Controllers\Ehs\ContingenciaController;
 use App\Http\Controllers\UsuarioController;
-use App\Http\Controllers\Ehs\HistorialController;
-use App\Http\Controllers\Ehs\ReporteController;
-use App\Http\Controllers\Ehs\PredictivoController;
+use App\Http\Controllers\Admin\NodoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -58,9 +56,15 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
         return view('admin.dashboard');
     })->name('dashboard');
-
     Route::get('/nodos', [NodoController::class, 'index'])->name('nodos');
     Route::post('/nodos/asignar-ambiente', [NodoController::class, 'asignarAmbiente'])->name('nodos.asignar-ambiente');
+
+    // Gestión de usuarios
+    Route::get('/usuarios/crear', [\App\Http\Controllers\Admin\UsuarioController::class, 'create'])->name('usuarios.create');
+    Route::post('/usuarios/crear', [\App\Http\Controllers\Admin\UsuarioController::class, 'store'])->name('usuarios.store');
+    Route::get('/usuarios', [\App\Http\Controllers\Admin\UsuarioController::class, 'index'])->name('usuarios.index');
+    Route::put('/usuarios/{usuario}', [\App\Http\Controllers\Admin\UsuarioController::class, 'update'])->name('usuarios.update');
+    Route::delete('/usuarios/{usuario}', [\App\Http\Controllers\Admin\UsuarioController::class, 'destroy'])->name('usuarios.destroy');
 });
 
 // 2. Grupo SST / EHS CEFA
