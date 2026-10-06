@@ -51,6 +51,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AirSense CEFA - Monitoreo Inteligente de Calidad del Aire | SENA</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('images/logo.png') }}">
+
     <!-- Bootstrap 5.3.3 CSS Oficial -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     
