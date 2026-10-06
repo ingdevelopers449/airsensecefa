@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AsignacionController;
 use App\Http\Controllers\Admin\NodoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsuarioController;
@@ -56,6 +57,11 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     Route::get('/nodos', [NodoController::class, 'index'])->name('nodos');
     Route::post('/nodos/asignar-ambiente', [NodoController::class, 'asignarAmbiente'])->name('nodos.asignar-ambiente');
+
+    // Asignación de Ambientes a Instructores
+    Route::get('/asignaciones', [AsignacionController::class, 'index'])->name('asignaciones.index');
+    Route::post('/asignaciones', [AsignacionController::class, 'store'])->name('asignaciones.store');
+    Route::delete('/asignaciones/{id}', [AsignacionController::class, 'destroy'])->name('asignaciones.destroy');
 });
 
 // 2. Grupo SST / EHS CEFA
