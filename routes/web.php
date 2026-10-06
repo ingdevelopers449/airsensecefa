@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\NodoController;
-use App\Http\Controllers\InstructorDashboardController;
+use App\Http\Controllers\Instructor\InstructorDashboardController;
+use App\Http\Controllers\Instructor\InstructorPredictivoController;
+use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Ehs\EHSController;
 use App\Http\Controllers\Ehs\ContingenciaController;
@@ -101,6 +103,7 @@ Route::middleware(['auth'])->prefix('ehscefa')->name('ehscefa.')->group(function
 // 3. Grupo Instructor
 Route::middleware(['auth'])->prefix('instructor')->name('instructor.')->group(function () {
     Route::get('/dashboard', [InstructorDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/predictivo', [InstructorPredictivoController::class, 'index'])->name('predictivo.index');
 });
 
 Route::middleware('auth')->group(function () {
