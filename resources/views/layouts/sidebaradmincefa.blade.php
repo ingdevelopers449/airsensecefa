@@ -74,17 +74,17 @@
                             <i class="fas fa-chevron-down text-[10px] transition-transform duration-200" :class="{ 'rotate-180': open }"></i>
                         </button>
                         <div x-show="open" x-collapse x-cloak class="pl-6 pr-2 py-1 space-y-1 border-l-2 border-[#003B5C] ml-4 mt-1">
-                            <a href="" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-[13px] font-medium text-decoration-none transition-all duration-150 {{ request()->routeIs('usuarios.create') ? 'bg-[#39A900] text-white font-bold shadow-sm' : 'text-slate-300 hover:text-white hover:bg-white/10' }}">
+                            <a href="#" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-[13px] font-medium text-decoration-none transition-all duration-150 {{ request()->routeIs('usuarios.create') ? 'bg-[#39A900] text-white font-bold shadow-sm' : 'text-slate-300 hover:text-white hover:bg-white/10' }}">
                                 <i class="fas fa-user-plus text-[11px] text-[#39A900]"></i>
                                 <span>Registrar Usuario</span>
                             </a>
-                            <a href="" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-[13px] font-medium text-decoration-none transition-all duration-150 {{ request()->routeIs('gusuarios.listausuario') ? 'bg-[#39A900] text-white font-bold shadow-sm' : 'text-slate-300 hover:text-white hover:bg-white/10' }}">
+                            <a href="#" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-[13px] font-medium text-decoration-none transition-all duration-150 {{ request()->routeIs('gusuarios.listausuario') ? 'bg-[#39A900] text-white font-bold shadow-sm' : 'text-slate-300 hover:text-white hover:bg-white/10' }}">
                                 <i class="fas fa-list text-[11px] text-[#39A900]"></i>
                                 <span>Listado de Usuarios</span>
                             </a>
                         </div>
 
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('asignaciones.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="#" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('asignaciones.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-chalkboard-teacher w-4 text-center text-[#39A900]"></i>
                             <span>Asignar Ambientes</span>
                         </a>
@@ -94,7 +94,7 @@
                     <div class="space-y-1">
                         <p class="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">Configuración & IoT</p>
 
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('umbrales.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="#" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('umbrales.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-sliders-h w-4 text-center text-[#39A900]"></i>
                             <span>Umbrales de Alerta</span>
                         </a>
@@ -104,12 +104,12 @@
                             <span>Nodos IoT (ESP32)</span>
                         </a>
 
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('conectividad.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="#" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('conectividad.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-wifi w-4 text-center text-[#39A900]"></i>
                             <span>Monitor Conectividad</span>
                         </a>
 
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ubicaciones.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="#" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ubicaciones.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-map-marker-alt w-4 text-center text-[#39A900]"></i>
                             <span>Ubicación de Nodos</span>
                         </a>
@@ -119,12 +119,12 @@
                     <div class="space-y-1">
                         <p class="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">Auditoría & Seguridad</p>
 
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('auditoria.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="#" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('auditoria.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-history w-4 text-center text-[#39A900]"></i>
                             <span>Log de Auditoría</span>
                         </a>
 
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('reportes.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="#" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('reportes.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-file-pdf w-4 text-center text-[#39A900]"></i>
                             <span>Reportes Protegidos</span>
                         </a>
@@ -134,7 +134,7 @@
                     <div class="space-y-1">
                         <p class="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">Inteligencia Artificial</p>
 
-                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('predictivo.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="#" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('predictivo.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-brain w-4 text-center text-[#39A900]"></i>
                             <span>Módulo Predictivo</span>
                         </a>

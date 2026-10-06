@@ -53,7 +53,7 @@
                  @click="filtro = 'cambio_ubicacion'">
                 Cambio de ubicación
                 <span class="numero-filtro">
-                    1
+                    {{ $locationChangedCount }}
                 </span>
             </div>
 
@@ -75,7 +75,7 @@
         @forelse ($nodes as $node)
 
             @php
-                $isLocationChanged = ($node->device_uid === 'ESP-002');
+                $isLocationChanged = (bool) ($node->location_changed ?? false);
                 $isUnregistered = ($node->environment_id === null);
                 $isOffline = ($node->connectivity_status === 'offline');
             @endphp
@@ -121,7 +121,7 @@
                         </div>
 
                         <div class="datos-nodo-sub">
-                            {{ $node->device_uid }} · Token: ASCE-{{ substr(md5($node->device_uid), 0, 4) }}-•••• · {{ $node->environment?->description ?? 'Agropecuaria' }}
+                            {{ $node->device_uid }} · Token: ASCE-{{ substr(md5($node->device_uid), 0, 4) }}-•••• · {{ $node->environment?->description ?? ($node->environment?->name ?? 'Sin ubicación') }}
                         </div>
                     </div>
 
@@ -133,11 +133,11 @@
                     <div class="coordenada-box">
                         <div class="coordenada-item">
                             <small>Latitud</small>
-                            <strong>{{ number_format($node->last_reported_latitude ?? 2.92780, 5) }}</strong>
+                            <strong>{{ $node->last_reported_latitude !== null ? number_format($node->last_reported_latitude, 5) : 'N/A' }}</strong>
                         </div>
                         <div class="coordenada-item">
                             <small>Longitud</small>
-                            <strong>{{ number_format($node->last_reported_longitude ?? -75.2810, 4) }}</strong>
+                            <strong>{{ $node->last_reported_longitude !== null ? number_format($node->last_reported_longitude, 4) : 'N/A' }}</strong>
                         </div>
                     </div>
 
@@ -255,7 +255,7 @@
                                 <div class="row g-3">
                                     <div class="col-md-6 text-start">
                                         <label class="form-label font-semibold text-slate-700">Nombre del lugar</label>
-                                        <input type="text" name="name" class="form-control rounded-3 py-2" value="{{ $node->name ?? 'Hangar de ganadería' }}">
+                                        <input type="text" name="name" class="form-control rounded-3 py-2" value="{{ $node->name ?? '' }}" placeholder="Ej. Hangar de ganadería">
                                     </div>
 
                                     <div class="col-md-6 text-start">
