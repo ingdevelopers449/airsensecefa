@@ -14,13 +14,7 @@
         </div>
     </div>
 
-    <!-- MENSAJE DE ÉXITO AL GUARDAR AMBIENTE -->
-    @if (session('success'))
-        <div class="alerta-exito">
-            <i class="fas fa-check-circle"></i>
-            <span>{{ session('success') }}</span>
-        </div>
-    @endif
+
 
     <!-- FILTROS Y BUSCADOR -->
     <div class="herramientas-nodos">

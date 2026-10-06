@@ -9,18 +9,11 @@
     <!-- ENCABEZADO SUPERIOR -->
     <div class="encabezado-infraestructura">
         <div>
-            <h1 class="titulo-infra">Asignación de Ambientes a Instructores</h1>
-            <p class="desc-infra">Asigna y vincula a los docentes con sus aulas de formación correspondientes.</p>
+            <h1 class="titulo-infra">Asignación de Ambientes</h1>
         </div>
     </div>
 
-    <!-- MENSAJE DE ÉXITO -->
-    @if (session('success'))
-        <div class="alerta-exito">
-            <i class="fas fa-check-circle"></i>
-            <span>{{ session('success') }}</span>
-        </div>
-    @endif
+
 
     <!-- FILTROS Y BUSCADOR -->
     <div class="herramientas-nodos">
@@ -135,13 +128,9 @@
                     </div>
 
                     @if ($hasEnvironment)
-                        <form action="{{ route('admin.asignaciones.destroy', $assignment->id) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Desea desvincular este ambiente del instructor?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn-registrar-cambio text-danger border-danger" title="Finalizar asignación">
-                                Desvincular
-                            </button>
-                        </form>
+                        <button type="button" class="btn-registrar-cambio text-danger border-danger" data-bs-toggle="modal" data-bs-target="#modalDesvincular{{ $assignment->id }}" title="Finalizar asignación">
+                            Desvincular
+                        </button>
                     @endif
 
                     <button type="button" class="btn-editar-nodo-circle" data-bs-toggle="modal" data-bs-target="#modalAsignarInstructor{{ $instructor->id }}" title="Asignar / Cambiar Ambiente">
@@ -219,6 +208,49 @@
                     </div>
                 </div>
             </div>
+
+            <!-- MODAL BOOTSTRAP 5: CONFIRMAR DESVINCULACIÓN -->
+            @if ($hasEnvironment)
+                <div class="modal fade" id="modalDesvincular{{ $assignment->id }}" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content modal-custom-ref shadow-lg">
+                            <div class="modal-custom-header bg-rose-50">
+                                <div>
+                                    <div class="modal-custom-sub text-rose-600">CONFIRMAR DESVINCULACIÓN</div>
+                                    <h2 class="modal-custom-title text-slate-800">{{ $instructor->name }}</h2>
+                                </div>
+                                <button type="button" class="btn-close-modal-circle" data-bs-dismiss="modal" aria-label="Cerrar">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+
+                            <form action="{{ route('admin.asignaciones.destroy', $assignment->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+
+                                <div class="modal-body px-4 py-3 text-start">
+                                    <div class="d-flex align-items-center gap-3 p-3 bg-rose-50/60 rounded-3 border border-rose-100 mb-3">
+                                        <div class="rounded-circle bg-rose-100 text-rose-600 d-flex align-items-center justify-content-center flex-shrink-0" style="width: 44px; height: 44px;">
+                                            <i class="fas fa-exclamation-triangle fs-5"></i>
+                                        </div>
+                                        <div>
+                                            <strong class="d-block text-slate-800 fs-6">¿Desvincular ambiente de formación?</strong>
+                                            <p class="text-slate-600 small m-0">El instructor dejará de tener asignada el aula <strong>{{ $assignment->environment?->name }}</strong>.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer border-0 px-4 pt-2 pb-3 justify-content-end gap-2">
+                                    <button type="button" class="btn-descartar-modal" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn-confirmar-modal bg-rose-600 hover:bg-rose-700 text-white">
+                                        <i class="fas fa-unlink me-1"></i> Sí, desvincular
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            @endif
 
         @empty
 

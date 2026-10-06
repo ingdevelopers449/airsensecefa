@@ -199,25 +199,35 @@
             <!-- Alert Toast Notifications & Content Canvas -->
             <main class="flex-1 p-4 p-lg-6 max-w-7xl w-full mx-auto">
                 @if(session('success'))
-                    <div class="alert alert-success d-flex align-items-center justify-content-between rounded-4 shadow-sm mb-4" role="alert">
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="rounded-circle bg-success text-white d-flex align-items-center justify-center p-2" style="width: 32px; height: 32px;">
-                                <i class="fas fa-check text-xs"></i>
-                            </div>
-                            <span class="fw-medium small">{{ session('success') }}</span>
-                        </div>
-                    </div>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            Swal.fire({
+                                toast: true,
+                                position: 'top-end',
+                                icon: 'success',
+                                title: '{{ session('success') }}',
+                                showConfirmButton: false,
+                                timer: 3500,
+                                timerProgressBar: true
+                            });
+                        });
+                    </script>
                 @endif
 
                 @if(session('error'))
-                    <div class="alert alert-danger d-flex align-items-center justify-content-between rounded-4 shadow-sm mb-4" role="alert">
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="rounded-circle bg-danger text-white d-flex align-items-center justify-content-center p-2" style="width: 32px; height: 32px;">
-                                <i class="fas fa-exclamation-triangle text-xs"></i>
-                            </div>
-                            <span class="fw-medium small">{{ session('error') }}</span>
-                        </div>
-                    </div>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            Swal.fire({
+                                toast: true,
+                                position: 'top-end',
+                                icon: 'error',
+                                title: '{{ session('error') }}',
+                                showConfirmButton: false,
+                                timer: 4000,
+                                timerProgressBar: true
+                            });
+                        });
+                    </script>
                 @endif
 
                 @yield('content')
