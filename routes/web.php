@@ -13,7 +13,7 @@ use App\Http\Controllers\Ehs\PredictivoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+Route::get('/', function () {   
     if (Auth::check()) {
         $user = Auth::user();
         $roleCode = $user->role ? $user->role->code : null;

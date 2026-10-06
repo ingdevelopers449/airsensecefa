@@ -36,7 +36,7 @@ class UsuarioController extends Controller
         return view('admin.gusuarios.listauser', compact('usuarios'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
         $usuario = \App\Models\User::findOrFail($id);
 
@@ -55,11 +55,11 @@ class UsuarioController extends Controller
         return redirect()->route('admin.usuarios.index')->with('success', 'Usuario actualizado correctamente.');
     }
 
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $usuario = \App\Models\User::findOrFail($id);
         // Avoid deleting the current authenticated user
-        if (auth()->id() == $usuario->id) {
+        if (\Illuminate\Support\Facades\Auth::id() == $usuario->id) {
             return redirect()->route('admin.usuarios.index')->with('error', 'No puedes eliminar tu propio usuario.');
         }
 
