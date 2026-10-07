@@ -2,12 +2,19 @@
 
 use App\Http\Controllers\Admin\AsignacionController;
 use App\Http\Controllers\Admin\NodoController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Instructor\InstructorDashboardController;
+use App\Http\Controllers\Instructor\InstructorPredictivoController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Ehs\EHSController;
+use App\Http\Controllers\Ehs\ContingenciaController;
+use App\Http\Controllers\Ehs\ReporteController;
+use App\Http\Controllers\Ehs\HistorialController;
+use App\Http\Controllers\Ehs\PredictivoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+Route::get('/', function () {   
     if (Auth::check()) {
         $user = Auth::user();
         $roleCode = $user->role ? $user->role->code : null;
@@ -54,7 +61,6 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
         return view('admin.dashboard');
     })->name('dashboard');
-
     Route::get('/nodos', [NodoController::class, 'index'])->name('nodos');
     Route::post('/nodos/asignar-ambiente', [NodoController::class, 'asignarAmbiente'])->name('nodos.asignar-ambiente');
 
@@ -62,10 +68,30 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/asignaciones', [AsignacionController::class, 'index'])->name('asignaciones.index');
     Route::post('/asignaciones', [AsignacionController::class, 'store'])->name('asignaciones.store');
     Route::delete('/asignaciones/{id}', [AsignacionController::class, 'destroy'])->name('asignaciones.destroy');
+    // Gestión de usuarios
+    Route::get('/usuarios/crear', [UsuarioController::class, 'create'])->name('usuarios.create');
+    Route::post('/usuarios/crear', [UsuarioController::class, 'store'])->name('usuarios.store');
+    Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
+    Route::put('/usuarios/{usuario}', [UsuarioController::class, 'update'])->name('usuarios.update');
+    Route::delete('/usuarios/{usuario}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');
 });
 
 // 2. Grupo SST / EHS CEFA
 Route::middleware(['auth'])->prefix('ehscefa')->name('ehscefa.')->group(function () {
+
+    // Ruta del Módulo Estado de Hardware
+    Route::get('/hardware/nodo', [EHSController::class, 'estadoHardware'])->name('hardware.nodo');
+    Route::get('/contingencias', [ContingenciaController::class, 'index'])->name('contingencias.index');
+    Route::post('/contingencias', [ContingenciaController::class, 'store'])->name('contingencias.store');
+    Route::put('/contingencias/{id}', [ContingenciaController::class, 'update'])->name('contingencias.update');
+    Route::delete('/contingencias/{id}', [ContingenciaController::class, 'destroy'])->name('contingencias.destroy');
+    Route::get('/reportes', [ReporteController::class, 'index'])->name('reportes.index');
+    Route::get('/reportes/imprimir-pdf', [ReporteController::class, 'imprimirPdf'])->name('reportes.pdf');
+    Route::get('/reportes/exportar-csv', [ReporteController::class, 'exportarCsv'])->name('reportes.csv');
+
+    Route::get('/historico', [HistorialController::class, 'index'])->name('historico.index');
+    Route::get('/predictivo', [PredictivoController::class, 'index'])->name('predictivo.index');
+
     Route::get('/dashboard', function () {
         $user = Auth::user();
         $roleCode = $user->role ? $user->role->code : null;
@@ -81,17 +107,8 @@ Route::middleware(['auth'])->prefix('ehscefa')->name('ehscefa.')->group(function
 
 // 3. Grupo Instructor
 Route::middleware(['auth'])->prefix('instructor')->name('instructor.')->group(function () {
-    Route::get('/dashboard', function () {
-        $user = Auth::user();
-        $roleCode = $user->role ? $user->role->code : null;
-        $roleId = $user->role_id;
-
-        if ($roleCode !== 'INSTRUCTOR' && $roleId != 3 && $roleCode !== 'ADMIN' && $roleId != 1) {
-            return redirect()->route('dashboard');
-        }
-
-        return view('instructor.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [InstructorDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/predictivo', [InstructorPredictivoController::class, 'index'])->name('predictivo.index');
 });
 
 Route::middleware('auth')->group(function () {

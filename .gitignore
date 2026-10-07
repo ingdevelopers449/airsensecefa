@@ -29,6 +29,3 @@ Thumbs.db
 # Documentos Privados del Líder de Proyecto (Tareas)
 /docs/tareas/
 /docs/TAREAS_EQUIPO_DESARROLLO.md
-
-# Firmware ESP32 (Ignorado para mantener credenciales e IPs locales privadas)
-/docs/hardware/FIRMWARE_ESP32_AIRSENSE/FIRMWARE_ESP32_AIRSENSE.ino
