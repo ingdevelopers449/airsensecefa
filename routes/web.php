@@ -2,12 +2,10 @@
 
 use App\Http\Controllers\Admin\AsignacionController;
 use App\Http\Controllers\Admin\NodoController;
-use App\Http\Controllers\InstructorDashboardController;
 use App\Http\Controllers\Instructor\InstructorDashboardController;
 use App\Http\Controllers\Instructor\InstructorPredictivoController;
-use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\Admin\UsuarioController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\Ehs\EHSController;
 use App\Http\Controllers\Ehs\ContingenciaController;
 use App\Http\Controllers\Ehs\ReporteController;
