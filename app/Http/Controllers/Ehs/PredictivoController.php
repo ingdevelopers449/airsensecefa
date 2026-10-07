@@ -180,7 +180,7 @@ class PredictivoController extends Controller
     /**
      * Consulta DeepSeek AI con prompt en formato JSON estricto.
      */
-    private function consultarDeepSeekAI($readings, $variableType, $environment, $lastValue)
+    private function consultarDeepSeekAI(\Illuminate\Support\Collection $readings, string $variableType, mixed $environment, float $lastValue): array
     {
         $apiKey = config('services.deepseek.key') ?: env('DEEPSEEK_API_KEY');
         $baseUrl = config('services.deepseek.base_url', 'https://api.deepseek.com');
@@ -250,7 +250,7 @@ Proyecta la tendencia a +1h, +2h y +4h y responde ÚNICAMENTE este objeto JSON e
     /**
      * Fallback local en caso de desconexión.
      */
-    private function calcularRegresionLocal($readings, $lastValue, $engineName)
+    private function calcularRegresionLocal(\Illuminate\Support\Collection $readings, float $lastValue, string $engineName): array
     {
         $n = $readings->count();
         if ($n < 2) {

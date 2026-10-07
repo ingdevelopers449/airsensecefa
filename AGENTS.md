@@ -13,4 +13,7 @@
   1. `git add <archivos tocados>`
   2. `git commit -m "<mensaje descriptivo de la tarea realizada>"`
   3. `git push origin feature/nodo-gestion-ui`
+## 📋 REGLA OBLIGATORIA DE PLAN DE IMPLEMENTACIÓN PREVIO
 
+- **PROHIBIDO MODIFICAR CÓDIGO SIN PLAN Y APROBACIÓN PREVIA:** Antes de modificar, crear o eliminar cualquier archivo de código, controlador, ruta o vista en el proyecto, el agente debe **generar primero un Plan de Implementación interactivo**.
+- El agente **NUNCA** debe tocar directamente el código fuente sin que el usuario haya revisado y aprobado explícitamente el plan propuesto.
