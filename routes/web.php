@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\AsignacionController;
 use App\Http\Controllers\Admin\NodoController;
 use App\Http\Controllers\InstructorDashboardController;
+use App\Http\Controllers\Instructor\InstructorDashboardController;
+use App\Http\Controllers\Instructor\InstructorPredictivoController;
+use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\Ehs\EHSController;
@@ -62,6 +66,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/nodos', [NodoController::class, 'index'])->name('nodos');
     Route::post('/nodos/asignar-ambiente', [NodoController::class, 'asignarAmbiente'])->name('nodos.asignar-ambiente');
 
+    // Asignación de Ambientes a Instructores
+    Route::get('/asignaciones', [AsignacionController::class, 'index'])->name('asignaciones.index');
+    Route::post('/asignaciones', [AsignacionController::class, 'store'])->name('asignaciones.store');
+    Route::delete('/asignaciones/{id}', [AsignacionController::class, 'destroy'])->name('asignaciones.destroy');
     // Gestión de usuarios
     Route::get('/usuarios/crear', [\App\Http\Controllers\Admin\UsuarioController::class, 'create'])->name('usuarios.create');
     Route::post('/usuarios/crear', [\App\Http\Controllers\Admin\UsuarioController::class, 'store'])->name('usuarios.store');
@@ -108,6 +116,7 @@ Route::middleware(['auth'])->prefix('ehscefa')->name('ehscefa.')->group(function
 // 3. Grupo Instructor
 Route::middleware(['auth'])->prefix('instructor')->name('instructor.')->group(function () {
     Route::get('/dashboard', [InstructorDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/predictivo', [InstructorPredictivoController::class, 'index'])->name('predictivo.index');
 });
 
 Route::middleware('auth')->group(function () {

@@ -14,21 +14,20 @@ class NodoController extends Controller
      */
     public function index()
     { 
-    // Traemos todos los nodos junto con su ambiente
-    $nodes = Node::with('environment')->get();
+        // Traemos todos los nodos junto con su ambiente
+        $nodes = Node::with('environment')->get();
 
-    // Traemos los ambientes activos para mostrarlos en el select
-    $environments = Environment::where('is_active', true)
-        ->orderBy('name')
-        ->get();
+        // Traemos los ambientes activos para mostrarlos en el select
+        $environments = Environment::where('is_active', true)
+            ->orderBy('name')
+            ->get();
 
-    // Contadores de prueba para demostración (No registrados y Cambio de ubicación)
-    $unregisteredCount = 1;
-    $locationChangedCount = 1;
+        // Contadores dinámicos calculados directamente desde la base de datos
+        $unregisteredCount = $nodes->whereNull('environment_id')->count();
+        $locationChangedCount = $nodes->where('location_changed', true)->count();
 
-    // Enviamos las variables a la vista
-    return view('admin.nodos.index', compact('nodes', 'environments', 'unregisteredCount', 'locationChangedCount'));
-
+        // Enviamos las variables a la vista
+        return view('admin.nodos.index', compact('nodes', 'environments', 'unregisteredCount', 'locationChangedCount'));
     }
 
     /** Asigna un ambiente a un nodo. */
