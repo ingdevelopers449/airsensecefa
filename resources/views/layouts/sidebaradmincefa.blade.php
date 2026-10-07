@@ -76,11 +76,11 @@
                             <i class="fas fa-chevron-down text-[10px] transition-transform duration-200" :class="{ 'rotate-180': open }"></i>
                         </button>
                         <div x-show="open" x-collapse x-cloak class="pl-6 pr-2 py-1 space-y-1 border-l-2 border-[#003B5C] ml-4 mt-1">
-                            <a href="#" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-[13px] font-medium text-decoration-none transition-all duration-150 {{ request()->routeIs('usuarios.create') ? 'bg-[#39A900] text-white font-bold shadow-sm' : 'text-slate-300 hover:text-white hover:bg-white/10' }}">
+                            <a href="{{ route('admin.usuarios.create') }}" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-[13px] font-medium text-decoration-none transition-all duration-150 {{ request()->routeIs('admin.usuarios.create') ? 'bg-[#39A900] text-white font-bold shadow-sm' : 'text-slate-300 hover:text-white hover:bg-white/10' }}">
                                 <i class="fas fa-user-plus text-[11px] text-[#39A900]"></i>
                                 <span>Registrar Usuario</span>
                             </a>
-                            <a href="#" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-[13px] font-medium text-decoration-none transition-all duration-150 {{ request()->routeIs('gusuarios.listausuario') ? 'bg-[#39A900] text-white font-bold shadow-sm' : 'text-slate-300 hover:text-white hover:bg-white/10' }}">
+                            <a href="{{ route('admin.usuarios.index') }}" class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-[13px] font-medium text-decoration-none transition-all duration-150 {{ request()->routeIs('admin.usuarios.index') ? 'bg-[#39A900] text-white font-bold shadow-sm' : 'text-slate-300 hover:text-white hover:bg-white/10' }}">
                                 <i class="fas fa-list text-[11px] text-[#39A900]"></i>
                                 <span>Listado de Usuarios</span>
                             </a>
