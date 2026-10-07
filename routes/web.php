@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\Admin\AsignacionController;
 use App\Http\Controllers\Admin\NodoController;
+use App\Http\Controllers\InstructorDashboardController;
 use App\Http\Controllers\Instructor\InstructorDashboardController;
 use App\Http\Controllers\Instructor\InstructorPredictivoController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\Ehs\EHSController;
 use App\Http\Controllers\Ehs\ContingenciaController;
 use App\Http\Controllers\Ehs\ReporteController;
@@ -69,11 +71,17 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::post('/asignaciones', [AsignacionController::class, 'store'])->name('asignaciones.store');
     Route::delete('/asignaciones/{id}', [AsignacionController::class, 'destroy'])->name('asignaciones.destroy');
     // Gestión de usuarios
-    Route::get('/usuarios/crear', [UsuarioController::class, 'create'])->name('usuarios.create');
-    Route::post('/usuarios/crear', [UsuarioController::class, 'store'])->name('usuarios.store');
-    Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
-    Route::put('/usuarios/{usuario}', [UsuarioController::class, 'update'])->name('usuarios.update');
-    Route::delete('/usuarios/{usuario}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');
+    Route::get('/usuarios/crear', [\App\Http\Controllers\Admin\UsuarioController::class, 'create'])->name('usuarios.create');
+    Route::post('/usuarios/crear', [\App\Http\Controllers\Admin\UsuarioController::class, 'store'])->name('usuarios.store');
+    Route::get('/usuarios', [\App\Http\Controllers\Admin\UsuarioController::class, 'index'])->name('usuarios.index');
+    Route::put('/usuarios/{usuario}', [\App\Http\Controllers\Admin\UsuarioController::class, 'update'])->name('usuarios.update');
+    Route::delete('/usuarios/{usuario}', [\App\Http\Controllers\Admin\UsuarioController::class, 'destroy'])->name('usuarios.destroy');
+    // Módulos copiados de EHS
+    Route::get('/historico', [\App\Http\Controllers\Admin\HistorialController::class, 'index'])->name('historico.index');
+    Route::get('/reportes', [\App\Http\Controllers\Admin\ReporteController::class, 'index'])->name('reportes.index');
+    Route::get('/reportes/imprimir-pdf', [\App\Http\Controllers\Admin\ReporteController::class, 'imprimirPdf'])->name('reportes.pdf');
+    Route::get('/reportes/exportar-csv', [\App\Http\Controllers\Admin\ReporteController::class, 'exportarCsv'])->name('reportes.csv');
+    Route::get('/predictivo', [\App\Http\Controllers\Admin\PredictivoController::class, 'index'])->name('predictivo.index');
 });
 
 // 2. Grupo SST / EHS CEFA

@@ -65,10 +65,10 @@
                     </div>
 
                     <!-- GESTIÓN DE USUARIOS -->
-                    <div x-data="{ open: {{ request()->routeIs('usuarios.*', 'gusuarios.*') ? 'true' : 'false' }} }" class="space-y-1">
+                    <div x-data="{ open: {{ request()->routeIs('admin.usuarios.*') ? 'true' : 'false' }} }" class="space-y-1">
                         <p class="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">Personal</p>
 
-                        <button @click="open = !open" type="button" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold transition-all duration-200 {{ request()->routeIs('usuarios.*', 'gusuarios.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }} focus:outline-none">
+                        <button @click="open = !open" type="button" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold transition-all duration-200 {{ request()->routeIs('admin.usuarios.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }} focus:outline-none">
                             <div class="flex items-center gap-2.5">
                                 <i class="fas fa-users-cog w-4 text-center text-[#39A900]"></i>
                                 <span>Gestión de Usuarios</span>
@@ -121,12 +121,12 @@
                     <div class="space-y-1">
                         <p class="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">Auditoría & Seguridad</p>
 
-                        <a href="#" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('auditoria.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="{{ route('admin.historico.index') }}" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('admin.historico.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-history w-4 text-center text-[#39A900]"></i>
                             <span>Log de Auditoría</span>
                         </a>
 
-                        <a href="#" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('reportes.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="{{ route('admin.reportes.index') }}" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('admin.reportes.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-file-pdf w-4 text-center text-[#39A900]"></i>
                             <span>Reportes Protegidos</span>
                         </a>
@@ -136,7 +136,7 @@
                     <div class="space-y-1">
                         <p class="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">Inteligencia Artificial</p>
 
-                        <a href="#" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('predictivo.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                        <a href="{{ route('admin.predictivo.index') }}" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('admin.predictivo.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-brain w-4 text-center text-[#39A900]"></i>
                             <span>Módulo Predictivo</span>
                         </a>
