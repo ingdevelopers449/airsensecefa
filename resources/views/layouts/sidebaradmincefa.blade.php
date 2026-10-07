@@ -255,19 +255,11 @@
         <!-- Main Content Canvas -->
         <div class="flex-1 flex flex-col min-w-0 lg:ml-64 w-full bg-slate-50">
             <!-- Header Navbar Sticky -->
-<<<<<<< HEAD
             <header class="h-16 bg-white border-b border-slate-200 px-4 px-lg-6 flex items-center justify-between sticky top-0 z-30 shadow-sm">
                 <div class="flex items-center gap-3">
                     <h1 class="text-lg font-bold text-slate-800 font-heading hidden sm:block m-0">@yield('tituloPagina', 'Dashboard Principal')</h1>
                     <span class="badge bg-success-subtle text-success border border-success-subtle px-2.5 py-1.5 rounded-pill font-semibold">
                         <i class="bi bi-circle-fill text-success me-1" style="font-size: 8px;"></i>
-=======
-            <header class="h-16 bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-4 px-lg-6 flex items-center justify-between sticky top-0 z-30 shadow-xs">
-                <div class="flex items-center gap-3">
-                    <h1 class="text-lg font-bold text-slate-800 font-heading hidden sm:block m-0">@yield('tituloPagina', 'Dashboard Principal')</h1>
-                    <span class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/80">
-                        <span class="w-2 h-2 rounded-full bg-[#39A900] animate-pulse"></span>
->>>>>>> origin/feature/login-usuario
                         Sistema En Línea
                     </span>
                 </div>
@@ -312,7 +304,6 @@
                 </div>
             </header>
 
-<<<<<<< HEAD
             <!-- Formulario oculto de Cierre de Sesión -->
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
@@ -334,19 +325,6 @@
                             });
                         });
                     </script>
-=======
-            <!-- Alert Toast Notifications & Content Canvas -->
-            <main class="flex-1 p-4 p-lg-6 max-w-7xl w-full mx-auto">
-                @if(session('success'))
-                    <div class="alert alert-success d-flex align-items-center justify-content-between rounded-4 shadow-sm mb-4" role="alert">
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="rounded-circle bg-success text-white d-flex align-items-center justify-center p-2" style="width: 32px; height: 32px;">
-                                <i class="fas fa-check text-xs"></i>
-                            </div>
-                            <span class="fw-medium small">{{ session('success') }}</span>
-                        </div>
-                    </div>
->>>>>>> origin/feature/login-usuario
                 @endif
 
                 @if(session('error'))
