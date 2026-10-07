@@ -58,6 +58,7 @@
                     
                     <!-- Dashboard -->
                     <div>
+<<<<<<< HEAD
                         <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 text-decoration-none {{ request()->routeIs('admin.dashboard', 'dashboard') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-chart-pie text-base w-4 text-center text-[#39A900]"></i>
                             <span>Dashboard Principal</span>
@@ -69,6 +70,19 @@
                         <p class="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">Personal</p>
 
                         <button @click="open = !open" type="button" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold transition-all duration-200 {{ request()->routeIs('admin.usuarios.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }} focus:outline-none">
+=======
+                        <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all duration-200 text-decoration-none {{ request()->routeIs('admin.dashboard', 'dashboard') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                            <i class="fas fa-chart-pie text-sm w-4 text-center text-[#39A900]"></i>
+                            <span class="text-sm">Dashboard Principal</span>
+                        </a>
+                    </div>
+
+                    <!-- CATÁLOGOS -->
+                    <div x-data="{ open: {{ request()->routeIs('usuarios.*', 'gusuarios.*') ? 'true' : 'false' }} }" class="space-y-1">
+                        <p class="px-3 text-[10.5px] font-extrabold text-slate-400 uppercase tracking-wider mb-1.5">Gestión y Catálogos</p>
+
+                        <button @click="open = !open" type="button" class="w-full flex items-center justify-between px-3.5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 {{ request()->routeIs('usuarios.*', 'gusuarios.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }} focus:outline-none">
+>>>>>>> origin/feature/login-usuario
                             <div class="flex items-center gap-2.5">
                                 <i class="fas fa-users-cog w-4 text-center text-[#39A900]"></i>
                                 <span>Gestión de Usuarios</span>
@@ -139,11 +153,64 @@
                         <a href="{{ route('admin.predictivo.index') }}" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('admin.predictivo.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
                             <i class="fas fa-brain w-4 text-center text-[#39A900]"></i>
                             <span>Módulo Predictivo</span>
+=======
+                        <p class="px-3 text-[10.5px] font-extrabold text-slate-400 uppercase tracking-wider mb-1.5">Operaciones Comercial</p>
+
+                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-200 hover:text-white hover:bg-white/10 text-decoration-none">
+                            <i class="fas fa-cart-plus text-[#39A900] w-4 text-center"></i>
+                            <span>Nueva Compra Entrada</span>
+                        </a>
+
+                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('compras.index') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                            <i class="fas fa-file-invoice-dollar w-4 text-center text-[#39A900]"></i>
+                            <span>Historial Compras</span>
+                        </a>
+
+                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-amber-300 hover:text-amber-200 hover:bg-white/10 text-decoration-none">
+                            <i class="fas fa-cash-register w-4 text-center"></i>
+                            <span>Nueva Venta (POS)</span>
+                        </a>
+
+                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ventas.index') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                            <i class="fas fa-shopping-basket w-4 text-center text-[#39A900]"></i>
+                            <span>Historial Ventas</span>
+                        </a>
+                    </div>
+
+                    <!-- REPORTES & POST-VENTA -->
+                    <div class="space-y-1">
+                        <p class="px-3 text-[10.5px] font-extrabold text-slate-400 uppercase tracking-wider mb-1.5">Reportes & Post-Venta</p>
+
+                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('reportes.ventas') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                            <i class="fas fa-chart-line w-4 text-center text-[#39A900]"></i>
+                            <span>Reporte de Ventas</span>
+                        </a>
+
+                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('reportes.ganancias') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                            <i class="fas fa-calculator w-4 text-center text-[#39A900]"></i>
+                            <span>Resumen Ganancias</span>
+                        </a>
+
+                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('devoluciones.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                            <i class="fas fa-undo w-4 text-center text-[#39A900]"></i>
+                            <span>Devoluciones</span>
+                        </a>
+
+                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('garantias.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                            <i class="fas fa-shield-alt w-4 text-center text-[#39A900]"></i>
+                            <span>Garantías</span>
+                        </a>
+
+                        <a href="" class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('configuracion.bitacora') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
+                            <i class="fas fa-history w-4 text-center text-[#39A900]"></i>
+                            <span>Bitácora & Backup</span>
+>>>>>>> origin/feature/login-usuario
                         </a>
                     </div>
                 </div>
             </div>
 
+<<<<<<< HEAD
             <!-- Footer User Badge - Bootstrap 5 Clean -->
             <div class="p-3 border-top border-secondary-subtle" style="background-color: #001522;">
                 <div class="d-flex align-items-center justify-content-between p-2 rounded-3 border" style="background-color: #002237; border-color: rgba(255,255,255,0.1) !important;">
@@ -169,6 +236,17 @@
                         <button type="button" onclick="confirmarCierreSesion()" class="btn btn-sm text-white-50 hover-text-danger p-1" title="Cerrar Sesión">
                             <i class="bi bi-box-arrow-right text-rose-400" style="font-size: 14px;"></i>
                         </button>
+=======
+            <!-- Footer User Badge -->
+            <div class="p-3.5 bg-[#001522] border-t border-[#003B5C]/70">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-xl bg-[#39A900] text-white flex items-center justify-center font-bold text-base shadow-sm">
+                        {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-xs font-semibold text-white truncate m-0">{{ Auth::user()->name }}</p>
+                        <p class="text-[10.5px] text-[#39A900] font-medium m-0">Administrador General</p>
+>>>>>>> origin/feature/login-usuario
                     </div>
                 </div>
             </div>
@@ -177,11 +255,19 @@
         <!-- Main Content Canvas -->
         <div class="flex-1 flex flex-col min-w-0 lg:ml-64 w-full bg-slate-50">
             <!-- Header Navbar Sticky -->
+<<<<<<< HEAD
             <header class="h-16 bg-white border-b border-slate-200 px-4 px-lg-6 flex items-center justify-between sticky top-0 z-30 shadow-sm">
                 <div class="flex items-center gap-3">
                     <h1 class="text-lg font-bold text-slate-800 font-heading hidden sm:block m-0">@yield('tituloPagina', 'Dashboard Principal')</h1>
                     <span class="badge bg-success-subtle text-success border border-success-subtle px-2.5 py-1.5 rounded-pill font-semibold">
                         <i class="bi bi-circle-fill text-success me-1" style="font-size: 8px;"></i>
+=======
+            <header class="h-16 bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-4 px-lg-6 flex items-center justify-between sticky top-0 z-30 shadow-xs">
+                <div class="flex items-center gap-3">
+                    <h1 class="text-lg font-bold text-slate-800 font-heading hidden sm:block m-0">@yield('tituloPagina', 'Dashboard Principal')</h1>
+                    <span class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/80">
+                        <span class="w-2 h-2 rounded-full bg-[#39A900] animate-pulse"></span>
+>>>>>>> origin/feature/login-usuario
                         Sistema En Línea
                     </span>
                 </div>
@@ -226,6 +312,7 @@
                 </div>
             </header>
 
+<<<<<<< HEAD
             <!-- Formulario oculto de Cierre de Sesión -->
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
@@ -247,6 +334,19 @@
                             });
                         });
                     </script>
+=======
+            <!-- Alert Toast Notifications & Content Canvas -->
+            <main class="flex-1 p-4 p-lg-6 max-w-7xl w-full mx-auto">
+                @if(session('success'))
+                    <div class="alert alert-success d-flex align-items-center justify-content-between rounded-4 shadow-sm mb-4" role="alert">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="rounded-circle bg-success text-white d-flex align-items-center justify-center p-2" style="width: 32px; height: 32px;">
+                                <i class="fas fa-check text-xs"></i>
+                            </div>
+                            <span class="fw-medium small">{{ session('success') }}</span>
+                        </div>
+                    </div>
+>>>>>>> origin/feature/login-usuario
                 @endif
 
                 @if(session('error'))
