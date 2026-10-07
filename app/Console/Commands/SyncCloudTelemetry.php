@@ -7,6 +7,7 @@ use App\Models\Node;
 use App\Models\SensorMeasurement;
 use App\Models\SensorReading;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 
 class SyncCloudTelemetry extends Command
@@ -64,8 +65,7 @@ class SyncCloudTelemetry extends Command
                     ['device_uid' => $nodeData['device_uid']],
                     [
                         'name' => $nodeData['name'] ?? 'Nodo ESP32 (Sincronizado)',
-                        'mac_address' => $nodeData['mac_address'] ?? ('MAC_' . substr(md5($nodeData['device_uid']), 0, 6)),
-                        'device_token' => $nodeData['device_token'] ?? 'token_sync_auto',
+                        'device_token_hash' => Hash::make($nodeData['device_token'] ?? 'token_sync_auto'),
                         'connectivity_status' => 'online',
                         'last_seen_at' => now(),
                     ]
@@ -81,8 +81,8 @@ class SyncCloudTelemetry extends Command
                 ];
 
                 if ($reportedLat && $reportedLng) {
-                    $updateData['latitude'] = $reportedLat;
-                    $updateData['longitude'] = $reportedLng;
+                    $updateData['last_reported_latitude'] = $reportedLat;
+                    $updateData['last_reported_longitude'] = $reportedLng;
                 }
 
                 $node->update($updateData);
