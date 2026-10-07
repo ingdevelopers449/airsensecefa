@@ -32,6 +32,8 @@ class IoTTelemetryController extends Controller
         $validator = Validator::make($request->all(), [
             'device_message_id' => 'nullable|string|max:180',
             'measured_at' => 'nullable|date',
+            'latitude' => 'nullable|numeric|between:-90,90',
+            'longitude' => 'nullable|numeric|between:-180,180',
             'measurements' => 'required|array|min:1',
             'measurements.*.variable_type' => 'required|string|in:co2,temperature,humidity',
             'measurements.*.value' => 'required|numeric',
@@ -89,12 +91,19 @@ class IoTTelemetryController extends Controller
                     ]);
                 }
 
-                // 3. Actualizar estado y timestamps del nodo ESP32
-                $node->update([
+                // 3. Actualizar estado, timestamps y ubicación del nodo ESP32
+                $nodeDataToUpdate = [
                     'connectivity_status' => 'online',
                     'last_seen_at' => now(),
                     'last_keep_alive_at' => now(),
-                ]);
+                ];
+
+                if ($request->filled('latitude') && $request->filled('longitude')) {
+                    $nodeDataToUpdate['latitude'] = $request->input('latitude');
+                    $nodeDataToUpdate['longitude'] = $request->input('longitude');
+                }
+
+                $node->update($nodeDataToUpdate);
 
                 return $sensorReading;
             });
@@ -142,6 +151,25 @@ class IoTTelemetryController extends Controller
             'message' => 'Keep-alive recibido correctamente.',
             'device_uid' => $node->device_uid,
             'timestamp' => now()->toDateTimeString()
+        ], Response::HTTP_OK);
+    }
+
+    /**
+     * Retorna las últimas lecturas registradas para consumo de sincronización local o mapas.
+     */
+    public function latestTelemetry(Request $request): Response
+    {
+        $limit = min((int) $request->query('limit', 20), 100);
+
+        $readings = SensorReading::with(['node', 'environment', 'measurements'])
+            ->orderBy('id', 'desc')
+            ->limit($limit)
+            ->get();
+
+        return response()->json([
+            'status' => 'success',
+            'count' => $readings->count(),
+            'data' => $readings
         ], Response::HTTP_OK);
     }
 }

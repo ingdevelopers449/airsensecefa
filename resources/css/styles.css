@@ -175,6 +175,7 @@ body {
     }
 }
 
+<<<<<<< HEAD
 /* =========================================================
    Inicio de estilos para Nodos IoT (resources/views/admin/nodos/index.blade.php)
    ========================================================= */
@@ -219,10 +220,30 @@ body {
     gap: 15px;
     margin-bottom: 25px;
     align-items: stretch;
+=======
+/* ================================
+   GESTIÓN DE NODOS IOT
+================================ */
+
+.contenedor-nodos {
+    padding: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.herramientas-nodos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 24px;
+>>>>>>> 172c3e964c313ed40735e8c4453e7bd49961d20c
 }
 
 .filtros-nodos {
     display: flex;
+<<<<<<< HEAD
     background: #f3f6f5;
     border-radius: 12px;
     overflow: hidden;
@@ -396,6 +417,413 @@ body {
     border-radius: 12px;
     background: white;
     color: #53605c;
+=======
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filtro-nodo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: #f1f5f9;
+    color: #475569;
+    border-radius: 999px;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.filtro-nodo:hover {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+
+.filtro-nodo.activo {
+    background: rgba(57, 169, 0, 0.12);
+    color: var(--sena-green, #39A900);
+    border-color: rgba(57, 169, 0, 0.3);
+    font-weight: 700;
+}
+
+.numero-filtro {
+    background: #ffffff;
+    color: #475569;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.filtro-nodo.activo .numero-filtro {
+    background: var(--sena-green, #39A900);
+    color: #ffffff;
+}
+
+.buscador-nodo input {
+    padding: 9px 16px;
+    font-size: 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    outline: none;
+    min-width: 260px;
+    transition: all 0.2s ease;
+    background: #ffffff;
+}
+
+.buscador-nodo input:focus {
+    border-color: var(--sena-green, #39A900);
+    box-shadow: 0 0 0 3px rgba(57, 169, 0, 0.15);
+}
+
+.tabla-nodos {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.tabla-contenedor {
+    width: 100%;
+    overflow-x: auto;
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.tabla-contenedor table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-contenedor thead {
+    background: #f8fafc;
+}
+
+.tabla-contenedor th {
+    padding: 16px 18px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+    color: #475569;
+    border-bottom: 1px solid #e5e7eb;
+    white-space: nowrap;
+}
+
+.tabla-contenedor td {
+    padding: 17px 18px;
+    font-size: 14px;
+    color: #334155;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.tabla-contenedor tbody tr {
+    transition: background 0.2s ease;
+}
+
+.tabla-contenedor tbody tr:hover {
+    background: #f8fafc;
+}
+
+.device-uid {
+    font-weight: 600;
+    color: #4f46e5;
+}
+
+.ambiente-nodo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ambiente-nodo i {
+    color: #6366f1;
+}
+
+.badge-conectividad {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.badge-conectividad.online {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.badge-conectividad.offline {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.badge-conectividad.unknown {
+    background: #e5e7eb;
+    color: #4b5563;
+}
+
+.punto-estado {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.ultima-transmision {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ultima-transmision i {
+    color: #64748b;
+}
+
+.sin-transmision {
+    color: #94a3b8;
+    font-style: italic;
+}
+
+.tabla-vacia {
+    text-align: center !important;
+    padding: 45px !important;
+}
+
+.tabla-vacia i {
+    font-size: 32px;
+    color: #94a3b8;
+}
+
+.tabla-vacia p {
+    margin-top: 10px;
+    color: #64748b;
+}
+
+/* Botón Asignar Ambiente */
+.btn-asignar {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: #e0e7ff;
+    color: #4338ca;
+    border: 1px solid #c7d2fe;
+    border-radius: 8px;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-asignar:hover {
+    background: #4338ca;
+    color: #ffffff;
+    border-color: #4338ca;
+}
+
+/* Alertas de Éxito / Error */
+.alerta-exito {
+    padding: 12px 18px;
+    background: #dcfce7;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ================================
+   NUEVO DISEÑO DE LISTA / TARJETAS DE NODOS (SEGÚN REFERENCIA)
+================================ */
+
+.encabezado-infraestructura {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.subtitulo-infra {
+    font-size: 11.5px;
+    font-weight: 800;
+    color: #39A900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.titulo-infra {
+    font-size: 26px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 4px 0;
+}
+
+.desc-infra {
+    font-size: 13.5px;
+    color: #64748b;
+    margin: 0;
+}
+
+.btn-registrar-nodo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #00875a;
+    color: #ffffff !important;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 14px;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 135, 90, 0.2);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.btn-registrar-nodo:hover {
+    background: #00704a;
+    box-shadow: 0 6px 16px rgba(0, 135, 90, 0.3);
+}
+
+.lista-nodos-cards {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+}
+
+.card-nodo-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid #f1f5f9;
+    transition: background 0.2s ease;
+}
+
+.card-nodo-item:last-child {
+    border-bottom: none;
+}
+
+.card-nodo-item:hover {
+    background: #f8fafc;
+}
+
+.info-izquierda-nodo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.icono-nodo-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.icono-nodo-box.online {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.icono-nodo-box.offline {
+    background: #f1f5f9;
+    color: #94a3b8;
+}
+
+.nombre-nodo-titulo {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.badge-estado-pill {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.badge-estado-pill.online {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.badge-estado-pill.cambio {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.badge-estado-pill.offline {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+.datos-nodo-sub {
+    font-size: 13px;
+    color: #64748b;
+    margin-top: 4px;
+}
+
+.info-derecha-nodo {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.coordenada-box {
+    text-align: right;
+    display: flex;
+    gap: 16px;
+}
+
+.coordenada-item small {
+    display: block;
+    font-size: 11px;
+    color: #94a3b8;
+    margin-bottom: 2px;
+}
+
+.coordenada-item strong {
+    font-size: 14px;
+    color: #1e293b;
+    font-weight: 700;
+}
+
+.btn-editar-nodo-circle {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    color: #475569;
+>>>>>>> 172c3e964c313ed40735e8c4453e7bd49961d20c
     display: flex;
     align-items: center;
     justify-content: center;
@@ -403,6 +831,7 @@ body {
     transition: all 0.2s ease;
 }
 
+<<<<<<< HEAD
 .editar-nodo:hover {
     background: #f3f7f5;
     border-color: #39A900;
@@ -459,3 +888,198 @@ body {
    ========================================================= */
 
 
+=======
+.btn-editar-nodo-circle:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+    border-color: #cbd5e1;
+}
+
+.btn-registrar-cambio {
+    padding: 8px 16px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    color: #334155;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-registrar-cambio:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+/* ================================
+   ESTILOS DE MODALES (SEGUNDA REFERENCIA VISUAL)
+================================ */
+
+.modal-custom-ref {
+    border-radius: 28px !important;
+    padding: 12px;
+    border: none !important;
+}
+
+.modal-custom-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 24px 28px 12px 28px;
+    border: none;
+}
+
+.modal-custom-sub {
+    font-size: 11px;
+    font-weight: 800;
+    color: #00875a;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.modal-custom-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+}
+
+.btn-close-modal-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-close-modal-circle:hover {
+    background: #f1f5f9;
+}
+
+.box-nodo-token-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+}
+
+.badge-token-valido {
+    background: #dcfce7;
+    color: #166534;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.banner-info-blue {
+    background: #eff6ff;
+    color: #1e40af;
+    border-radius: 16px;
+    padding: 14px 18px;
+    font-size: 13.5px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.grid-comparacion-ubicacion {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.card-ubicacion-box {
+    flex: 1;
+    padding: 18px 20px;
+    border-radius: 18px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+}
+
+.card-ubicacion-box.nueva {
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+}
+
+.card-ubicacion-box small {
+    display: block;
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    color: #64748b;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+.card-ubicacion-box.nueva small {
+    color: #166534;
+}
+
+.card-ubicacion-box h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 4px 0;
+}
+
+.card-ubicacion-box p {
+    font-size: 12px;
+    color: #64748b;
+    margin: 0;
+}
+
+.flecha-comparacion {
+    font-size: 18px;
+    color: #94a3b8;
+}
+
+.btn-descartar-modal {
+    background: #f1f5f9;
+    color: #475569;
+    font-weight: 700;
+    padding: 10px 22px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-descartar-modal:hover {
+    background: #e2e8f0;
+}
+
+.btn-confirmar-modal {
+    background: #00875a;
+    color: #ffffff !important;
+    font-weight: 700;
+    padding: 10px 22px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 135, 90, 0.25);
+    transition: all 0.2s ease;
+}
+
+.btn-confirmar-modal:hover {
+    background: #00704a;
+}
+>>>>>>> 172c3e964c313ed40735e8c4453e7bd49961d20c

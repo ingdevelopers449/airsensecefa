@@ -28,6 +28,18 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        $user = Auth::user();
+        $roleCode = $user->role ? $user->role->code : null;
+        $roleId = $user->role_id;
+
+        if ($roleCode === 'ADMIN' || $roleId == 1) {
+            return redirect()->route('admin.dashboard');
+        } elseif ($roleCode === 'SST' || $roleId == 2) {
+            return redirect()->route('ehscefa.dashboard');
+        } elseif ($roleCode === 'INSTRUCTOR' || $roleId == 3) {
+            return redirect()->route('instructor.dashboard');
+        }
+
         return redirect()->intended('/');
     }
 

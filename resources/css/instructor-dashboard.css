@@ -1,0 +1,485 @@
+/* =========================================================
+   AirSense CEFA - Dashboard Instructor
+   Estilos del Semáforo Ambiental, Indicadores y Tarjetas
+   ========================================================= */
+
+/* ── Semáforo Realista ───────────────────────────────── */
+
+.semaforo-area {
+    background: linear-gradient(135deg, #f8f9fa 0%, #f0f2f5 100%);
+    border-radius: 16px;
+    padding: 24px 20px;
+    display: inline-flex;
+}
+
+.semaforo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.semaforo-body {
+    width: 130px;
+    background:
+        radial-gradient(circle 2.5px at 8px 8px, #6c757d 60%, #1a1c1e 100%),
+        radial-gradient(circle 2.5px at calc(100% - 8px) 8px, #6c757d 60%, #1a1c1e 100%),
+        radial-gradient(circle 2.5px at 8px calc(100% - 8px), #6c757d 60%, #1a1c1e 100%),
+        radial-gradient(circle 2.5px at calc(100% - 8px) calc(100% - 8px), #6c757d 60%, #1a1c1e 100%),
+        linear-gradient(160deg, #2c3238 0%, #191c20 100%);
+    border-radius: 18px;
+    padding: 18px 14px;
+    position: relative;
+    border: 2px solid #414852;
+    box-shadow:
+        0 0 0 3px #181b1e,
+        0 10px 28px rgba(0, 0, 0, 0.45),
+        inset 0 1px 1px rgba(255, 255, 255, 0.18),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.semaforo-light-wrapper {
+    position: relative;
+    margin-bottom: 14px;
+}
+
+.semaforo-light-wrapper:last-child {
+    margin-bottom: 0;
+}
+
+/* Viseras a los lados (aletas laterales izquierda y derecha) */
+.semaforo-visor {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.semaforo-visor::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: -26px;
+    width: 22px;
+    height: 52px;
+    background: linear-gradient(180deg, #323840 0%, #181b1e 100%);
+    clip-path: polygon(100% 0%, 0% 22%, 18% 100%, 100% 82%);
+    filter: drop-shadow(-2px 3px 3px rgba(0, 0, 0, 0.45));
+}
+
+.semaforo-visor::after {
+    content: '';
+    position: absolute;
+    top: 12px;
+    right: -26px;
+    width: 22px;
+    height: 52px;
+    background: linear-gradient(180deg, #323840 0%, #181b1e 100%);
+    clip-path: polygon(0% 0%, 100% 22%, 82% 100%, 0% 82%);
+    filter: drop-shadow(2px 3px 3px rgba(0, 0, 0, 0.45));
+}
+
+.semaforo-light {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    border: 5px solid #23272c;
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.6),
+        inset 0 2px 5px rgba(0, 0, 0, 0.8);
+    transition: all 0.4s ease;
+}
+
+/* Luces Inactivas */
+.semaforo-light.inactive {
+    background: radial-gradient(circle at 40% 35%, #3a3a3a 0%, #1e1e1e 70%);
+    box-shadow:
+        inset 0 2px 6px rgba(0,0,0,0.7),
+        inset 0 -1px 3px rgba(255,255,255,0.03);
+}
+
+/* Luz Roja Activa */
+.semaforo-light.active-red {
+    background: radial-gradient(circle at 40% 35%, #ff6b6b 0%, #e63946 40%, #b71c1c 80%);
+    box-shadow:
+        inset 0 -4px 8px rgba(0,0,0,0.3),
+        inset 0 2px 4px rgba(255,255,255,0.15),
+        0 0 30px rgba(230, 57, 70, 0.7),
+        0 0 60px rgba(230, 57, 70, 0.35),
+        0 0 100px rgba(230, 57, 70, 0.15);
+    animation: pulseGlow-red 2s ease-in-out infinite;
+}
+
+/* Luz Amarilla Activa */
+.semaforo-light.active-yellow {
+    background: radial-gradient(circle at 40% 35%, #ffe066 0%, #ffca28 40%, #f9a825 80%);
+    box-shadow:
+        inset 0 -4px 8px rgba(0,0,0,0.2),
+        inset 0 2px 4px rgba(255,255,255,0.2),
+        0 0 30px rgba(255, 202, 40, 0.7),
+        0 0 60px rgba(255, 202, 40, 0.35),
+        0 0 100px rgba(255, 202, 40, 0.15);
+    animation: pulseGlow-yellow 2s ease-in-out infinite;
+}
+
+/* Luz Verde Activa */
+.semaforo-light.active-green {
+    background: radial-gradient(circle at 40% 35%, #69f0ae 0%, #2e7d32 50%, #1b5e20 85%);
+    box-shadow:
+        inset 0 -4px 8px rgba(0,0,0,0.3),
+        inset 0 2px 4px rgba(255,255,255,0.15),
+        0 0 30px rgba(46, 125, 50, 0.7),
+        0 0 60px rgba(46, 125, 50, 0.35),
+        0 0 100px rgba(46, 125, 50, 0.15);
+    animation: pulseGlow-green 2s ease-in-out infinite;
+}
+
+/* Reflejo de vidrio en luces activas */
+.semaforo-light.active-red::after,
+.semaforo-light.active-yellow::after,
+.semaforo-light.active-green::after {
+    content: '';
+    position: absolute;
+    top: 12%;
+    left: 20%;
+    width: 35%;
+    height: 25%;
+    background: radial-gradient(ellipse, rgba(255,255,255,0.35) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+/* Animaciones de pulso */
+@keyframes pulseGlow-red {
+    0%, 100% {
+        box-shadow: inset 0 -4px 8px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.15),
+                    0 0 30px rgba(230,57,70,0.7), 0 0 60px rgba(230,57,70,0.35);
+    }
+    50% {
+        box-shadow: inset 0 -4px 8px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.15),
+                    0 0 40px rgba(230,57,70,0.85), 0 0 80px rgba(230,57,70,0.5);
+    }
+}
+
+@keyframes pulseGlow-yellow {
+    0%, 100% {
+        box-shadow: inset 0 -4px 8px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.2),
+                    0 0 30px rgba(255,202,40,0.7), 0 0 60px rgba(255,202,40,0.35);
+    }
+    50% {
+        box-shadow: inset 0 -4px 8px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.2),
+                    0 0 40px rgba(255,202,40,0.85), 0 0 80px rgba(255,202,40,0.5);
+    }
+}
+
+@keyframes pulseGlow-green {
+    0%, 100% {
+        box-shadow: inset 0 -4px 8px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.15),
+                    0 0 30px rgba(46,125,50,0.7), 0 0 60px rgba(46,125,50,0.35);
+    }
+    50% {
+        box-shadow: inset 0 -4px 8px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.15),
+                    0 0 40px rgba(46,125,50,0.85), 0 0 80px rgba(46,125,50,0.5);
+    }
+}
+
+/* Poste y Base */
+.semaforo-pole {
+    width: 18px;
+    height: 52px;
+    background: linear-gradient(90deg, #444 0%, #2a2e33 40%, #444 100%);
+    margin: 0 auto;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.3);
+}
+
+.semaforo-base {
+    width: 60px;
+    height: 11px;
+    background: linear-gradient(180deg, #3d434a 0%, #22262a 100%);
+    margin: 0 auto;
+    border-radius: 0 0 6px 6px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.semaforo-base-bottom {
+    width: 80px;
+    height: 7px;
+    background: linear-gradient(180deg, #2e3338 0%, #15171a 100%);
+    margin: 0 auto;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+
+/* ── Gauge Ring (Tarjeta CO₂) ────────────────────────── */
+
+.gauge-wrapper {
+    flex-shrink: 0;
+}
+
+.gauge-svg {
+    width: 100px;
+    height: 100px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.gauge-bg {
+    fill: none;
+    stroke: #e9ecef;
+    stroke-width: 8;
+}
+
+.gauge-progress {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s ease, stroke 0.5s ease;
+}
+
+.gauge-label-text {
+    fill: #6c757d;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+}
+
+.gauge-number-text {
+    fill: #212529;
+    font-size: 24px;
+    font-weight: 700;
+    font-family: 'Outfit', 'Inter', sans-serif;
+}
+
+
+/* ── Tarjetas Métricas ───────────────────────────────── */
+
+.metric-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+.metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08) !important;
+}
+
+.metric-card .metric-accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    border-radius: 4px 0 0 4px;
+}
+
+.metric-icon-circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.metric-card:hover .metric-icon-circle {
+    transform: scale(1.05);
+}
+
+.metric-value {
+    font-family: 'Outfit', 'Inter', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.25rem;
+    color: #212529;
+}
+
+.metric-unit {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #6c757d;
+}
+
+.metric-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: opacity 0.2s ease;
+}
+
+
+/* ── Panel de Estado Ambiental ────────────────────────── */
+
+.estado-badge-large {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.indicadores-titulo {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 0.75rem;
+    margin-top: 0;
+}
+
+
+/* ── Items de Indicador ──────────────────────────────── */
+
+.indicator-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #e9ecef;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.indicator-item:last-child {
+    margin-bottom: 0;
+}
+
+.indicator-item:hover {
+    background-color: #f1f3f5;
+    transform: translateX(2px);
+}
+
+.indicator-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 8px rgba(0,0,0,0.15);
+}
+
+.indicator-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.indicator-info strong {
+    display: block;
+    font-size: 0.9rem;
+    color: #212529;
+    margin-bottom: 2px;
+}
+
+.indicator-info p {
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.indicator-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.725rem;
+    font-weight: 600;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+
+/* ── Línea Separadora ────────────────────────────────── */
+
+.separator-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #dee2e6, transparent);
+    margin: 1rem 0;
+}
+
+
+
+/* ── Tarjeta de Ambiente (Component) ─────────────────── */
+
+.environment-card-component {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.environment-card-component:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08) !important;
+}
+
+.environment-status-indicator {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    border: 2px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    flex-shrink: 0;
+}
+
+.environment-status-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    animation: statusPulse 2s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(0.85); }
+}
+
+
+/* ── Panel de Estado (borde izquierdo en md+) ────────── */
+
+@media (min-width: 768px) {
+    .estado-panel.border-start-md {
+        padding-left: 1.5rem;
+    }
+}
+
+
+/* ── Responsive ──────────────────────────────────────── */
+
+@media (max-width: 991.98px) {
+    .estado-panel {
+        padding-left: 0;
+        padding-top: 1.5rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .gauge-svg {
+        width: 80px;
+        height: 80px;
+    }
+
+    .metric-value {
+        font-size: 1.5rem;
+    }
+
+    .indicator-item {
+        padding: 10px 12px;
+    }
+
+    .semaforo-area {
+        padding: 16px 12px;
+    }
+}
