@@ -444,50 +444,7 @@
 
 
 @section('css')
-<!-- Leaflet.js CSS para el Mapa Interactivo del Dashboard EHS -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
-<style>
-    #mapa-dashboard-ehs {
-        height: 480px;
-        width: 100%;
-        border-radius: 1rem;
-        z-index: 1;
-    }
-    .custom-marker {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        color: white;
-        font-weight: bold;
-        font-size: 11px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        border: 2px solid white;
-        transition: transform 0.2s ease-in-out;
-    }
-    .custom-marker:hover { transform: scale(1.25); }
-    .pulse-green { animation: pulseGreen 2s infinite; }
-    .pulse-yellow { animation: pulseYellow 1.5s infinite; }
-    .pulse-red { animation: pulseRed 0.8s infinite; }
-
-    @keyframes pulseGreen {
-        0% { box-shadow: 0 0 0 0 rgba(57, 169, 0, 0.7); }
-        70% { box-shadow: 0 0 0 12px rgba(57, 169, 0, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(57, 169, 0, 0); }
-    }
-    @keyframes pulseYellow {
-        0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
-        70% { box-shadow: 0 0 0 12px rgba(245, 158, 11, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
-    }
-    @keyframes pulseRed {
-        0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.8); }
-        70% { box-shadow: 0 0 0 14px rgba(239, 68, 68, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
-    }
-</style>
+@vite(['resources/css/dashboard-map.css'])
 @endsection
 
 @section('content')
@@ -578,9 +535,10 @@
 @endsection
 
 @section('js')
+@vite(['resources/js/dashboard-map.js'])
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-<script>
+<!--
     let map;
     let markersLayer = L.layerGroup();
     let variableActual = 'co2';
@@ -733,7 +691,7 @@
             }
         }
     }
-</script>
+-->
 @endsection
 
 
