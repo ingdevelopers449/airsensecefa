@@ -197,28 +197,35 @@ El proyecto cuenta con guias completas para el trabajo en equipo y control de ve
 
 <table>
   <tr>
-    <td align="center" width="220">
-      <img src="https://raw.githubusercontent.com/ingdevelopers449/airsensecefa/main/public/images/equipo/foto-adso-1.png" width="150" height="150" style="border-radius:12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" alt="Isabella"/>
-      <br/><br/>
-      <strong>Isabella</strong>
-      <br/>
-      <em>Desarrolladora Full-Stack</em>
-    </td>
-    <td align="center" width="220">
-      <img src="https://raw.githubusercontent.com/ingdevelopers449/airsensecefa/main/public/images/equipo/foto-adso-3.png" width="150" height="150" style="border-radius:12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" alt="Lizbeth"/>
-      <br/><br/>
-      <strong>Lizbeth</strong>
-      <br/>
-      <em>Desarrolladora Full-Stack</em>
-    </td>
-    <td align="center" width="220">
-      <img src="https://raw.githubusercontent.com/ingdevelopers449/airsensecefa/main/public/images/equipo/foto-adso-4.png" width="150" height="150" style="border-radius:12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" alt="Michaell"/>
-      <br/><br/>
-      <strong>Michaell</strong>
-      <br/>
-      <em>Desarrollador Full-Stack</em>
-    </td>
-  </tr>
+  <td align="center" width="220">
+    <img src="https://raw.githubusercontent.com/ingdevelopers449/airsensecefa/main/public/images/equipo/foto-adso-1.png" width="150" height="150" style="border-radius:12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" alt="Luis Felipe"/>
+    <br/><br/>
+    <strong>Luis Felipe Lozada Bastidas</strong>
+    <br/>
+    <em>Líder de Desarrollo IoT</em>
+  </td>
+  <td align="center" width="220">
+    <img src="https://raw.githubusercontent.com/ingdevelopers449/airsensecefa/main/public/images/equipo/foto-adso-2.png" width="150" height="150" style="border-radius:12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" alt="Isabella"/>
+    <br/><br/>
+    <strong>Isabella Sifuentes Perdomo</strong>
+    <br/>
+    <em>Analítica de Datos</em>
+  </td>
+  <td align="center" width="220">
+    <img src="https://raw.githubusercontent.com/ingdevelopers449/airsensecefa/main/public/images/equipo/foto-adso-3.png" width="150" height="150" style="border-radius:12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" alt="Michael"/>
+    <br/><br/>
+    <strong>Michael Gustavo Castaño Pareja</strong>
+    <br/>
+    <em>Analítica de Datos & IA</em>
+  </td>
+  <td align="center" width="220">
+    <img src="https://raw.githubusercontent.com/ingdevelopers449/airsensecefa/main/public/images/equipo/foto-adso-4.png" width="150" height="150" style="border-radius:12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" alt="Lizbeth"/>
+    <br/><br/>
+    <strong>Lizbeth Dayana Daza Rogelis</strong>
+    <br/>
+    <em>Soporte Telemetría & Redes</em>
+  </td>
+</tr>
 </table>
 
 </div>
