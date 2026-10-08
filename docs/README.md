@@ -88,8 +88,9 @@ Contiene la fuente única de verdad del esquema de la base de datos. **No editar
 
 | Archivo | Descripción |
 |---------|-------------|
-| [`database_schema.md`](schemas/database_schema.md) | Describe todas las tablas del sistema: `users`, `roles`, `nodes`, `sensor_readings`, `ambientes`, `alertas`, etc. Incluye columnas, tipos de dato, relaciones (foreign keys) y propósito de cada tabla. |
-| [`../database_schema.pdf`](database_schema.pdf) | **Versión PDF lista para imprimir o compartir** del mismo esquema de base de datos. Generado automáticamente desde el `.md` con estilos visuales del proyecto. |
+| [`schemas/database_schema.md`](schemas/database_schema.md) | Describe todas las tablas del sistema: `users`, `roles`, `nodes`, `sensor_readings`, `ambientes`, `alertas`, etc. Incluye columnas, tipos de dato, relaciones (foreign keys) y propósito de cada tabla. |
+| [`schemas/database_schema.pdf`](schemas/database_schema.pdf) | **Versión PDF lista para imprimir o compartir.** Generada automáticamente desde el `.md` con estilos visuales del proyecto. |
+| [`schemas/database_schema.html`](schemas/database_schema.html) | Versión HTML intermedia usada para generar el PDF. No modificar manualmente. |
 
 ---
 

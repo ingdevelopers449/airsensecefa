@@ -179,6 +179,7 @@ El proyecto cuenta con documentación organizada en la carpeta [`docs/`](docs/RE
 | [`docs/guides/team-workflow.md`](docs/guides/team-workflow.md) | Roles del equipo y convención de commits (Conventional Commits) |
 | [`docs/guides/laravel-setup.md`](docs/guides/laravel-setup.md) | Instalación de dependencias, Composer, NPM y Telescope |
 | [`docs/schemas/database_schema.md`](docs/schemas/database_schema.md) | Esquema completo de la base de datos |
+| [`docs/schemas/database_schema.pdf`](docs/schemas/database_schema.pdf) | Versión PDF del esquema (para imprimir o compartir) |
 | [`docs/tasks/asignacion-equipo.md`](docs/tasks/asignacion-equipo.md) | Tabla de tareas y ramas Git asignadas por integrante |
 
 ---
