@@ -171,15 +171,15 @@ npm run dev
 
 ## Documentacion del Proyecto
 
-El proyecto cuenta con guias completas para el trabajo en equipo y control de versiones bajo Git:
+El proyecto cuenta con documentación organizada en la carpeta [`docs/`](docs/README.md):
 
 | Documento | Descripcion |
 |-----------|-------------|
-| [`docs/GUIA_RAPIDA_GIT.md`](docs/GUIA_RAPIDA_GIT.md) | Guia rapida paso a paso para desarrolladores junior |
-| [`docs/GUIA_TRABAJO_EQUIPO.md`](docs/GUIA_TRABAJO_EQUIPO.md) | Manual maestro de roles, ramas y conventional commits |
-| [`docs/GUIA_MIGRACION_DEVELOP_A_MAIN.md`](docs/GUIA_MIGRACION_DEVELOP_A_MAIN.md) | Guia de sincronizacion y migracion entre `develop` y `main` |
-| [`docs/CONVENTIONAL_COMMITS_GUIA.md`](docs/CONVENTIONAL_COMMITS_GUIA.md) | Estandar de nomenclatura para commits |
-| [`docs/INSTALACION_LIBRERIAS_LARAVEL.md`](docs/INSTALACION_LIBRERIAS_LARAVEL.md) | Instalacion de librerias y dependencias Laravel |
+| [`docs/guides/git-flow.md`](docs/guides/git-flow.md) | Flujo Git completo: ramas, push, merge y solución de errores |
+| [`docs/guides/team-workflow.md`](docs/guides/team-workflow.md) | Roles del equipo y convención de commits (Conventional Commits) |
+| [`docs/guides/laravel-setup.md`](docs/guides/laravel-setup.md) | Instalación de dependencias, Composer, NPM y Telescope |
+| [`docs/schemas/database_schema.md`](docs/schemas/database_schema.md) | Esquema completo de la base de datos |
+| [`docs/tasks/asignacion-equipo.md`](docs/tasks/asignacion-equipo.md) | Tabla de tareas y ramas Git asignadas por integrante |
 
 ---
 
