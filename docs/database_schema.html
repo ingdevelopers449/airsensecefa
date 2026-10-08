@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Esquema de Base de Datos — AirSense CEFA</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 11pt;
+    color: #1e293b;
+    line-height: 1.6;
+    padding: 40px 50px;
+    max-width: 960px;
+    margin: auto;
+  }
+
+  /* ── ENCABEZADO ──────────────────────── */
+  .header {
+    background: linear-gradient(135deg, #002235 0%, #004d6e 100%);
+    color: white;
+    padding: 28px 32px;
+    border-radius: 10px;
+    margin-bottom: 36px;
+  }
+  .header h1 { font-size: 22pt; font-weight: 700; color: #39A900; margin: 0 0 6px 0; }
+  .header p  { font-size: 10pt; color: #94a3b8; margin: 0; }
+  .header .badge {
+    display: inline-block;
+    background: #39A900;
+    color: white;
+    font-size: 8pt;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin-top: 10px;
+  }
+
+  /* ── TÍTULOS ─────────────────────────── */
+  h1 { font-size: 20pt; color: #002235; border-bottom: 3px solid #39A900; padding-bottom: 8px; margin: 28px 0 16px; }
+  h2 {
+    font-size: 13pt;
+    font-weight: 700;
+    color: white;
+    background: #002235;
+    padding: 8px 14px;
+    border-left: 5px solid #39A900;
+    border-radius: 0 6px 6px 0;
+    margin: 28px 0 10px;
+    page-break-after: avoid;
+  }
+  h3 { font-size: 11pt; color: #002235; margin: 16px 0 6px; }
+
+  /* ── LISTAS ──────────────────────────── */
+  ul { list-style: none; margin: 0 0 12px 0; padding: 0; }
+  li {
+    padding: 5px 10px 5px 22px;
+    position: relative;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 10pt;
+  }
+  li:last-child { border-bottom: none; }
+  li::before {
+    content: "▸";
+    position: absolute;
+    left: 6px;
+    color: #39A900;
+    font-size: 9pt;
+  }
+
+  /* ── CÓDIGO INLINE ───────────────────── */
+  code {
+    background: #f1f5f9;
+    color: #002235;
+    font-family: 'Courier New', monospace;
+    font-size: 9.5pt;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+
+  /* ── SEPARADORES ─────────────────────── */
+  hr { border: none; border-top: 1px solid #e2e8f0; margin: 20px 0; }
+
+  /* ── PÁRRAFOS ────────────────────────── */
+  p { margin: 0 0 10px; font-size: 10pt; color: #475569; }
+
+  /* ── TARJETA DE TABLA ────────────────── */
+  h2 + ul, h2 + p + ul {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 0 0 8px 8px;
+    padding: 6px 0;
+    margin-bottom: 6px;
+  }
+
+  /* ── PIE DE PÁGINA ───────────────────── */
+  .footer {
+    margin-top: 48px;
+    padding-top: 16px;
+    border-top: 2px solid #e2e8f0;
+    text-align: center;
+    font-size: 9pt;
+    color: #94a3b8;
+  }
+  .footer strong { color: #002235; }
+
+  /* ── PAGINACIÓN ──────────────────────── */
+  @page { margin: 20mm 15mm; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📊 Esquema de Base de Datos</h1>
+  <p>Documentación oficial de todas las tablas del sistema AirSense CEFA</p>
+  <span class="badge">AirSense CEFA · SENA La Angostura</span>
+</div>
+
+<h1>Documentación del esquema de base de datos</h1>
+<p>Este documento describe cada tabla presente en la base de datos de <strong>AirSense‑CEFA</strong>, su propósito y los campos principales. Las descripciones se basan en las migraciones del proyecto. </p>
+<hr>
+<h2><code>environments</code></h2>
+<ul><li><strong>Propósito</strong>: Define los entornos físicos (CEFA) donde se despliegan los nodos.</li>
+<li><strong>Columnas principales</strong>:</li>
+<p>- <code>id</code> – PK autoincremental. - <code>code</code> – Código único del entorno. - <code>name</code> – Nombre descriptivo. - <code>description</code> – Texto opcional. - <code>current_semaphore_state</code> – Estado del semáforo (<code>green</code>, <code>yellow</code>, <code>red</code>, <code>no_data</code>). - <code>current_state_updated_at</code> – Timestamp del último cambio de estado. - <code>is_active</code> – Flag de activación. - <code>created_at</code> / <code>updated_at</code>. </p>
+<hr>
+<h2><code>node_categories</code></h2>
+<li><strong>Propósito</strong>: Categorías para clasificar los nodos (p. ej., sensor, cámara).</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>name</code> (único), <code>description</code>, <code>is_active</code>, timestamps.</li>
+<hr>
+<h2><code>nodes</code></h2>
+<li><strong>Propósito</strong>: Registra cada dispositivo IoT instalado.</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>environment_id</code> (FK), <code>device_uid</code> (único), <code>device_token_hash</code>, <code>token_version</code>, <code>name</code>, <code>is_active</code>, <code>connectivity_status</code> (<code>online</code>, <code>offline</code>, <code>unknown</code>), <code>last_seen_at</code>, <code>last_keep_alive_at</code>, <code>last_reported_latitude</code>, <code>last_reported_longitude</code>, <code>token_rotated_at</code>, <code>first_seen_at</code>, timestamps, índices de rendimiento.</li>
+<hr>
+<h2><code>map_points</code></h2>
+<li><strong>Propósito</strong>: Ubicaciones geográficas de los nodos en el mapa.</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>node_id</code> (FK, único), <code>category_id</code> (FK), <code>place_name</code>, <code>latitude</code>, <code>longitude</code>, <code>is_active</code>, timestamps.</li>
+<hr>
+<h2><code>node_location_changes</code></h2>
+<li><strong>Propósito</strong>: Historial de cambios de ubicación de un nodo.</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>node_id</code> (FK), <code>previous_place_name</code>, <code>previous_latitude</code>, <code>previous_longitude</code>, <code>new_place_name</code>, <code>new_latitude</code>, <code>new_longitude</code>, <code>changed_by</code> (FK a <code>users</code>), <code>confirmed_at</code>, <code>created_at</code>.</li>
+<hr>
+<h2><code>environment_assignments</code></h2>
+<li><strong>Propósito</strong>: Asigna usuarios a entornos.</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>environment_id</code> (FK), <code>user_id</code> (FK), <code>assigned_at</code>, <code>revoked_at</code> (nullable), <code>is_active</code>.</li>
+<hr>
+<h2><code>attendance_confirmations</code></h2>
+<li><strong>Propósito</strong>: Confirmaciones de asistencia de usuarios a un entorno.</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>environment_id</code> (FK), <code>user_id</code> (FK), <code>confirmed_at</code>, <code>status</code> (<code>present</code>, <code>absent</code>).</li>
+<hr>
+<h2><code>occupancy_records</code></h2>
+<li><strong>Propósito</strong>: Registro de ocupación de un entorno en periodos de tiempo.</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>environment_id</code> (FK), <code>recorded_at</code>, <code>occupancy_count</code>.</li>
+<hr>
+<h2><code>environment_change_events</code></h2>
+<li><strong>Propósito</strong>: Eventos de cambio de estado del entorno (p. ej., alarma).</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>environment_id</code> (FK), <code>event_type</code>, <code>description</code>, <code>occurred_at</code>.</li>
+<hr>
+<h2><code>audit_logs</code></h2>
+<li><strong>Propósito</strong>: Registro de acciones importantes para auditoría.</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>user_id</code> (FK), <code>action</code>, <code>model_type</code>, <code>model_id</code>, <code>old_values</code>, <code>new_values</code>, <code>created_at</code>.</li>
+<hr>
+<h2><code>system_settings</code></h2>
+<li><strong>Propósito</strong>: Configuraciones globales del sistema.</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>key</code>, <code>value</code>, <code>description</code>, <code>created_at</code>, <code>updated_at</code>.</li>
+<hr>
+<h2><code>environmental_thresholds</code></h2>
+<li><strong>Propósito</strong>: Umbrales de parámetros ambientales (CO₂, temperatura, etc.) por entorno.</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>environment_id</code> (FK), <code>parameter</code>, <code>min_value</code>, <code>max_value</code>.</li>
+<hr>
+<h2><code>users</code></h2>
+<li><strong>Propósito</strong>: Usuarios del portal (administradores, operadores).</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>name</code>, <code>email</code> (único), <code>password</code>, <code>email_verified_at</code>, <code>remember_token</code>, <code>is_active</code>, timestamps.</li>
+<hr>
+<h2><code>password_reset_tokens</code></h2>
+<li><strong>Propósito</strong>: Tokens para restablecer contraseñas.</li>
+<li><strong>Columnas</strong>: <code>email</code>, <code>token</code>, <code>created_at</code>.</li>
+<hr>
+<h2><code>sessions</code></h2>
+<li><strong>Propósito</strong>: Información de sesiones autenticadas.</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>user_id</code> (FK), <code>ip_address</code>, <code>user_agent</code>, <code>payload</code>, <code>last_activity</code>.</li>
+<hr>
+<h2><code>roles</code></h2>
+<li><strong>Propósito</strong>: Roles de autorización (admin, supervisor, operador).</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>name</code>, <code>guard_name</code>, <code>created_at</code>, <code>updated_at</code>.</li>
+<hr>
+<h2><code>permissions</code></h2>
+<li><strong>Propósito</strong>: Permisos granulares asignables a roles.</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>name</code>, <code>guard_name</code>, <code>created_at</code>, <code>updated_at</code>.</li>
+<hr>
+<h2><code>role_permissions</code></h2>
+<li><strong>Propósito</strong>: Relación many‑to‑many entre <code>roles</code> y <code>permissions</code>.</li>
+<li><strong>Columnas</strong>: <code>role_id</code>, <code>permission_id</code>.</li>
+<hr>
+<h2><code>jobs</code></h2>
+<li><strong>Propósito</strong>: Tabla de trabajos encolados por Laravel Queue.</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>queue</code>, <code>payload</code>, <code>attempts</code>, <code>reserved_at</code>, <code>available_at</code>, <code>created_at</code>.</li>
+<hr>
+<h2><code>job_batches</code></h2>
+<li><strong>Propósito</strong>: Agrupa varios <code>jobs</code> en lotes.</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>name</code>, <code>total_jobs</code>, <code>processed_jobs</code>, <code>failed_jobs</code>, <code>cancelled_at</code>, <code>created_at</code>, <code>finished_at</code>.</li>
+<hr>
+<h2><code>failed_jobs</code></h2>
+<li><strong>Propósito</strong>: Registro de trabajos que fallaron.</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>connection</code>, <code>queue</code>, <code>payload</code>, <code>exception</code>, <code>failed_at</code>.</li>
+<hr>
+<h2><code>cache</code></h2>
+<li><strong>Propósito</strong>: Almacén de caché genérico.</li>
+<li><strong>Columnas</strong>: <code>key</code>, <code>value</code>, <code>expiration</code>.</li>
+<hr>
+<h2><code>cache_locks</code></h2>
+<li><strong>Propósito</strong>: Bloqueos de caché para sincronización.</li>
+<li><strong>Columnas</strong>: <code>key</code>, <code>owner</code>, <code>expiration</code>.</li>
+<hr>
+<h2><code>contingency_protocols</code></h2>
+<li><strong>Propósito</strong>: Protocolos de contingencia para situaciones de emergencia.</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>name</code>, <code>description</code>, <code>is_active</code>, timestamps.</li>
+<hr>
+<h2><code>maintenance_windows</code></h2>
+<li><strong>Propósito</strong>: Ventanas de mantenimiento programado.</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>start_at</code>, <code>end_at</code>, <code>description</code>, <code>is_active</code>.</li>
+<hr>
+<h2><code>alerts</code></h2>
+<li><strong>Propósito</strong>: Alertas generadas por el sistema (p. ej., umbral excedido).</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>environment_id</code> (FK), <code>type</code>, <code>severity</code>, <code>message</code>, <code>generated_at</code>, <code>is_resolved</code>.</li>
+<hr>
+<h2><code>notifications</code></h2>
+<li><strong>Propósito</strong>: Notificaciones enviadas a usuarios.</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>user_id</code> (FK), <code>title</code>, <code>body</code>, <code>data</code> (JSON), <code>read_at</code>, <code>created_at</code>.</li>
+<hr>
+<h2><code>system_events</code></h2>
+<li><strong>Propósito</strong>: Eventos internos del sistema (arranque, actualización).</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>event_type</code>, <code>description</code>, <code>occurred_at</code>.</li>
+<hr>
+<h2><code>mqtt_publications</code></h2>
+<li><strong>Propósito</strong>: Mensajes publicados vía MQTT.</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>topic</code>, <code>payload</code>, <code>qos</code>, <code>published_at</code>.</li>
+<hr>
+<h2><code>system_performance_metrics</code></h2>
+<li><strong>Propósito</strong>: Métricas de rendimiento (CPU, RAM, latencia).</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>metric_name</code>, <code>value</code>, <code>recorded_at</code>.</li>
+<hr>
+<h2><code>risk_categories</code></h2>
+<li><strong>Propósito</strong>: Categorías de riesgo para análisis predictivo.</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>name</code>, <code>description</code>.</li>
+<hr>
+<h2><code>manuals</code></h2>
+<li><strong>Propósito</strong>: Manuales operativos.</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>title</code>, <code>version</code>, <code>published_at</code>.</li>
+<hr>
+<h2><code>manual_sections</code></h2>
+<li><strong>Propósito</strong>: Secciones de un manual.</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>manual_id</code> (FK), <code>title</code>, <code>content</code> (text).</li>
+<hr>
+<h2><code>protocols</code></h2>
+<li><strong>Propósito</strong>: Protocolos de operación.</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>name</code>, <code>description</code>.</li>
+<hr>
+<h2><code>predictions</code></h2>
+<li><strong>Propósito</strong>: Predicciones generadas por el módulo IA.</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>node_id</code> (FK), <code>prediction_type</code>, <code>value</code>, <code>predicted_at</code>.</li>
+<hr>
+<h2><code>prediction_points</code></h2>
+<li><strong>Propósito</strong>: Puntos de datos usados para entrenar predicciones.</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>prediction_id</code> (FK), <code>latitude</code>, <code>longitude</code>, <code>timestamp</code>.</li>
+<hr>
+<h2><code>sensor_readings</code></h2>
+<li><strong>Propósito</strong>: Lecturas crudas de sensores (CO₂, temperatura, humedad).</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>node_id</code> (FK), <code>sensor_type</code>, <code>value</code>, <code>recorded_at</code>.</li>
+<hr>
+<h2><code>sensor_measurements</code></h2>
+<li><strong>Propósito</strong>: Medidas derivadas de las lecturas (promedios, estadísticos).</li>
+<li><strong>Columnas</strong>: <code>id</code>, <code>reading_id</code> (FK), <code>metric</code>, <code>value</code>.</li></ul>
+<hr>
+<em>Este documento puede ser convertido a PDF mediante <code>pandoc</code> o <code>wkhtmltopdf</code> para su distribución.</em>
+
+
+<div class="footer">
+  <strong>AirSense CEFA</strong> · Centro de Formación Agroindustrial La Angostura · SENA Regional Huila<br>
+  Generado automáticamente desde <code>docs/database_schema.md</code> · <?= date('d/m/Y H:i') ?>
+</div>
+
+</body>
+</html>
