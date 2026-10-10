@@ -2,20 +2,20 @@
 
 use App\Http\Controllers\Admin\AsignacionController;
 use App\Http\Controllers\Admin\NodoController;
+use App\Http\Controllers\Admin\UsuarioController;
+use App\Http\Controllers\Ehs\ContingenciaController;
+use App\Http\Controllers\Ehs\EHSController;
+use App\Http\Controllers\Ehs\HistorialController;
+use App\Http\Controllers\Ehs\MapaController;
+use App\Http\Controllers\Ehs\PredictivoController;
+use App\Http\Controllers\Ehs\ReporteController;
 use App\Http\Controllers\Instructor\InstructorDashboardController;
 use App\Http\Controllers\Instructor\InstructorPredictivoController;
-use App\Http\Controllers\Admin\UsuarioController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Ehs\EHSController;
-use App\Http\Controllers\Ehs\ContingenciaController;
-use App\Http\Controllers\Ehs\ReporteController;
-use App\Http\Controllers\Ehs\HistorialController;
-use App\Http\Controllers\Ehs\PredictivoController;
-use App\Http\Controllers\Ehs\MapaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {   
+Route::get('/', function () {
     if (Auth::check()) {
         $user = Auth::user();
         $roleCode = $user->role ? $user->role->code : null;
@@ -85,7 +85,6 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
 // 2. Grupo SST / EHS CEFA
 Route::middleware(['auth'])->prefix('ehscefa')->name('ehscefa.')->group(function () {
-
     // Ruta del Módulo Estado de Hardware
     Route::get('/hardware/nodo', [EHSController::class, 'estadoHardware'])->name('hardware.nodo');
     Route::get('/contingencias', [ContingenciaController::class, 'index'])->name('contingencias.index');
@@ -101,7 +100,6 @@ Route::middleware(['auth'])->prefix('ehscefa')->name('ehscefa.')->group(function
     Route::get('/mapa', [MapaController::class, 'index'])->name('mapa.index');
     Route::get('/mapa/geojson', [MapaController::class, 'apiGeojson'])->name('mapa.geojson');
 
-
     Route::get('/dashboard', function () {
         $user = Auth::user();
         $roleCode = $user->role ? $user->role->code : null;
@@ -111,14 +109,11 @@ Route::middleware(['auth'])->prefix('ehscefa')->name('ehscefa.')->group(function
             return redirect()->route('dashboard');
         }
 
-
         $coordinate = \Illuminate\Support\Facades\DB::table('coordinates')->first();
-        $centerLat = $coordinate ? $coordinate->latitude : 2.612210;
+        $centerLat = $coordinate ? $coordinate->latitude : 2.61221;
         $centerLng = $coordinate ? $coordinate->length : -75.361408;
 
         return view('ehscefa.dashboard', compact('centerLat', 'centerLng'));
-
-
     })->name('dashboard');
 });
 
@@ -134,8 +129,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
 Route::redirect('/nodos', '/admin/nodos');
 
-require __DIR__.'/auth.php';
-
+require __DIR__ . '/auth.php';
