@@ -4,6 +4,16 @@
 
 @section('content')
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<div class="contenedor-nodos">
+
+
+    <!-- FILTROS Y BUSCADOR -->
+
+=======
+>>>>>>> origin/feacture/lizbeth
 <div class="contenedor-nodos" x-data="{ filtro: 'todos', busqueda: '' }">
 
     <!-- ENCABEZADO SUPERIOR SEGÚN IMAGEN DE REFERENCIA -->
@@ -17,10 +27,40 @@
 
 
     <!-- FILTROS Y BUSCADOR -->
+<<<<<<< HEAD
+=======
+>>>>>>> 172c3e964c313ed40735e8c4453e7bd49961d20c
+>>>>>>> origin/feacture/lizbeth
     <div class="herramientas-nodos">
 
         <div class="filtros-nodos">
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+            <div class="filtro-nodo activo">
+                Registrados
+
+                <span class="numero-filtro">
+                    5
+                </span>
+            </div>
+
+            <div class="filtro-nodo">
+                No registrados
+
+                <span class="numero-filtro">
+                    1
+                </span>
+            </div>
+
+            <div class="filtro-nodo">
+                Cambio de ubicación
+
+                <span class="numero-filtro">
+                    1
+=======
+>>>>>>> origin/feacture/lizbeth
             <!-- REGISTRADOS -->
             <div class="filtro-nodo"
                  :class="{ 'activo': filtro === 'todos' || filtro === 'registrados' }"
@@ -48,21 +88,76 @@
                 Cambio de ubicación
                 <span class="numero-filtro">
                     {{ $locationChangedCount }}
+<<<<<<< HEAD
+=======
+>>>>>>> 172c3e964c313ed40735e8c4453e7bd49961d20c
+>>>>>>> origin/feacture/lizbeth
                 </span>
             </div>
 
         </div>
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+        <div class="buscador-nodo">
+
+            <input
+                type="text"
+                placeholder="🔍  Buscar nodo..."
+            >
+
+=======
+>>>>>>> origin/feacture/lizbeth
         <div class="buscador-nodo">
             <input
                 type="text"
                 x-model="busqueda"
                 placeholder="🔍  Buscar nodo..."
             >
+<<<<<<< HEAD
+=======
+>>>>>>> 172c3e964c313ed40735e8c4453e7bd49961d20c
+>>>>>>> origin/feacture/lizbeth
         </div>
 
     </div>
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+    <!-- LISTA DE NODOS -->
+
+    <div class="lista-nodos">
+
+
+        <!-- NODO 1 -->
+
+        <div class="nodo">
+
+            <div class="icono-nodo">
+                <i class="fas fa-wifi"></i>
+            </div>
+
+
+            <div class="informacion-nodo">
+
+                <div class="nombre-nodo">
+
+                    Hangar de ganadería
+
+                    <span class="estado-nodo online">
+                        ● En línea
+                    </span>
+
+                </div>
+
+                <div class="datos-nodo">
+                    ESP-001 · Token: ASCE-4321-•••• · Agropecuaria
+=======
+>>>>>>> origin/feacture/lizbeth
     <!-- LISTA DE NODOS (TARJETAS / FILAS SEGÚN IMAGEN DE REFERENCIA) -->
     <div class="lista-nodos-cards">
 
@@ -145,10 +240,245 @@
                         <i class="fas fa-pen"></i>
                     </button>
 
+<<<<<<< HEAD
+=======
+>>>>>>> 172c3e964c313ed40735e8c4453e7bd49961d20c
+>>>>>>> origin/feacture/lizbeth
                 </div>
 
             </div>
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+            <div class="ubicacion-nodo">
+
+                <div>
+                    <small>Latitud</small>
+                    <strong>2.92780</strong>
+                </div>
+
+                <div>
+                    <small>Longitud</small>
+                    <strong>-75.2810</strong>
+                </div>
+
+            </div>
+
+
+            <button class="editar-nodo" title="Editar nodo">
+                <i class="fas fa-pen"></i>
+            </button>
+
+        </div>
+
+
+        <!-- NODO 2 -->
+
+        <div class="nodo">
+
+            <div class="icono-nodo">
+                <i class="fas fa-wifi"></i>
+            </div>
+
+
+            <div class="informacion-nodo">
+
+                <div class="nombre-nodo">
+
+                    Centro de acopio
+
+                    <span class="estado-nodo online">
+                        ● En línea
+                    </span>
+
+                    <span class="estado-nodo cambio">
+                        ● Ubicación cambió
+                    </span>
+
+                </div>
+
+                <div class="datos-nodo">
+                    ESP-002 · Token: ASCE-4322-•••• · Agroindustrial
+                </div>
+
+            </div>
+
+
+            <div class="ubicacion-nodo">
+
+                <div>
+                    <small>Latitud</small>
+                    <strong>2.92781</strong>
+                </div>
+
+                <div>
+                    <small>Longitud</small>
+                    <strong>-75.2811</strong>
+                </div>
+
+            </div>
+
+
+            <button class="editar-nodo" title="Editar nodo">
+                <i class="fas fa-pen"></i>
+            </button>
+
+        </div>
+
+
+        <!-- NODO 3 -->
+
+        <div class="nodo">
+
+            <div class="icono-nodo">
+                <i class="fas fa-wifi"></i>
+            </div>
+
+
+            <div class="informacion-nodo">
+
+                <div class="nombre-nodo">
+
+                    Ambiente 204
+
+                    <span class="estado-nodo online">
+                        ● En línea
+                    </span>
+
+                </div>
+
+                <div class="datos-nodo">
+                    ESP-003 · Token: ASCE-4323-•••• · Académica
+                </div>
+
+            </div>
+
+
+            <div class="ubicacion-nodo">
+
+                <div>
+                    <small>Latitud</small>
+                    <strong>2.92782</strong>
+                </div>
+
+                <div>
+                    <small>Longitud</small>
+                    <strong>-75.2812</strong>
+                </div>
+
+            </div>
+
+
+            <button class="editar-nodo" title="Editar nodo">
+                <i class="fas fa-pen"></i>
+            </button>
+
+        </div>
+
+
+        <!-- NODO 4 -->
+
+        <div class="nodo">
+
+            <div class="icono-nodo">
+                <i class="fas fa-wifi"></i>
+            </div>
+
+
+            <div class="informacion-nodo">
+
+                <div class="nombre-nodo">
+
+                    Laboratorio de alimentos
+
+                    <span class="estado-nodo online">
+                        ● En línea
+                    </span>
+
+                </div>
+
+                <div class="datos-nodo">
+                    ESP-004 · Token: ASCE-4324-•••• · Laboratorio
+                </div>
+
+            </div>
+
+
+            <div class="ubicacion-nodo">
+
+                <div>
+                    <small>Latitud</small>
+                    <strong>2.92783</strong>
+                </div>
+
+                <div>
+                    <small>Longitud</small>
+                    <strong>-75.2813</strong>
+                </div>
+
+            </div>
+
+
+            <button class="editar-nodo" title="Editar nodo">
+                <i class="fas fa-pen"></i>
+            </button>
+
+        </div>
+
+
+        <!-- NODO 5 -->
+
+        <div class="nodo">
+
+            <div class="icono-nodo sin-conexion">
+                <i class="fas fa-wifi"></i>
+            </div>
+
+
+            <div class="informacion-nodo">
+
+                <div class="nombre-nodo">
+
+                    Bloque administrativo
+
+                    <span class="estado-nodo offline">
+                        ● Sin conexión
+                    </span>
+
+                </div>
+
+                <div class="datos-nodo">
+                    ESP-005 · Token: ASCE-4325-•••• · Administrativa
+                </div>
+
+            </div>
+
+
+            <div class="ubicacion-nodo">
+
+                <div>
+                    <small>Latitud</small>
+                    <strong>2.92784</strong>
+                </div>
+
+                <div>
+                    <small>Longitud</small>
+                    <strong>-75.2814</strong>
+                </div>
+
+            </div>
+
+
+            <button class="editar-nodo" title="Editar nodo">
+                <i class="fas fa-pen"></i>
+            </button>
+
+        </div>
+
+=======
+>>>>>>> origin/feacture/lizbeth
             <!-- MODAL 1: CONFIRMAR NUEVA UBICACIÓN (SEGÚN IMAGEN DE REFERENCIA 1) -->
             @if ($isLocationChanged)
                 <div class="modal fade" id="modalCambioUbicacion{{ $node->id }}" tabindex="-1" aria-hidden="true">
@@ -301,9 +631,20 @@
             </div>
 
         @endforelse
+<<<<<<< HEAD
+=======
+>>>>>>> 172c3e964c313ed40735e8c4453e7bd49961d20c
+>>>>>>> origin/feacture/lizbeth
 
     </div>
 
 </div>
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> 172c3e964c313ed40735e8c4453e7bd49961d20c
+>>>>>>> origin/feacture/lizbeth
 @endsection

@@ -175,6 +175,55 @@ body {
     }
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+/* =========================================================
+   Inicio de estilos para Nodos IoT (resources/views/admin/nodos/index.blade.php)
+   ========================================================= */
+
+.contenedor-nodos {
+    width: 100%;
+    background: white;
+    border: 1px solid #e1e7e5;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.encabezado-nodos {
+    margin-bottom: 25px;
+}
+
+.titulo-nodos {
+    color: #16866e;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.encabezado-nodos h1 {
+    margin: 0;
+    color: #202927;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.descripcion-nodos {
+    margin-top: 8px;
+    color: #7b8582;
+    font-size: 14px;
+}
+
+/* FILTROS Y BUSCADOR */
+
+.herramientas-nodos {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    align-items: stretch;
+=======
+>>>>>>> origin/feacture/lizbeth
 /* ================================
    GESTIÓN DE NODOS IOT
 ================================ */
@@ -192,10 +241,192 @@ body {
     flex-wrap: wrap;
     gap: 16px;
     margin-bottom: 24px;
+<<<<<<< HEAD
+=======
+>>>>>>> 172c3e964c313ed40735e8c4453e7bd49961d20c
+>>>>>>> origin/feacture/lizbeth
 }
 
 .filtros-nodos {
     display: flex;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    background: #f3f6f5;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.filtro-nodo {
+    padding: 15px 20px;
+    color: #68716e;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.filtro-nodo.activo {
+    background: white;
+    color: #222;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.numero-filtro {
+    background: #e5ebe8;
+    color: #34413d;
+    border-radius: 20px;
+    padding: 2px 8px;
+    margin-left: 6px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.buscador-nodo {
+    flex: 1;
+}
+
+.buscador-nodo input {
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    border: 1px solid #dce3e0;
+    border-radius: 12px;
+    outline: none;
+    font-size: 14px;
+}
+
+.buscador-nodo input:focus {
+    border-color: #39A900;
+    box-shadow: 0 0 0 3px rgba(57, 169, 0, 0.08);
+}
+
+/* LISTA */
+
+.lista-nodos {
+    border: 1px solid #e1e7e5;
+    border-radius: 18px;
+    overflow: hidden;
+    background: white;
+}
+
+.nodo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 22px;
+    border-bottom: 1px solid #e5e9e8;
+    transition: background 0.2s ease;
+}
+
+.nodo:last-child {
+    border-bottom: none;
+}
+
+.nodo:hover {
+    background: #fafcfb;
+}
+
+/* ICONO */
+
+.icono-nodo {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    border-radius: 14px;
+    background: #e5f4ef;
+    color: #16866e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.icono-nodo.sin-conexion {
+    background: #eef0ef;
+    color: #7c8582;
+}
+
+/* INFORMACION */
+
+.informacion-nodo {
+    flex: 1;
+    min-width: 220px;
+}
+
+.nombre-nodo {
+    font-weight: 700;
+    color: #202927;
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+.datos-nodo {
+    color: #7c8582;
+    font-size: 13px;
+}
+
+/* ESTADOS */
+
+.estado-nodo {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: 7px;
+    vertical-align: middle;
+}
+
+.online {
+    background: #e2f4ed;
+    color: #16866e;
+}
+
+.offline {
+    background: #eeeeee;
+    color: #777;
+}
+
+.cambio {
+    background: #fff2d6;
+    color: #a87516;
+}
+
+/* UBICACION */
+
+.ubicacion-nodo {
+    display: flex;
+    gap: 30px;
+    min-width: 200px;
+}
+
+.ubicacion-nodo small {
+    display: block;
+    color: #888;
+    margin-bottom: 5px;
+    font-size: 11px;
+}
+
+.ubicacion-nodo strong {
+    color: #202927;
+    font-size: 13px;
+}
+
+/* BOTON EDITAR */
+
+.editar-nodo {
+    width: 46px;
+    height: 46px;
+    border: 1px solid #dfe5e3;
+    border-radius: 12px;
+    background: white;
+    color: #53605c;
+=======
+>>>>>>> origin/feacture/lizbeth
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
@@ -601,6 +832,10 @@ body {
     border: 1px solid #e2e8f0;
     background: #ffffff;
     color: #475569;
+<<<<<<< HEAD
+=======
+>>>>>>> 172c3e964c313ed40735e8c4453e7bd49961d20c
+>>>>>>> origin/feacture/lizbeth
     display: flex;
     align-items: center;
     justify-content: center;
@@ -608,6 +843,67 @@ body {
     transition: all 0.2s ease;
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+.editar-nodo:hover {
+    background: #f3f7f5;
+    border-color: #39A900;
+    color: #16866e;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1000px) {
+
+    .herramientas-nodos {
+        flex-direction: column;
+    }
+
+    .filtros-nodos {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .ubicacion-nodo {
+        min-width: 180px;
+        gap: 15px;
+    }
+
+}
+
+@media (max-width: 750px) {
+
+    .contenedor-nodos {
+        padding: 20px;
+    }
+
+    .nodo {
+        flex-wrap: wrap;
+    }
+
+    .informacion-nodo {
+        min-width: calc(100% - 75px);
+    }
+
+    .ubicacion-nodo {
+        width: 100%;
+        margin-left: 70px;
+    }
+
+    .editar-nodo {
+        margin-left: auto;
+    }
+
+}
+
+/* =========================================================
+   Fin de estilos para Nodos IoT (resources/views/admin/nodos/index.blade.php)
+   ========================================================= */
+
+
+=======
+>>>>>>> origin/feacture/lizbeth
 .btn-editar-nodo-circle:hover {
     background: #f1f5f9;
     color: #0f172a;
@@ -800,4 +1096,9 @@ body {
 
 .btn-confirmar-modal:hover {
     background: #00704a;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 172c3e964c313ed40735e8c4453e7bd49961d20c
+>>>>>>> origin/feacture/lizbeth

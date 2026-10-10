@@ -171,6 +171,7 @@ npm run dev
 
 ## Documentacion del Proyecto
 
+
 El proyecto cuenta con documentación organizada en la carpeta [`docs/`](docs/README.md):
 
 | Documento | Descripcion |
@@ -181,6 +182,17 @@ El proyecto cuenta con documentación organizada en la carpeta [`docs/`](docs/RE
 | [`docs/schemas/database_schema.md`](docs/schemas/database_schema.md) | Esquema completo de la base de datos |
 | [`docs/schemas/database_schema.pdf`](docs/schemas/database_schema.pdf) | Versión PDF del esquema (para imprimir o compartir) |
 | [`docs/tasks/asignacion-equipo.md`](docs/tasks/asignacion-equipo.md) | Tabla de tareas y ramas Git asignadas por integrante |
+
+El proyecto cuenta con guias completas para el trabajo en equipo y control de versiones bajo Git:
+
+| Documento | Descripcion |
+|-----------|-------------|
+| [`docs/GUIA_RAPIDA_GIT.md`](docs/GUIA_RAPIDA_GIT.md) | Guia rapida paso a paso para desarrolladores junior |
+| [`docs/GUIA_TRABAJO_EQUIPO.md`](docs/GUIA_TRABAJO_EQUIPO.md) | Manual maestro de roles, ramas y conventional commits |
+| [`docs/GUIA_MIGRACION_DEVELOP_A_MAIN.md`](docs/GUIA_MIGRACION_DEVELOP_A_MAIN.md) | Guia de sincronizacion y migracion entre `develop` y `main` |
+| [`docs/CONVENTIONAL_COMMITS_GUIA.md`](docs/CONVENTIONAL_COMMITS_GUIA.md) | Estandar de nomenclatura para commits |
+| [`docs/INSTALACION_LIBRERIAS_LARAVEL.md`](docs/INSTALACION_LIBRERIAS_LARAVEL.md) | Instalacion de librerias y dependencias Laravel |
+
 
 ---
 
@@ -198,6 +210,7 @@ El proyecto cuenta con documentación organizada en la carpeta [`docs/`](docs/RE
 
 <table>
   <tr>
+
   <td align="center" width="220">
     <img src="https://raw.githubusercontent.com/ingdevelopers449/airsensecefa/main/public/images/equipo/foto-adso-1.png" width="150" height="150" style="border-radius:12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" alt="Luis Felipe"/>
     <br/><br/>
@@ -227,6 +240,30 @@ El proyecto cuenta con documentación organizada en la carpeta [`docs/`](docs/RE
     <em>Soporte Telemetría & Redes</em>
   </td>
 </tr>
+
+    <td align="center" width="220">
+      <img src="https://raw.githubusercontent.com/ingdevelopers449/airsensecefa/main/public/images/equipo/foto-adso-1.png" width="150" height="150" style="border-radius:12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" alt="Isabella"/>
+      <br/><br/>
+      <strong>Isabella</strong>
+      <br/>
+      <em>Desarrolladora Full-Stack</em>
+    </td>
+    <td align="center" width="220">
+      <img src="https://raw.githubusercontent.com/ingdevelopers449/airsensecefa/main/public/images/equipo/foto-adso-3.png" width="150" height="150" style="border-radius:12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" alt="Lizbeth"/>
+      <br/><br/>
+      <strong>Lizbeth</strong>
+      <br/>
+      <em>Desarrolladora Full-Stack</em>
+    </td>
+    <td align="center" width="220">
+      <img src="https://raw.githubusercontent.com/ingdevelopers449/airsensecefa/main/public/images/equipo/foto-adso-4.png" width="150" height="150" style="border-radius:12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" alt="Michaell"/>
+      <br/><br/>
+      <strong>Michaell</strong>
+      <br/>
+      <em>Desarrollador Full-Stack</em>
+    </td>
+  </tr>
+>>>>>>> origin/feacture/lizbeth
 </table>
 
 </div>
