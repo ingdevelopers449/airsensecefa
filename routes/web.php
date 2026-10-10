@@ -11,10 +11,7 @@ use App\Http\Controllers\Ehs\ContingenciaController;
 use App\Http\Controllers\Ehs\ReporteController;
 use App\Http\Controllers\Ehs\HistorialController;
 use App\Http\Controllers\Ehs\PredictivoController;
-<<<<<<< HEAD
 use App\Http\Controllers\Ehs\MapaController;
-=======
->>>>>>> origin/feacture/lizbeth
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -101,11 +98,9 @@ Route::middleware(['auth'])->prefix('ehscefa')->name('ehscefa.')->group(function
 
     Route::get('/historico', [HistorialController::class, 'index'])->name('historico.index');
     Route::get('/predictivo', [PredictivoController::class, 'index'])->name('predictivo.index');
-<<<<<<< HEAD
     Route::get('/mapa', [MapaController::class, 'index'])->name('mapa.index');
     Route::get('/mapa/geojson', [MapaController::class, 'apiGeojson'])->name('mapa.geojson');
-=======
->>>>>>> origin/feacture/lizbeth
+
 
     Route::get('/dashboard', function () {
         $user = Auth::user();
@@ -138,9 +133,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-
-Route::redirect('/nodos', '/admin/nodos');
 
 
 Route::redirect('/nodos', '/admin/nodos');
