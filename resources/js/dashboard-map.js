@@ -23,13 +23,15 @@ document.addEventListener('DOMContentLoaded', function () {
         attribution: '© CartoDB Dark | AirSense CEFA'
     });
 
+    const centerCoords = window.AppMapCenter || [2.612210, -75.361408];
+
     map = L.map('mapa-dashboard-ehs', {
-        center: [2.4412, -75.6410],
+        center: centerCoords,
         zoom: 16,
-        layers: [baseLayers.streets]
+        layers: [baseLayers.satellite]
     });
 
-    activeTileLayer = baseLayers.streets;
+    activeTileLayer = baseLayers.satellite;
     markersLayer.addTo(map);
 
     L.control.layers({
@@ -61,7 +63,8 @@ function cambiarTipoMapa(tipo) {
 }
 
 function cargarNodosEnMapa() {
-    fetch("{{ route('ehscefa.mapa.geojson') }}")
+    const url = window.AppMapGeojsonUrl || '/ehscefa/mapa/geojson';
+    fetch(url)
         .then(res => res.json())
         .then(data => {
             geojsonData = data;

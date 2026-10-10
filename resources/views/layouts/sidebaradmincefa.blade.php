@@ -178,11 +178,7 @@
             <!-- Header Navbar Sticky -->
             <header class="h-16 bg-white border-b border-slate-200 px-4 px-lg-6 flex items-center justify-between sticky top-0 z-30 shadow-sm">
                 <div class="flex items-center gap-3">
-                    <h1 class="text-lg font-bold text-slate-800 font-heading hidden sm:block m-0">@yield('tituloPagina', 'Dashboard Principal')</h1>
-                    <span class="badge bg-success-subtle text-success border border-success-subtle px-2.5 py-1.5 rounded-pill font-semibold">
-                        <i class="bi bi-circle-fill text-success me-1" style="font-size: 8px;"></i>
-                        Sistema En Línea
-                    </span>
+                    <h1 class="text-lg font-bold text-slate-800 font-heading hidden sm:block m-0">@yield('tituloPagina', 'Dashboard Principal')</h1>    
                 </div>
 
                 <!-- User Profile Dropdown (Bootstrap 5 Clean) -->

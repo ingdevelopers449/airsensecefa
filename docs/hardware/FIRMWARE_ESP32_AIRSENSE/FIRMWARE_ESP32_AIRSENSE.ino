@@ -9,8 +9,8 @@
 // =========================================================================
 // ⚙️ 1. CONFIGURACIÓN DE RED Y DISPOSITIVO (EDITA ESTOS VALORES)
 // =========================================================================
-const char* WIFI_SSID     = "LUIS";       // Escribe el SSID de tu Wi-Fi
-const char* WIFI_PASSWORD = "12345678910";        // Escribe la clave del Wi-Fi
+const char* WIFI_SSID     = "FAMILIA LOZADA VARGAS";       // Escribe el SSID de tu Wi-Fi
+const char* WIFI_PASSWORD = "1077845912";        // Escribe la clave del Wi-Fi
 
 // Lista de Servidores API de destino
 const char* API_SERVERS[] = {

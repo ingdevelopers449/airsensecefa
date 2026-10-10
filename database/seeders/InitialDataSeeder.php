@@ -103,95 +103,30 @@ class InitialDataSeeder extends Seeder
             DB::table('system_settings')->updateOrInsert(['setting_key' => $s['setting_key']], $s);
         }
 
-        // 7. Ambientes de prueba
-        $environmentsData = [
-            ['code' => 'HAN_GAN', 'name' => 'Hangar de ganadería', 'description' => 'Agropecuaria', 'is_active' => true],
-            ['code' => 'ACOPIO', 'name' => 'Centro de acopio', 'description' => 'Agroindustrial', 'is_active' => true],
-            ['code' => 'AMB_204', 'name' => 'Ambiente 204', 'description' => 'Académica', 'is_active' => true],
-            ['code' => 'LAB_FOOD', 'name' => 'Laboratorio de alimentos', 'description' => 'Laboratorio', 'is_active' => true],
-            ['code' => 'ADMIN_BLK', 'name' => 'Bloque administrativo', 'description' => 'Administrativa', 'is_active' => true],
+
+        // 9. Coordenadas Iniciales y Delimitaciones CEFA
+        $coordinatesData = [
+            [
+                'length' => '-75.361408',
+                'latitude' => '2.612210',
+                'description' => 'Centro CEFA La Angostura',
+            ],
+            // DELIMITACIONES CEFA
+            ['latitude' => '2.616929', 'length' => '-75.360114', 'description' => 'Delimitación CEFA - Punto 1'],
+            ['latitude' => '2.613478', 'length' => '-75.363858', 'description' => 'Delimitación CEFA - Punto 2'],
+            ['latitude' => '2.606083', 'length' => '-75.363333', 'description' => 'Delimitación CEFA - Punto 3'],
+            ['latitude' => '2.611187', 'length' => '-75.360993', 'description' => 'Delimitación CEFA - Punto 4'],
+            ['latitude' => '2.611007', 'length' => '-75.360389', 'description' => 'Delimitación CEFA - Punto 5'],
+            ['latitude' => '2.611638', 'length' => '-75.359757', 'description' => 'Delimitación CEFA - Punto 6'],
+            ['latitude' => '2.610385', 'length' => '-75.357881', 'description' => 'Delimitación CEFA - Punto 7'],
+            ['latitude' => '2.611971', 'length' => '-75.357673', 'description' => 'Delimitación CEFA - Punto 8'],
+            ['latitude' => '2.614663', 'length' => '-75.358752', 'description' => 'Delimitación CEFA - Punto 9'],
+            ['latitude' => '2.614821', 'length' => '-75.358625', 'description' => 'Delimitación CEFA - Punto 10'],
         ];
 
-        foreach ($environmentsData as $envData) {
-            DB::table('environments')->updateOrInsert(
-                ['code' => $envData['code']],
-                array_merge($envData, ['created_at' => now(), 'updated_at' => now()])
-            );
-        }
-
-        $hanGanId  = DB::table('environments')->where('code', 'HAN_GAN')->value('id');
-        $acopioId  = DB::table('environments')->where('code', 'ACOPIO')->value('id');
-        $amb204Id  = DB::table('environments')->where('code', 'AMB_204')->value('id');
-        $labFoodId = DB::table('environments')->where('code', 'LAB_FOOD')->value('id');
-
-        // 8. Nodos IoT de prueba con coordenadas exactas de la referencia
-        $nodesData = [
-            [
-                'device_uid' => 'ESP-001',
-                'environment_id' => $hanGanId,
-                'name' => 'Hangar de ganadería',
-                'device_token_hash' => Hash::make('secret_token_001'),
-                'token_version' => 1,
-                'is_active' => true,
-                'connectivity_status' => 'online',
-                'last_reported_latitude' => 2.92780,
-                'last_reported_longitude' => -75.2810,
-                'last_seen_at' => now(),
-            ],
-            [
-                'device_uid' => 'ESP-002',
-                'environment_id' => $acopioId,
-                'name' => 'Centro de acopio',
-                'device_token_hash' => Hash::make('secret_token_002'),
-                'token_version' => 1,
-                'is_active' => true,
-                'connectivity_status' => 'online',
-                'last_reported_latitude' => 2.92781,
-                'last_reported_longitude' => -75.2811,
-                'last_seen_at' => now()->subMinutes(5),
-            ],
-            [
-                'device_uid' => 'ESP-003',
-                'environment_id' => $amb204Id,
-                'name' => 'Ambiente 204',
-                'device_token_hash' => Hash::make('secret_token_003'),
-                'token_version' => 1,
-                'is_active' => true,
-                'connectivity_status' => 'online',
-                'last_reported_latitude' => 2.92782,
-                'last_reported_longitude' => -75.2812,
-                'last_seen_at' => now()->subMinutes(10),
-            ],
-            [
-                'device_uid' => 'ESP-004',
-                'environment_id' => $labFoodId,
-                'name' => 'Laboratorio de alimentos',
-                'device_token_hash' => Hash::make('secret_token_004'),
-                'token_version' => 1,
-                'is_active' => true,
-                'connectivity_status' => 'online',
-                'last_reported_latitude' => 2.92783,
-                'last_reported_longitude' => -75.2813,
-                'last_seen_at' => now()->subMinutes(12),
-            ],
-            [
-                'device_uid' => 'ESP-005',
-                'environment_id' => null,
-                'name' => 'Bloque administrativo',
-                'device_token_hash' => Hash::make('secret_token_005'),
-                'token_version' => 1,
-                'is_active' => true,
-                'connectivity_status' => 'offline',
-                'last_reported_latitude' => 2.92784,
-                'last_reported_longitude' => -75.2814,
-                'last_seen_at' => now()->subHours(3),
-            ],
-        ];
-
-        foreach ($nodesData as $nodeData) {
-            DB::table('nodes')->updateOrInsert(
-                ['device_uid' => $nodeData['device_uid']],
-                array_merge($nodeData, ['created_at' => now(), 'updated_at' => now()])
+        foreach ($coordinatesData as $coord) {
+            DB::table('coordinates')->insert(
+                array_merge($coord, ['created_at' => now(), 'updated_at' => now()])
             );
         }
     }

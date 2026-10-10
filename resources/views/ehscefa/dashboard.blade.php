@@ -11,31 +11,46 @@
         border-radius: 1rem;
         z-index: 1;
     }
-    .custom-node-pin {
-        display: flex;
-        align-items: center;
-        gap: 6px;
+    /* Estilo de Alfiler tipo Gota (Teardrop Pin) */
+    .marker-pin {
+        width: 30px;
+        height: 30px;
+        border-radius: 50% 50% 50% 0;
+        position: absolute;
+        transform: rotate(-45deg);
+        left: 50%;
+        top: 50%;
+        margin: -15px 0 0 -15px;
+        border: 2px solid white;
+        box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+        transition: transform 0.2s ease;
+    }
+    .marker-pin::after {
+        content: '';
+        width: 10px;
+        height: 10px;
         background: white;
-        padding: 4px 10px;
-        border-radius: 9999px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        border: 2px solid #e2e8f0;
-        cursor: pointer;
-        white-space: nowrap;
-        font-family: 'Inter', sans-serif;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .custom-node-pin:hover {
-        transform: scale(1.08);
-        box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-    }
-    .pin-dot {
-        width: 12px;
-        height: 12px;
+        position: absolute;
         border-radius: 50%;
-        display: inline-block;
-        box-shadow: 0 0 0 2px white;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
     }
+    .marker-pin:hover {
+        transform: rotate(-45deg) scale(1.1);
+    }
+
+    /* Tooltip encima del alfiler */
+    .custom-tooltip {
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        padding: 4px 8px;
+        font-family: 'Inter', sans-serif;
+    }
+
     .pulse-green { animation: pulseGreen 2s infinite; }
     .pulse-yellow { animation: pulseYellow 1.5s infinite; }
     .pulse-red { animation: pulseRed 0.8s infinite; }
@@ -270,11 +285,14 @@
     let nodoSeleccionado = null;
 
     document.addEventListener('DOMContentLoaded', function () {
-        map = L.map('mapa-dashboard-ehs').setView([2.4412, -75.6410], 16);
+        // Coordenadas centrales dinámicas
+        const centerCoords = [{{ $centerLat ?? 2.612210 }}, {{ $centerLng ?? -75.361408 }}];
+        map = L.map('mapa-dashboard-ehs').setView(centerCoords, 16);
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '© OpenStreetMap | AirSense CEFA'
+        // Vista Satelital por defecto (Google Maps Hybrid para mejor cobertura)
+        L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            attribution: '© Google Maps | AirSense CEFA'
         }).addTo(map);
 
         markersLayer.addTo(map);
@@ -372,6 +390,10 @@
         document.getElementById('panel-co2-bar').style.width = `${pct}%`;
     }
 
+    function filtrarVariable(variable) {
+        // Filtros (si los tuvieras habilitados)
+    }
+
     function renderizarPuntosEnMapa() {
         markersLayer.clearLayers();
         if (!geojsonData || !geojsonData.features) return;
@@ -383,10 +405,10 @@
             if (geom.type === 'Polygon') {
                 const polygonLayer = L.geoJSON(feature, {
                     style: {
-                        color: props.stroke || '#002235',
-                        weight: props['stroke-width'] || 3,
-                        fillColor: props.fill || '#39A900',
-                        fillOpacity: props['fill-opacity'] || 0.12,
+                        color: props.stroke || '#eab308', // Amarillo
+                        weight: props['stroke-width'] || 4,
+                        fillColor: props.fill || '#39A900', // Verde
+                        fillOpacity: props['fill-opacity'] || 0.25,
                         dashArray: '5, 5'
                     }
                 });
@@ -404,19 +426,28 @@
                 const customIcon = L.divIcon({
                     className: 'custom-leaflet-icon',
                     html: `
-                        <div class="custom-node-pin" onclick="seleccionarNodoDirecto(${props.id})">
-                            <span class="pin-dot ${pulseClass}" style="background-color: ${props.color};"></span>
-                            <div class="flex flex-col text-left">
-                                <span class="text-[11px] font-extrabold text-slate-800 leading-tight">${props.ambiente}</span>
-                                <span class="text-[9.5px] font-bold" style="color: ${props.color};">${props.status_text}</span>
-                            </div>
+                        <div onclick="seleccionarNodoDirecto(${props.id})" class="cursor-pointer" style="position:relative; width:30px; height:30px;">
+                            <div class="marker-pin" style="background-color: ${props.color};"></div>
+                            <div class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full ${pulseClass}" style="background-color: ${props.color};"></div>
                         </div>
                     `,
-                    iconSize: [160, 36],
-                    iconAnchor: [20, 18]
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30] // La punta del alfiler apuntará exactamente a la coordenada
                 });
 
                 const marker = L.marker([coords[1], coords[0]], { icon: customIcon });
+
+                marker.bindTooltip(`
+                    <div class="text-center leading-tight">
+                        <span class="text-[11px] font-extrabold text-slate-800">${props.ambiente}</span><br>
+                        <span class="text-[9.5px] font-bold" style="color: ${props.color};">${props.status_text}</span>
+                    </div>
+                `, { 
+                    permanent: true, 
+                    direction: "top", 
+                    offset: [0, -32],
+                    className: 'custom-tooltip'
+                });
 
                 marker.on('click', function() {
                     seleccionarNodo(props);
@@ -440,258 +471,6 @@
         if (feature) seleccionarNodo(feature.properties);
     }
 </script>
-@endsection
-
-
-@section('css')
-@vite(['resources/css/dashboard-map.css'])
-@endsection
-
-@section('content')
-<div class="space-y-6">
-
-    <!-- Tarjetas resumen KPI EHS -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex items-center gap-4">
-            <div class="w-12 h-12 rounded-xl bg-emerald-50 text-[#39A900] flex items-center justify-center fs-4">
-                <i class="fas fa-microchip"></i>
-            </div>
-            <div>
-                <p class="text-xs font-semibold text-slate-500 uppercase m-0">Nodos Sensores</p>
-                <h3 class="text-xl font-bold text-slate-800 m-0 mt-0.5">CEFA EHS</h3>
-            </div>
-        </div>
-
-        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex items-center gap-4">
-            <div class="w-12 h-12 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center fs-4">
-                <i class="fas fa-leaf"></i>
-            </div>
-            <div>
-                <p class="text-xs font-semibold text-slate-500 uppercase m-0">Calidad del Aire</p>
-                <h3 class="text-xl font-bold text-slate-800 m-0 mt-0.5">NDIR CO₂</h3>
-            </div>
-        </div>
-
-        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex items-center gap-4">
-            <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center fs-4">
-                <i class="fas fa-shield-alt"></i>
-            </div>
-            <div>
-                <p class="text-xs font-semibold text-slate-500 uppercase m-0">Seguridad SST</p>
-                <h3 class="text-xl font-bold text-slate-800 m-0 mt-0.5">Vigilancia 24/7</h3>
-            </div>
-        </div>
-
-        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex items-center gap-4">
-            <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center fs-4">
-                <i class="fas fa-chart-line"></i>
-            </div>
-            <div>
-                <p class="text-xs font-semibold text-slate-500 uppercase m-0">Alertas Semáforo</p>
-                <h3 class="text-xl font-bold text-slate-800 m-0 mt-0.5">Verde / Naranja / Rojo</h3>
-            </div>
-        </div>
-    </div>
-
-    <!-- SECCIÓN PRINCIPAL: MAPA INTERACTIVO DEL CEFA -->
-    <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs space-y-3">
-        <div class="flex flex-col md:flex-row items-md-center justify-between gap-3 border-b border-slate-100 pb-3">
-            <div>
-                <h3 class="text-base font-bold text-slate-800 flex items-center gap-2 m-0">
-                    <i class="fas fa-map-marked-alt text-[#39A900]"></i> Mapa de Monitoreo Ambiental CEFA (EHS / SST)
-                </h3>
-                <p class="text-xs text-slate-500 m-0 mt-0.5">Visualización en tiempo real de niveles de CO₂, Temperatura y Humedad por cada nodo instalado.</p>
-            </div>
-
-            <div class="flex items-center gap-2 flex-wrap">
-                <!-- Selector de Tipo de Vista de Mapa -->
-                <div class="bg-slate-100 p-1 rounded-xl flex items-center gap-1 border border-slate-200">
-                    <button type="button" id="btn-map-streets" onclick="cambiarTipoMapa('streets')" class="px-3 py-1 rounded-lg text-xs font-bold transition-all bg-[#002235] text-white shadow-xs">
-                        <i class="fas fa-map"></i> Calles
-                    </button>
-                    <button type="button" id="btn-map-satellite" onclick="cambiarTipoMapa('satellite')" class="px-3 py-1 rounded-lg text-xs font-bold transition-all text-slate-600 hover:bg-white">
-                        <i class="fas fa-satellite"></i> Satelital
-                    </button>
-                    <button type="button" id="btn-map-dark" onclick="cambiarTipoMapa('dark')" class="px-3 py-1 rounded-lg text-xs font-bold transition-all text-slate-600 hover:bg-white">
-                        <i class="fas fa-moon"></i> Oscuro
-                    </button>
-                </div>
-
-                <!-- Selector de Variable -->
-                <div class="bg-slate-100 p-1 rounded-xl flex items-center gap-1 border border-slate-200">
-                    <button type="button" id="btn-var-co2" onclick="filtrarVariable('co2')" class="px-3 py-1 rounded-lg text-xs font-bold transition-all bg-[#39A900] text-white shadow-xs">CO₂</button>
-                    <button type="button" id="btn-var-temp" onclick="filtrarVariable('temp')" class="px-3 py-1 rounded-lg text-xs font-bold transition-all text-slate-600 hover:bg-white">Temperatura</button>
-                    <button type="button" id="btn-var-hum" onclick="filtrarVariable('hum')" class="px-3 py-1 rounded-lg text-xs font-bold transition-all text-slate-600 hover:bg-white">Humedad</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="relative">
-            <div id="mapa-dashboard-ehs"></div>
-        </div>
-    </div>
-
-</div>
-@endsection
-
-@section('js')
-@vite(['resources/js/dashboard-map.js'])
-<!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-<!--
-    let map;
-    let markersLayer = L.layerGroup();
-    let variableActual = 'co2';
-    let geojsonData = null;
-    let baseLayers = {};
-    let activeTileLayer = null;
-
-    document.addEventListener('DOMContentLoaded', function () {
-        baseLayers.streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '© OpenStreetMap | AirSense CEFA'
-        });
-
-        baseLayers.satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-            maxZoom: 19,
-            attribution: '© Esri WorldImagery | AirSense CEFA'
-        });
-
-        baseLayers.dark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            maxZoom: 19,
-            attribution: '© CartoDB Dark | AirSense CEFA'
-        });
-
-        map = L.map('mapa-dashboard-ehs', {
-            center: [2.4412, -75.6410],
-            zoom: 16,
-            layers: [baseLayers.streets]
-        });
-
-        activeTileLayer = baseLayers.streets;
-        markersLayer.addTo(map);
-
-        L.control.layers({
-            "🗺️ Calles (OSM)": baseLayers.streets,
-            "🛰️ Satelital HD": baseLayers.satellite,
-            "🌙 Vista Oscura": baseLayers.dark
-        }).addTo(map);
-
-        cargarNodosEnMapa();
-        setInterval(cargarNodosEnMapa, 30000);
-    });
-
-    function cambiarTipoMapa(tipo) {
-        if (!baseLayers[tipo]) return;
-        map.removeLayer(activeTileLayer);
-        baseLayers[tipo].addTo(map);
-        activeTileLayer = baseLayers[tipo];
-
-        ['streets', 'satellite', 'dark'].forEach(t => {
-            const btn = document.getElementById('btn-map-' + t);
-            if (btn) {
-                if (t === tipo) {
-                    btn.className = "px-3 py-1 rounded-lg text-xs font-bold transition-all bg-[#002235] text-white shadow-xs";
-                } else {
-                    btn.className = "px-3 py-1 rounded-lg text-xs font-bold transition-all text-slate-600 hover:bg-white";
-                }
-            }
-        });
-    }
-
-    function cargarNodosEnMapa() {
-        fetch("{{ route('ehscefa.mapa.geojson') }}")
-            .then(res => res.json())
-            .then(data => {
-                geojsonData = data;
-                renderizarPuntosEnMapa();
-            })
-            .catch(err => console.error("Error cargando GeoJSON:", err));
-    }
-
-    function filtrarVariable(variable) {
-        variableActual = variable;
-        ['co2', 'temp', 'hum'].forEach(v => {
-            const btn = document.getElementById('btn-var-' + v);
-            if (btn) {
-                if (v === variable) {
-                    btn.className = "px-3 py-1 rounded-lg text-xs font-bold transition-all bg-[#39A900] text-white shadow-xs";
-                } else {
-                    btn.className = "px-3 py-1 rounded-lg text-xs font-bold transition-all text-slate-600 hover:bg-white";
-                }
-            }
-        });
-        if (geojsonData) renderizarPuntosEnMapa();
-    }
-
-    function renderizarPuntosEnMapa() {
-        markersLayer.clearLayers();
-        if (!geojsonData || !geojsonData.features) return;
-
-        geojsonData.features.forEach(feature => {
-            const props = feature.properties;
-            const geom = feature.geometry;
-
-            if (geom.type === 'Polygon') {
-                const polygonLayer = L.geoJSON(feature, {
-                    style: {
-                        color: props.stroke || '#002235',
-                        weight: props['stroke-width'] || 3,
-                        fillColor: props.fill || '#39A900',
-                        fillOpacity: props['fill-opacity'] || 0.15,
-                        dashArray: '5, 5'
-                    }
-                });
-                polygonLayer.bindTooltip(`<b>${props.name}</b><br><small>${props.description}</small>`, { sticky: true });
-                markersLayer.addLayer(polygonLayer);
-                return;
-            }
-
-            if (geom.type === 'Point') {
-                const coords = geom.coordinates;
-                let pulseClass = "pulse-green";
-                if (props.co2 >= 1200) pulseClass = "pulse-red";
-                else if (props.co2 >= 800) pulseClass = "pulse-yellow";
-
-                const customIcon = L.divIcon({
-                    className: 'custom-leaflet-icon',
-                    html: `<div class="custom-marker ${pulseClass}" style="background-color: ${props.color};">${Math.round(props.co2)}</div>`,
-                    iconSize: [32, 32],
-                    iconAnchor: [16, 16]
-                });
-
-                const marker = L.marker([coords[1], coords[0]], { icon: customIcon });
-
-                const popupContent = `
-                    <div style="font-family: 'Inter', sans-serif; width: 220px;">
-                        <div style="background-color: #002235; color: white; padding: 8px 12px; border-radius: 8px 8px 0 0; margin: -14px -20px 10px -20px;">
-                            <h6 style="margin: 0; font-weight: 700; font-size: 13px; color: #86efac;">${props.ambiente}</h6>
-                            <small style="font-size: 10px; color: #cbd5e1;">Nodo: ${props.name}</small>
-                        </div>
-                        <div style="font-size: 12px; display: grid; gap: 4px;">
-                            <div><strong>💨 CO₂:</strong> <span style="color: ${props.color}; font-weight: 800;">${props.co2} PPM</span></div>
-                            <div><strong>🌡️ Temperatura:</strong> ${props.temperatura} °C</div>
-                            <div><strong>💧 Humedad:</strong> ${props.humedad} %</div>
-                            <div style="margin-top: 6px; padding-top: 6px; border-top: 1px solid #e2e8f0; font-size: 10.5px; color: #64748b;">
-                                Estado SST: <strong>${props.status_text}</strong>
-                            </div>
-                        </div>
-                    </div>
-                `;
-
-                marker.bindPopup(popupContent);
-                markersLayer.addLayer(marker);
-            }
-        });
-
-        if (markersLayer.getLayers().length > 0) {
-            const bounds = L.featureGroup(markersLayer.getLayers()).getBounds();
-            if (bounds.isValid()) {
-                map.fitBounds(bounds, { padding: [30, 30] });
-            }
-        }
-    }
--->
 @endsection
 
 

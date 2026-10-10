@@ -110,7 +110,11 @@ Route::middleware(['auth'])->prefix('ehscefa')->name('ehscefa.')->group(function
             return redirect()->route('dashboard');
         }
 
-        return view('ehscefa.dashboard');
+        $coordinate = \Illuminate\Support\Facades\DB::table('coordinates')->first();
+        $centerLat = $coordinate ? $coordinate->latitude : 2.612210;
+        $centerLng = $coordinate ? $coordinate->length : -75.361408;
+
+        return view('ehscefa.dashboard', compact('centerLat', 'centerLng'));
     })->name('dashboard');
 });
 

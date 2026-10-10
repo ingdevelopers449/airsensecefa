@@ -15,8 +15,8 @@ class MapaController extends Controller
      */
     public function index()
     {
-        $nodesCount = Node::where('is_active', true)->count();
-        return view('ehscefa.mapa.index', compact('nodesCount'));
+        // El mapa está incrustado en el dashboard, por lo que redirigimos allá
+        return redirect()->route('ehscefa.dashboard');
     }
 
     /**
@@ -110,29 +110,40 @@ class MapaController extends Controller
         }
 
 
-        // Agregar la Delimitación Poligonal del Predio CEFA La Angostura
-        $features[] = [
-            'type' => 'Feature',
-            'geometry' => [
-                'type' => 'Polygon',
-                'coordinates' => [[
-                    [-75.6450, 2.4380],
-                    [-75.6370, 2.4380],
-                    [-75.6370, 2.4450],
-                    [-75.6450, 2.4450],
-                    [-75.6450, 2.4380]
-                ]]
-            ],
-            'properties' => [
-                'type' => 'boundary',
-                'name' => 'Perímetro CEFA La Angostura',
-                'description' => 'Centro de Formación Agroindustrial SENA Campoalegre',
-                'stroke' => '#002235',
-                'stroke-width' => 3,
-                'fill' => '#39A900',
-                'fill-opacity' => 0.15
-            ]
-        ];
+        // Obtener la Delimitación Poligonal desde la base de datos (tabla coordinates)
+        $polygonPoints = \Illuminate\Support\Facades\DB::table('coordinates')
+            ->where('description', 'like', 'Delimitación CEFA%')
+            ->orderBy('id')
+            ->get();
+
+        $polygonCoords = [];
+        foreach ($polygonPoints as $pt) {
+            // GeoJSON usa [Longitud, Latitud]
+            $polygonCoords[] = [(float)$pt->length, (float)$pt->latitude];
+        }
+
+        // Si hay suficientes puntos para formar un polígono, lo agregamos
+        if (count($polygonCoords) >= 3) {
+            // Para cerrar el polígono, el último punto debe ser igual al primero
+            $polygonCoords[] = $polygonCoords[0];
+
+            $features[] = [
+                'type' => 'Feature',
+                'geometry' => [
+                    'type' => 'Polygon',
+                    'coordinates' => [$polygonCoords]
+                ],
+                'properties' => [
+                    'type' => 'boundary',
+                    'name' => 'Perímetro CEFA La Angostura',
+                    'description' => 'Centro de Formación Agroindustrial SENA Campoalegre',
+                    'stroke' => '#eab308',
+                    'stroke-width' => 4,
+                    'fill' => '#39A900',
+                    'fill-opacity' => 0.25
+                ]
+            ];
+        }
 
         return response()->json([
             'type' => 'FeatureCollection',
