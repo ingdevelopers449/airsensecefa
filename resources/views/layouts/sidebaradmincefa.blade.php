@@ -111,11 +111,7 @@
                             <span>Monitor Conectividad</span>
                         </a>
 
-<<<<<<< HEAD
                         <a href="{{ route('ehscefa.mapa.index') }}" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ehscefa.mapa.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
-=======
-                        <a href="#" class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-[13.5px] font-semibold text-decoration-none transition-all duration-150 {{ request()->routeIs('ubicaciones.*') ? 'bg-[#39A900]/20 text-[#39A900] font-bold border-l-4 border-[#39A900]' : 'text-slate-200 hover:text-white hover:bg-white/10' }}">
->>>>>>> origin/feacture/lizbeth
                             <i class="fas fa-map-marker-alt w-4 text-center text-[#39A900]"></i>
                             <span>Ubicación de Nodos</span>
                         </a>
@@ -182,15 +178,11 @@
             <!-- Header Navbar Sticky -->
             <header class="h-16 bg-white border-b border-slate-200 px-4 px-lg-6 flex items-center justify-between sticky top-0 z-30 shadow-sm">
                 <div class="flex items-center gap-3">
-<<<<<<< HEAD
-                    <h1 class="text-lg font-bold text-slate-800 font-heading hidden sm:block m-0">@yield('tituloPagina', 'Dashboard Principal')</h1>    
-=======
                     <h1 class="text-lg font-bold text-slate-800 font-heading hidden sm:block m-0">@yield('tituloPagina', 'Dashboard Principal')</h1>
                     <span class="badge bg-success-subtle text-success border border-success-subtle px-2.5 py-1.5 rounded-pill font-semibold">
                         <i class="bi bi-circle-fill text-success me-1" style="font-size: 8px;"></i>
                         Sistema En Línea
-                    </span>
->>>>>>> origin/feacture/lizbeth
+                    </span>    
                 </div>
 
                 <!-- User Profile Dropdown (Bootstrap 5 Clean) -->
