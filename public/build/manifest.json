@@ -1,0 +1,44 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-Cvjif6lz.css",
+    "name": "app",
+    "names": [
+      "app.css"
+    ],
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/css/funcionalidades.css": {
+    "file": "assets/funcionalidades-pU7RpUcW.css",
+    "name": "funcionalidades",
+    "names": [
+      "funcionalidades.css"
+    ],
+    "src": "resources/css/funcionalidades.css",
+    "isEntry": true
+  },
+  "resources/css/login.css": {
+    "file": "assets/login-ByVJQu0-.css",
+    "name": "login",
+    "names": [
+      "login.css"
+    ],
+    "src": "resources/css/login.css",
+    "isEntry": true
+  },
+  "resources/css/styles.css": {
+    "file": "assets/styles-BQEMEAUx.css",
+    "name": "styles",
+    "names": [
+      "styles.css"
+    ],
+    "src": "resources/css/styles.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-DIZEten-.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  }
+}
